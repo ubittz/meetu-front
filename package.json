@@ -24,6 +24,7 @@
     "sass": "^1.80.4",
     "slick-carousel": "^1.8.1",
     "styled-components": "^6.1.13",
+    "styled-normalize": "^8.1.1",
     "vite-tsconfig-paths": "^5.0.1"
   },
   "devDependencies": {
