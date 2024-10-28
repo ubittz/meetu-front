@@ -1,3 +1,5 @@
 import { combineReducers } from 'redux';
 
-export const rootReducers = combineReducers({});
+import home from '@@stores/home/reducer';
+
+export const rootReducers = combineReducers({ home });
