@@ -1,7 +1,7 @@
 export const BUTTON_SIZE = {
-  LARGE: 'lg',
-  MEDIUM: 'md',
-  SMALL: 'sm',
+  LARGE: 'Large',
+  MEDIUM: 'Medium',
+  SMALL: 'Small',
 } as const;
 
 export const BUTTON_THEME = {

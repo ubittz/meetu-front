@@ -1,11 +1,10 @@
-import LargeButton from '@@components/Button/LargeButton';
-import MediumButton from '@@components/Button/MediumButton';
-import SmallButton from '@@components/Button/SmallButton';
+import BasicButton from './BasicButton';
+import { BUTTON_SIZE } from './constants';
 
 const Button = {
-  Large: LargeButton,
-  Medium: MediumButton,
-  Small: SmallButton,
+  [BUTTON_SIZE.LARGE]: BasicButton(BUTTON_SIZE.LARGE),
+  [BUTTON_SIZE.MEDIUM]: BasicButton(BUTTON_SIZE.MEDIUM),
+  [BUTTON_SIZE.SMALL]: BasicButton(BUTTON_SIZE.SMALL),
 };
 
 export default Button;
