@@ -1,10 +1,17 @@
 import { DefaultTheme } from 'styled-components';
 
 import { BUTTON_SIZE, BUTTON_THEME } from '@@components/Button/constants';
+import { FLEX_DIRECTION } from '@@components/Flex/constants';
 import { TYPOGRAPHY_THEME } from '@@components/Typography/constants';
 import { COLORS } from '@@constants/colors';
 
 export const theme: DefaultTheme = {
+  flex: {
+    direction: {
+      [FLEX_DIRECTION.HORIZONTAL]: 'row',
+      [FLEX_DIRECTION.VERTICAL]: 'column',
+    },
+  },
   button: {
     size: {
       [BUTTON_SIZE.LARGE]: 'height: 48px;',
