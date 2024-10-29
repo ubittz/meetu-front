@@ -1,5 +1,5 @@
-import BasicButton from './BasicButton';
-import { BUTTON_SIZE } from './constants';
+import BasicButton from '@@components/Button/BasicButton';
+import { BUTTON_SIZE } from '@@components/Button/constants';
 
 const Button = {
   [BUTTON_SIZE.LARGE]: BasicButton(BUTTON_SIZE.LARGE),

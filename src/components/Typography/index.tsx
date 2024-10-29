@@ -1,5 +1,5 @@
-import BaseTypography from './BaseTypography';
-import { TYPOGRAPHY_THEME } from './constants';
+import BaseTypography from '@@components/Typography/BaseTypography';
+import { TYPOGRAPHY_THEME } from '@@components/Typography/constants';
 
 const Typography = {
   [TYPOGRAPHY_THEME.LARGE_TITLE]: BaseTypography(TYPOGRAPHY_THEME.LARGE_TITLE),

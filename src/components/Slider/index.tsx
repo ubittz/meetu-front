@@ -5,9 +5,8 @@ import { useState } from 'react';
 import Slick from 'react-slick';
 import styled from 'styled-components';
 
-import { SliderProps } from '@@components/Slider/type';
-
-import SliderNavigation from './SliderNavigation';
+import SliderNavigation from '@@components/Slider/SliderNavigation';
+import { SliderProps } from '@@components/Slider/types';
 
 const StyledSlider = styled.div<{ $currentIndex: number; $size?: number }>`
   display: flex;
