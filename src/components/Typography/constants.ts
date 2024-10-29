@@ -1,0 +1,15 @@
+export const TYPOGRAPHY_THEME = {
+  LARGE_TITLE: 'LargeTitle',
+  MEDIUM_TITLE: 'MediumTitle',
+  SMALL_TITLE: 'SmallTitle',
+  LARGE_SUBTITLE: 'LargeSubtitle',
+  MEDIUM_SUBTITLE: 'MediumSubtitle',
+  SMALL_SUBTITLE: 'SmallSubtitle',
+  LARGE_BODY: 'LargeBody',
+  MEDIUM_BODY: 'MediumBody',
+  SMALL_BODY: 'SmallBody',
+  CAPTION: 'Caption',
+  LARGE_BUTTON: 'LargeButton',
+  MEDUIM_BUTTON: 'MeduimButton',
+  SMALL_BUTTON: 'SmallButton',
+} as const;

@@ -1,5 +1,5 @@
 import LargeButton from '@@components/Button/LargeButton';
-import MediumButton from '@@components/Button/MediumBUtton';
+import MediumButton from '@@components/Button/MediumButton';
 import SmallButton from '@@components/Button/SmallButton';
 
 const Button = {
