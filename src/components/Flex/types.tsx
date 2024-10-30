@@ -9,6 +9,7 @@ export interface FlexProps extends HTMLAttributes<HTMLDivElement> {
   gap?: number;
   alignItems?: Properties['alignItems'];
   justifyContent?: Properties['justifyContent'];
+  flex?: Properties['flex'];
 }
 
 export type FlexDirection = asType<typeof FLEX_DIRECTION>;
