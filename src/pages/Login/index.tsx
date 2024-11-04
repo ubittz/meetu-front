@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 
-const StyledLogin = styled.div`
+import FullScreen from '@@components/FullScreen';
+
+const StyledLogin = styled(FullScreen)`
   padding: 5px 10px;
 `;
 
