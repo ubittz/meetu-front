@@ -1,13 +1,12 @@
 export const BUTTON_SIZE = {
-  LARGE: 'Large',
-  MEDIUM: 'Medium',
+  TINY: 'Tiny',
   SMALL: 'Small',
+  MEDIUM: 'Medium',
+  LARGE: 'Large',
+  EXTRALARGE: 'ExtraLarge',
 } as const;
 
 export const BUTTON_THEME = {
   PRIMARY: 'primary',
-  SECONDARY: 'secondary',
   OUTLINE: 'outline',
-  SOFT: 'soft',
-  INACTIVE: 'inactive',
 } as const;

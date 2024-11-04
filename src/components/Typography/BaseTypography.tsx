@@ -1,16 +1,19 @@
+import { Properties } from 'csstype';
 import styled from 'styled-components';
 
 import { TypographyProps, TypographyTheme } from '@@components/Typography/types';
 
-const StyledBaseTypography = styled.p<{ $theme: TypographyTheme; $color?: string }>`
+const StyledBaseTypography = styled.p<{ $theme: TypographyTheme; $fontSize: Properties['fontSize']; $fontWeight: Properties['fontWeight'] }>`
   ${({ theme, $theme }) => theme.typography[$theme]}
-  color: ${({ theme, $color }) => $color ?? theme.color.defualtFontColor};
+  font-size: ${({ $fontSize }) => $fontSize};
+  font-weight: ${({ $fontWeight }) => $fontWeight};
+  line-height: 1.3em;
 `;
 
 const BaseTypography =
   (theme: TypographyTheme) =>
-  ({ color, ...props }: TypographyProps) => {
-    return <StyledBaseTypography {...props} $theme={theme} $color={color} />;
+  ({ fontWeight = 400, fontSize = '16px', ...props }: TypographyProps) => {
+    return <StyledBaseTypography {...props} $theme={theme} $fontSize={fontSize} $fontWeight={fontWeight} />;
   };
 
 export default BaseTypography;
