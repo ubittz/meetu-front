@@ -12,7 +12,7 @@ const TextField = styled.input`
   font-weight: 400;
   line-height: 1.3em;
 
-  color: ${COLORS.MAIN};
+  color: ${COLORS.TEXT_100};
 
   &::placeholder {
     color: ${COLORS.TEXT_400};

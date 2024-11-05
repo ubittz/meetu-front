@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 import { Formik } from 'formik';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 import Flex from '@@components/Flex';
@@ -10,6 +10,8 @@ import { COLORS } from '@@constants/colors';
 import { AppleLogoIcon, GoogleLogoIcon, KakaoLogoIcon, MainLogoIcon, NaverLogoIcon } from '@@pages/Login/icons';
 import LoginFormContent from '@@pages/Login/parts/LoginFormContent';
 import { LoginForm } from '@@pages/Login/types';
+import { PAGES } from '@@router/constants';
+import { pathGenerator } from '@@router/utils';
 
 import RegisterTermsBottomModal from './parts/\bRegisterTermsBottomModal';
 
@@ -49,11 +51,14 @@ const initialValues: LoginForm = {
 };
 
 function Login() {
+  const navigate = useNavigate();
+
   const [visible, setVisible] = useState(false);
 
   const handleSubmit = (form: LoginForm) => {
     // 로그인 로직 들어가야함
     console.log(form);
+    navigate(pathGenerator(PAGES.HOME));
   };
 
   const handleClickRegister = () => {

@@ -30,6 +30,7 @@ export const theme: DefaultTheme = {
     [TYPOGRAPHY_THEME.SUB]: `color: ${COLORS.TEXT_200};`,
     [TYPOGRAPHY_THEME.THIRD]: `color: ${COLORS.TEXT_300};`,
     [TYPOGRAPHY_THEME.PLACEHOLDER]: `color: ${COLORS.TEXT_400};`,
+    [TYPOGRAPHY_THEME.POINT]: `color: ${COLORS.MAIN};`,
   },
   color: {
     defualtFontColor: COLORS.TEXT_100,
