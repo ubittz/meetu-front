@@ -6,6 +6,7 @@ import GlobalStyle from '@@assets/styles/GlobalStyle';
 import { theme } from '@@assets/styles/theme';
 import Router from '@@router';
 import { store } from '@@store';
+import '@@assets/styles/index.css';
 
 function App() {
   return (

@@ -4,4 +4,5 @@ export const TYPOGRAPHY_THEME = {
   THIRD: 'Third',
   PLACEHOLDER: 'Placeholder',
   POINT: 'Point',
+  WHITE: 'White',
 } as const;

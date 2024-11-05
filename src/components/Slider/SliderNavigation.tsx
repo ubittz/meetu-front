@@ -1,6 +1,10 @@
 import styled from 'styled-components';
 
 const StyledSliderNavigation = styled.div`
+  position: absolute;
+  bottom: 18px;
+  left: 18px;
+
   display: flex;
   justify-content: center;
   gap: 4px;
@@ -10,10 +14,12 @@ const StyledSliderNavigation = styled.div`
     height: 6px;
     border-radius: 3px;
 
-    background: #eee;
+    background: #ffffff80;
 
     &.slider_dot-active {
-      background: #999;
+      width: 12px;
+      background: #ffffff;
+      transition: width 100ms;
     }
   }
 `;

@@ -9,6 +9,7 @@ import SliderNavigation from '@@components/Slider/SliderNavigation';
 import { SliderProps } from '@@components/Slider/types';
 
 const StyledSlider = styled.div<{ $currentIndex: number; $size?: number }>`
+  position: relative;
   display: flex;
   flex-direction: column;
   gap: 16px;
@@ -20,6 +21,7 @@ const StyledSlider = styled.div<{ $currentIndex: number; $size?: number }>`
 const StyledSlick = styled(Slick)<{ gap: number }>`
   /* Slider Item에게 Gap을 주기 위한 속성들 */
   .slick-list {
+    overflow: visible;
     margin: 0 -${({ gap }) => gap / 2}px;
     .slick-slide > div {
       padding: 0 ${({ gap }) => gap / 2}px;
