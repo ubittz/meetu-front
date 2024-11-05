@@ -9,10 +9,9 @@ import Flex from '@@components/Flex';
 import FooterContainer from '@@components/FooterContainer';
 import Typography from '@@components/Typography';
 import { COLORS } from '@@constants/colors';
+import { TermsRightArrowIcon } from '@@pages/Login/icons';
 import { PAGES } from '@@router/constants';
 import { pathGenerator } from '@@router/utils';
-
-import { TermsRightArrowIcon } from '../icons';
 
 const StyledBody = styled(Flex.Vertical)`
   padding: 24px 20px 40px;

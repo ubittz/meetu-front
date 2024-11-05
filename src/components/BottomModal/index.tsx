@@ -3,12 +3,11 @@ import { ForwardedRef, forwardRef } from 'react';
 import { CSSTransition } from 'react-transition-group';
 import styled from 'styled-components';
 
+import { ModalLeftArrowIcon } from '@@components/BottomModal/icons';
 import { BottomModalProps } from '@@components/BottomModal/types';
 import Flex from '@@components/Flex';
 import Typography from '@@components/Typography';
 import { COLORS } from '@@constants/colors';
-
-import { ModalLeftArrowIcon } from './icons';
 
 const StyledBottomModal = styled(Flex.Vertical)`
   position: fixed;

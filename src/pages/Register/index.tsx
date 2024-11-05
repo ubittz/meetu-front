@@ -1,12 +1,11 @@
 import { Formik } from 'formik';
 import { useNavigate } from 'react-router-dom';
 
+import { GENDER } from '@@pages/Register/constants';
+import RegisterFormContent from '@@pages/Register/parts/RegisterFormContent';
+import { RegisterForm } from '@@pages/Register/types';
 import { PAGES } from '@@router/constants';
 import { pathGenerator } from '@@router/utils';
-
-import { GENDER } from './constants';
-import RegisterFormContent from './parts/RegisterFormContent';
-import { RegisterForm } from './types';
 
 const initialValues: RegisterForm = {
   id: '',

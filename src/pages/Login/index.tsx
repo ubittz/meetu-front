@@ -8,12 +8,11 @@ import Flex from '@@components/Flex';
 import Typography from '@@components/Typography';
 import { COLORS } from '@@constants/colors';
 import { AppleLogoIcon, GoogleLogoIcon, KakaoLogoIcon, MainLogoIcon, NaverLogoIcon } from '@@pages/Login/icons';
+import RegisterTermsBottomModal from '@@pages/Login/parts/\bRegisterTermsBottomModal';
 import LoginFormContent from '@@pages/Login/parts/LoginFormContent';
 import { LoginForm } from '@@pages/Login/types';
 import { PAGES } from '@@router/constants';
 import { pathGenerator } from '@@router/utils';
-
-import RegisterTermsBottomModal from './parts/\bRegisterTermsBottomModal';
 
 const StyledLogin = styled(Flex.Vertical)`
   height: 100vh;

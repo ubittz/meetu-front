@@ -4,9 +4,8 @@ import Flex from '@@components/Flex';
 import FormGroup from '@@components/FormGroup';
 import InputFormGroup from '@@components/InputFormGroup';
 import Radio from '@@components/Radio';
-
-import { GENDER } from '../constants';
-import { RegisterForm } from '../types';
+import { GENDER } from '@@pages/Register/constants';
+import { RegisterForm } from '@@pages/Register/types';
 
 function RegisterFormInputContent() {
   const { getFieldProps } = useFormikContext<RegisterForm>();

@@ -1,11 +1,10 @@
 import { Formik } from 'formik';
 import { useNavigate } from 'react-router-dom';
 
+import FindIdFormContent from '@@pages/FindAccount/parts/FindIdFormContent';
+import { FindIdForm } from '@@pages/FindAccount/types';
 import { PAGES } from '@@router/constants';
 import { pathGenerator } from '@@router/utils';
-
-import FindIdFormContent from './parts/FindIdFormContent';
-import { FindIdForm } from './types';
 
 const initialValues: FindIdForm = {
   name: '',

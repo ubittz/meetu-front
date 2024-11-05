@@ -6,9 +6,8 @@ import Flex from '@@components/Flex';
 import FooterContainer from '@@components/FooterContainer';
 import FullScreen from '@@components/FullScreen';
 import SignTitle from '@@components/SignTitle';
-
-import { RegisterForm } from '../types';
-import RegisterFormInputContent from './RegisterFormInputContent';
+import RegisterFormInputContent from '@@pages/Register/parts/RegisterFormInputContent';
+import { RegisterForm } from '@@pages/Register/types';
 
 const StyledRegisterFormContent = styled(FullScreen)`
   .body {

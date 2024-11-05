@@ -4,9 +4,8 @@ import styled from 'styled-components';
 
 import Flex from '@@components/Flex';
 import FullScreen from '@@components/FullScreen';
+import { BackgroundLogoIcon } from '@@components/NotifyScreen/icons';
 import Typography from '@@components/Typography';
-
-import { BackgroundLogoIcon } from './icons';
 
 const StyledNotifyScreen = styled(FullScreen)`
   .body {
