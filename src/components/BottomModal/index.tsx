@@ -1,4 +1,4 @@
-import { ForwardedRef, forwardRef } from 'react';
+import { useRef } from 'react';
 
 import { CSSTransition } from 'react-transition-group';
 import styled from 'styled-components';
@@ -77,7 +77,9 @@ const StyledBottomModal = styled(Flex.Vertical)`
   }
 `;
 
-function BottomModal({ title, visible, setVisible, children }: BottomModalProps, ref: ForwardedRef<HTMLElement>) {
+function BottomModal({ title, visible, setVisible, children }: BottomModalProps) {
+  const ref = useRef<HTMLDivElement>();
+
   const handleClose = () => {
     setVisible(!visible);
   };
@@ -101,4 +103,4 @@ function BottomModal({ title, visible, setVisible, children }: BottomModalProps,
   );
 }
 
-export default forwardRef(BottomModal);
+export default BottomModal;
