@@ -1,3 +1,5 @@
+import { useState } from 'react';
+
 import { Formik } from 'formik';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
@@ -8,6 +10,8 @@ import { COLORS } from '@@constants/colors';
 import { AppleLogoIcon, GoogleLogoIcon, KakaoLogoIcon, MainLogoIcon, NaverLogoIcon } from '@@pages/Login/icons';
 import LoginFormContent from '@@pages/Login/parts/LoginFormContent';
 import { LoginForm } from '@@pages/Login/types';
+
+import RegisterTermsBottomModal from './parts/\bRegisterTermsBottomModal';
 
 const StyledLogin = styled(Flex.Vertical)`
   height: 100vh;
@@ -32,7 +36,9 @@ const StyledFindLink = styled(Link)`
   line-height: 1.3em;
 `;
 
-const StyledRegisterLink = styled(StyledFindLink)`
+const StyledRegisterButton = styled.span`
+  font-size: 14px;
+  line-height: 1.3em;
   text-decoration: underline;
   color: ${COLORS.MAIN};
 `;
@@ -43,12 +49,20 @@ const initialValues: LoginForm = {
 };
 
 function Login() {
+  const [visible, setVisible] = useState(false);
+
   const handleSubmit = (form: LoginForm) => {
+    // 로그인 로직 들어가야함
     console.log(form);
+  };
+
+  const handleClickRegister = () => {
+    setVisible(true);
   };
 
   return (
     <StyledLogin>
+      <RegisterTermsBottomModal visible={visible} setVisible={setVisible} />
       <Flex.Vertical className='login__header' alignItems='center'>
         <MainLogoIcon />
         <Typography.Sub>밋유에 오신 것을 환영합니다!</Typography.Sub>
@@ -63,7 +77,7 @@ function Login() {
             <div className='login__divider' />
             <StyledFindLink to={''}>Password 찾기</StyledFindLink>
           </Flex.Horizontal>
-          <StyledRegisterLink to=''>회원가입</StyledRegisterLink>
+          <StyledRegisterButton onClick={handleClickRegister}>회원가입</StyledRegisterButton>
         </Flex.Horizontal>
       </Flex.Vertical>
       <Flex.Horizontal alignItems='center' justifyContent='center' flex={1}>

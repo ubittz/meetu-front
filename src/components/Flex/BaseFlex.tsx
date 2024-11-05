@@ -1,3 +1,5 @@
+import { ForwardedRef, forwardRef } from 'react';
+
 import { Properties } from 'csstype';
 import styled from 'styled-components';
 
@@ -18,10 +20,19 @@ const StyledBaseFlex = styled.div<{
   ${({ $flex }) => $flex !== undefined && `flex: ${$flex};`}
 `;
 
-const BaseFlex =
-  (direction: FlexDirection) =>
-  ({ gap, alignItems, justifyContent, flex, ...props }: FlexProps) => {
-    return <StyledBaseFlex {...props} $gap={gap} $alignItems={alignItems} $justifyContent={justifyContent} $direction={direction} $flex={flex} />;
-  };
+const BaseFlex = (direction: FlexDirection) =>
+  forwardRef(({ gap, alignItems, justifyContent, flex, ...props }: FlexProps, forwardRef) => {
+    return (
+      <StyledBaseFlex
+        {...props}
+        ref={forwardRef as ForwardedRef<HTMLDivElement>}
+        $gap={gap}
+        $alignItems={alignItems}
+        $justifyContent={justifyContent}
+        $direction={direction}
+        $flex={flex}
+      />
+    );
+  });
 
 export default BaseFlex;
