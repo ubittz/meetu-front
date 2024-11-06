@@ -17,7 +17,7 @@ const StyledClassBoxList = styled(Flex.Horizontal)`
 
 function ClassBoxList({ title, classList, onClickShowAll, ...props }: ClassBoxListProps) {
   return (
-    <Flex.Vertical {...props}>
+    <Flex.Vertical {...props} gap={20}>
       <Flex.Horizontal className='tw-px-[20px]' alignItems='center' justifyContent='space-between'>
         <Typography.Main fontSize='20px' fontWeight={700}>
           {title}
