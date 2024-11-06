@@ -20,6 +20,11 @@ const StyledClassBox = styled(Flex.Vertical)`
     }
   }
 
+  .class_box__title {
+    height: calc(14px * 1.3 * 2);
+  }
+
+  .class_box__title,
   .class_box__description {
     overflow: hidden;
     display: -webkit-box;
@@ -38,7 +43,7 @@ function ClassBox({ classItem, ...props }: ClassBoxProps) {
       <Flex.Vertical className='tw-mt-[8px]' gap={12}>
         <Flex.Horizontal>{classItem.badgeList?.map((badge) => <Badge theme={badge.theme}>{badge.title}</Badge>)}</Flex.Horizontal>
         <Flex.Vertical gap={4}>
-          <Typography.Main fontSize='14px' fontWeight={500}>
+          <Typography.Main className='class_box__title' fontSize='14px' fontWeight={500}>
             {classItem.title}
           </Typography.Main>
           <Typography.Third fontSize='12px' className='class_box__description'>

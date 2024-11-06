@@ -6,6 +6,7 @@ import FindIdComplete from '@@pages/FindAccount/FindIdComplete';
 import FindPassword from '@@pages/FindAccount/FindPassword';
 import ResetPassword from '@@pages/FindAccount/ResetPassword';
 import Home from '@@pages/Home';
+import HomeCategory from '@@pages/HomeCategory';
 import Login from '@@pages/Login';
 import Register from '@@pages/Register';
 import RegisterComplete from '@@pages/Register/Complete';
@@ -24,6 +25,7 @@ function Router() {
       <Route path={pathGenerator(PAGES.FIND_ACCOUNT, '/password')} element={<FindPassword />} />
       <Route path={pathGenerator(PAGES.FIND_ACCOUNT, '/password/reset')} element={<ResetPassword />} />
       <Route path={pathGenerator(PAGES.HOME)} element={<Home />} />
+      <Route path={pathGenerator(PAGES.HOME, '/category/:id')} element={<HomeCategory />} />
       <Route path='*' element={<Error />} />
     </Routes>
   );
