@@ -4,11 +4,10 @@ import Flex from '@@components/Flex';
 import TabHeader from '@@components/Tab/TabHeader';
 import Typography from '@@components/Typography';
 import { COLORS } from '@@constants/colors';
-
-import { TAB_LIST } from '../constants';
-import AskCard from './AskCard';
-import AskInput from './AskInput';
-import Pagination from './Pagination';
+import { TAB_LIST } from '@@pages/ClassDetail/constants';
+import AskCard from '@@pages/ClassDetail/parts/AskCard';
+import AskInput from '@@pages/ClassDetail/parts/AskInput';
+import Pagination from '@@pages/ClassDetail/parts/Pagination';
 
 const StyledAsk = styled(Flex.Vertical)`
   .ask__title {

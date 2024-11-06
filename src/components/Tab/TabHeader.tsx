@@ -3,9 +3,8 @@ import { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 
 import Flex from '@@components/Flex';
+import TabBarItem from '@@components/Tab/TabBarItem';
 import { COLORS } from '@@constants/colors';
-
-import TabBarItem from './TabBarItem';
 
 const StyledTabHeader = styled(Flex.Horizontal)<{ $width: number; $left: number }>`
   position: relative;

@@ -6,4 +6,5 @@ export const PAGES = {
   FIND_ACCOUNT: '/find',
   HOME: '/home',
   CLASS: '/class',
+  PAYMENT: '/payment',
 } as const;

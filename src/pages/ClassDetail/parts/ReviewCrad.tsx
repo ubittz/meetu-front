@@ -3,9 +3,8 @@ import styled from 'styled-components';
 import Flex from '@@components/Flex';
 import Typography from '@@components/Typography';
 import { COLORS } from '@@constants/colors';
+import { StartIcon } from '@@pages/ClassDetail/icons';
 import ReviewImage from '@@pages/ClassDetail/images/review.jpeg';
-
-import { StartIcon } from '../icons';
 
 const StyledReviewCard = styled(Flex.Vertical)`
   padding: 20px 0;

@@ -5,9 +5,8 @@ import { BADGE_THEME } from '@@components/Badge/constants';
 import Flex from '@@components/Flex';
 import Typography from '@@components/Typography';
 import { COLORS } from '@@constants/colors';
-
-import { SecretIcon } from '../icons';
-import { AskStatus } from '../types';
+import { SecretIcon } from '@@pages/ClassDetail/icons';
+import { AskStatus } from '@@pages/ClassDetail/types';
 
 const StyledAskCard = styled(Flex.Vertical)`
   padding: 20px 0;

@@ -6,9 +6,8 @@ import Flex from '@@components/Flex';
 import TabHeader from '@@components/Tab/TabHeader';
 import Typography from '@@components/Typography';
 import { COLORS } from '@@constants/colors';
+import { TAB_LIST } from '@@pages/ClassDetail/constants';
 import DetailImage from '@@pages/ClassDetail/images/detail.png';
-
-import { TAB_LIST } from '../constants';
 
 const StyledDetailInfo = styled(Flex.Vertical)`
   .detail_info__contents {

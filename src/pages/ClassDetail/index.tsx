@@ -8,12 +8,12 @@ import Flex from '@@components/Flex';
 import FooterContainer from '@@components/FooterContainer';
 import Header from '@@components/Header';
 import { HeaderProps } from '@@components/Header/types';
+import Ask from '@@pages/ClassDetail/parts/Ask';
 import ClassInfo from '@@pages/ClassDetail/parts/ClassInfo';
+import DetailInfo from '@@pages/ClassDetail/parts/DetailInfo';
+import EnrollBottomModal from '@@pages/ClassDetail/parts/EnrollBottomModal';
+import Review from '@@pages/ClassDetail/parts/Review';
 import Background from '@@pages/Home/images/class_4.jpeg';
-
-import Ask from './parts/Ask';
-import DetailInfo from './parts/DetailInfo';
-import Review from './parts/Review';
 
 const StyledClassDetail = styled(Flex.Vertical)<{ $scrollPadding: number }>`
   height: 100vh;
@@ -46,6 +46,7 @@ function ClassDetail() {
 
   const [paddingTop, setPaddingTop] = useState<number>(0);
   const [headerTheme, setHeaderTheme] = useState<HeaderProps['theme']>('transparent');
+  const [visible, setVisible] = useState<boolean>(false);
 
   const scrollWrapRef = useRef<HTMLDivElement>(null);
   const tabListRef = useRef<HTMLDivElement>(null);
@@ -64,10 +65,15 @@ function ClassDetail() {
     navigate(-1);
   };
 
+  const handleClickEnroll = () => {
+    setVisible(true);
+  };
+
   return (
     <StyledClassDetail $scrollPadding={paddingTop}>
       <Header theme={headerTheme} onBack={handleBack} />
       <Flex.Vertical ref={scrollWrapRef} className='scroll_wrap' onScroll={handleScroll}>
+        <EnrollBottomModal visible={visible} setVisible={setVisible} />
         <Flex.Vertical className='body' gap={30}>
           <ClassInfo setPaddingTop={setPaddingTop} />
           <Flex.Vertical ref={tabListRef} gap={60}>
@@ -78,7 +84,7 @@ function ClassDetail() {
         </Flex.Vertical>
       </Flex.Vertical>
       <FooterContainer className='tw-bg-white'>
-        <Button.Medium>신청하기</Button.Medium>
+        <Button.Medium onClick={handleClickEnroll}>신청하기</Button.Medium>
       </FooterContainer>
     </StyledClassDetail>
   );
