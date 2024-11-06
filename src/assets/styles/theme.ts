@@ -22,7 +22,7 @@ export const theme: DefaultTheme = {
     },
     theme: {
       [BUTTON_THEME.PRIMARY]: `background: ${COLORS.MAIN}; border: none; color: ${COLORS.TEXT_500};`,
-      [BUTTON_THEME.OUTLINE]: `background: ${COLORS.TEXT_500}; border: 1px solid ${COLORS.LINE_100}; color: ${COLORS.TEXT_200};`,
+      [BUTTON_THEME.OUTLINE]: `background: ${COLORS.TEXT_500}; border: 1px solid ${COLORS.LINE_100}; color: ${COLORS.TEXT_200}; font-weight: 400`,
     },
   },
   typography: {
