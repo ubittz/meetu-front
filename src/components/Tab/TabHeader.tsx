@@ -12,7 +12,6 @@ const StyledTabHeader = styled(Flex.Horizontal)<{ $width: number; $left: number 
   height: 40px;
   border-bottom: 1px solid ${COLORS.LINE_100};
   padding: 0 20px;
-  margin-bottom: 20px;
 
   &::before {
     content: '';

@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 import Badge from '@@components/Badge';
@@ -5,6 +6,8 @@ import { ClassBoxProps } from '@@components/ClassBox/types';
 import Flex from '@@components/Flex';
 import Typography from '@@components/Typography';
 import { COLORS } from '@@constants/colors';
+import { PAGES } from '@@router/constants';
+import { pathGenerator } from '@@router/utils';
 
 const StyledClassBox = styled(Flex.Vertical)`
   flex: 0 0 auto;
@@ -35,8 +38,14 @@ const StyledClassBox = styled(Flex.Vertical)`
 `;
 
 function ClassBox({ classItem, ...props }: ClassBoxProps) {
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate(pathGenerator(PAGES.CLASS, `/${classItem.id}`));
+  };
+
   return (
-    <StyledClassBox {...props}>
+    <StyledClassBox {...props} onClick={handleClick}>
       <div className='class_box__image'>
         <img src={classItem.image} alt='Class Box Image' />
       </div>

@@ -2,6 +2,7 @@ import { BadgeTheme } from '@@components/Badge/types';
 import { FlexProps } from '@@components/Flex/types';
 
 export interface Class {
+  id: number;
   title: string;
   description: string;
   price: number;

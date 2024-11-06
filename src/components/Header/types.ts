@@ -4,6 +4,7 @@ import { HEADER_ALIGNMENT } from '@@components/Header/constants';
 import { asType } from '@@types/common';
 
 interface WithoutChildrenHeaderProps extends HTMLAttributes<HTMLDivElement> {
+  theme?: 'transparent' | 'white';
   hiddenBack?: boolean;
   titleAlign?: HeaderAlignment;
   onBack?: MouseEventHandler<HTMLDivElement>;

@@ -8,13 +8,14 @@ import { ArrowLeftIcon } from '@@constants/icons';
 
 const BUTTON_SIZE = 20;
 
-const StyledHeader = styled.div<{ $hiddenBack: boolean; $align: HeaderAlignment }>`
+const StyledHeader = styled.div<{ $hiddenBack: boolean; $align: HeaderAlignment; $theme: HeaderProps['theme'] }>`
   display: flex;
   justify-content: ${({ $hiddenBack, $align }) => (!$hiddenBack ? 'space-between' : ATTR_BY_HEADER_ALIGN[$align])};
   align-items: center;
   height: 52px;
   padding: 0 20px;
-  border-bottom: 1px solid ${COLORS.LINE_100};
+  background: ${({ $theme }) => ($theme === 'white' ? COLORS.TEXT_500 : 'transparent')};
+  ${({ $theme }) => $theme === 'white' && `border-bottom: 1px solid ${COLORS.LINE_100}`};
 
   .header__back_icon_wrap {
     display: ${({ $hiddenBack }) => ($hiddenBack ? 'none' : 'flex')};
@@ -25,12 +26,12 @@ const StyledHeader = styled.div<{ $hiddenBack: boolean; $align: HeaderAlignment 
   }
 `;
 
-function Header({ children, titleAlign = 'center', hiddenBack = false, onBack, className, ...props }: HeaderProps) {
+function Header({ theme = 'white', children, titleAlign = 'center', hiddenBack = false, onBack, className, ...props }: HeaderProps) {
   return (
-    <StyledHeader {...props} className={`header ${className}`} $hiddenBack={hiddenBack} $align={titleAlign}>
+    <StyledHeader {...props} className={`header ${className}`} $hiddenBack={hiddenBack} $align={titleAlign} $theme={theme}>
       {!hiddenBack && (
         <div className='header__back_icon_wrap' onClick={onBack}>
-          <ArrowLeftIcon />
+          <ArrowLeftIcon white={theme === 'transparent'} />
         </div>
       )}
       <div className='header__title'>{children}</div>

@@ -1,5 +1,6 @@
 import { Navigate, Route, Routes } from 'react-router-dom';
 
+import ClassDetail from '@@pages/ClassDetail';
 import Error from '@@pages/Error';
 import FindId from '@@pages/FindAccount/FindId';
 import FindIdComplete from '@@pages/FindAccount/FindIdComplete';
@@ -26,6 +27,7 @@ function Router() {
       <Route path={pathGenerator(PAGES.FIND_ACCOUNT, '/password/reset')} element={<ResetPassword />} />
       <Route path={pathGenerator(PAGES.HOME)} element={<Home />} />
       <Route path={pathGenerator(PAGES.HOME, '/category/:id')} element={<HomeCategory />} />
+      <Route path={pathGenerator(PAGES.CLASS, '/:id')} element={<ClassDetail />} />
       <Route path='*' element={<Error />} />
     </Routes>
   );

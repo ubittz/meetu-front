@@ -2,7 +2,7 @@ import { SVGAttributes } from 'react';
 
 type DefaultIconProps = SVGAttributes<SVGSVGElement>;
 
-export function ArrowLeftIcon(props: DefaultIconProps) {
+export function ArrowLeftIcon({ white = false, ...props }: { white?: boolean } & DefaultIconProps) {
   return (
     <svg width='20' height='20' viewBox='0 0 20 20' fill='none' xmlns='http://www.w3.org/2000/svg' {...props}>
       <mask id='mask0_339_997' style={{ maskType: 'alpha' }} maskUnits='userSpaceOnUse' x='1' y='0' width='18' height='18'>
@@ -18,9 +18,17 @@ export function ArrowLeftIcon(props: DefaultIconProps) {
           height='10.0884'
           rx='0.785715'
           transform='matrix(-0.707107 -0.707107 -0.707107 0.707107 14.1667 3.2063)'
-          fill='#212121'
+          fill={white ? '#fff' : '#212121'}
         />
-        <rect x='5.78589' y='9.46729' width='1.57143' height='10.0884' rx='0.785715' transform='rotate(-45 5.78589 9.46729)' fill='#212121' />
+        <rect
+          x='5.78589'
+          y='9.46729'
+          width='1.57143'
+          height='10.0884'
+          rx='0.785715'
+          transform='rotate(-45 5.78589 9.46729)'
+          fill={white ? '#fff' : '#212121'}
+        />
       </g>
     </svg>
   );
