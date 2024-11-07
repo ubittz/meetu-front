@@ -9,4 +9,5 @@ export const PAGES = {
   CLASS: '/class',
   PAYMENT: '/payment',
   PROFILE: '/profile',
+  MY_PAGE: '/my-page',
 } as const;

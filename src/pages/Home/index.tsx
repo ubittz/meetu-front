@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 
+import ClassBoxList from '@@components/ClassBoxList';
 import Flex from '@@components/Flex';
 import FullScreen from '@@components/FullScreen';
 import Header from '@@components/Header';
@@ -7,7 +8,6 @@ import { CLASS_LIST } from '@@pages/Home/constants';
 import { HomeLogoIcon } from '@@pages/Home/icons';
 import CategoryList from '@@pages/Home/parts/CategoryList';
 import ClassBanner from '@@pages/Home/parts/ClassBanner';
-import ClassBoxList from '@@pages/Home/parts/ClassBoxList';
 import CopyRight from '@@pages/Home/parts/CopyRight';
 import MainBanner from '@@pages/Home/parts/MainBanner';
 import MoodBanner from '@@pages/Home/parts/MoodBanner';

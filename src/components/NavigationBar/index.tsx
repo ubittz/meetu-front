@@ -39,7 +39,7 @@ const NAVIGATION_LIST: NavigationItemType[] = [
   },
   {
     title: '마이페이지',
-    path: pathGenerator(PAGES.HOME),
+    path: pathGenerator(PAGES.MY_PAGE),
     activeIcon: <ActiveMyPageIcon />,
     inactiveIcon: <InactiveMyPageIcon />,
   },

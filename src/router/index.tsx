@@ -9,6 +9,7 @@ import ResetPassword from '@@pages/FindAccount/ResetPassword';
 import FindClass from '@@pages/FindClass';
 import Home from '@@pages/Home';
 import Login from '@@pages/Login';
+import MyPage from '@@pages/MyPage';
 import Payment from '@@pages/Payment';
 import PaymentComplete from '@@pages/Payment/Complete';
 import Profile from '@@pages/Profile';
@@ -36,6 +37,9 @@ function Router() {
       <Route path={pathGenerator(PAGES.PAYMENT, '/complete')} element={<PaymentComplete />} />
       <Route path={pathGenerator(PAGES.PAYMENT, '/:id')} element={<Payment />} />
       <Route path={pathGenerator(PAGES.PROFILE, '/:id')} element={<Profile />} />
+
+      <Route path={pathGenerator(PAGES.MY_PAGE)} element={<MyPage />} />
+
       <Route path='*' element={<Error />} />
     </Routes>
   );
