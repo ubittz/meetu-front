@@ -60,7 +60,7 @@ function ProfileInfo() {
         </Flex.Vertical>
       </Flex.Horizontal>
       <Flex.Horizontal className='profile_info__menu_list' gap={8}>
-        <MenuBox to={pathGenerator(PAGES.MY_PAGE, '/info')} icon={<InformationIcon />}>
+        <MenuBox to={pathGenerator(PAGES.MY_PAGE, '/modify')} icon={<InformationIcon />}>
           내 정보
         </MenuBox>
         <MenuBox to={pathGenerator(PAGES.MY_PAGE, '/purchase-history')} icon={<WalletIcon />}>

@@ -10,6 +10,7 @@ import FindClass from '@@pages/FindClass';
 import Home from '@@pages/Home';
 import Login from '@@pages/Login';
 import MyPage from '@@pages/MyPage';
+import ModifyMyInfo from '@@pages/MyPage/Modify';
 import Payment from '@@pages/Payment';
 import PaymentComplete from '@@pages/Payment/Complete';
 import Profile from '@@pages/Profile';
@@ -39,6 +40,7 @@ function Router() {
       <Route path={pathGenerator(PAGES.PROFILE, '/:id')} element={<Profile />} />
 
       <Route path={pathGenerator(PAGES.MY_PAGE)} element={<MyPage />} />
+      <Route path={pathGenerator(PAGES.MY_PAGE, '/modify')} element={<ModifyMyInfo />} />
 
       <Route path='*' element={<Error />} />
     </Routes>
