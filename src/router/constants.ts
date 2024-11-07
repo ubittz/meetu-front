@@ -8,4 +8,5 @@ export const PAGES = {
   FIND_CLASS: '/find-class',
   CLASS: '/class',
   PAYMENT: '/payment',
+  PROFILE: '/profile',
 } as const;

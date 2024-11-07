@@ -11,6 +11,7 @@ import Home from '@@pages/Home';
 import Login from '@@pages/Login';
 import Payment from '@@pages/Payment';
 import PaymentComplete from '@@pages/Payment/Complete';
+import Profile from '@@pages/Profile';
 import Register from '@@pages/Register';
 import RegisterComplete from '@@pages/Register/Complete';
 import { PAGES, ROUTE_PREFIX } from '@@router/constants';
@@ -27,12 +28,14 @@ function Router() {
       <Route path={pathGenerator(PAGES.FIND_ACCOUNT, '/id/complete')} element={<FindIdComplete />} />
       <Route path={pathGenerator(PAGES.FIND_ACCOUNT, '/password')} element={<FindPassword />} />
       <Route path={pathGenerator(PAGES.FIND_ACCOUNT, '/password/reset')} element={<ResetPassword />} />
+
       <Route path={pathGenerator(PAGES.HOME)} element={<Home />} />
       <Route path={pathGenerator(PAGES.FIND_CLASS)} element={<FindClass />} />
       <Route path={pathGenerator(PAGES.FIND_CLASS, '/:id')} element={<FindClass />} />
       <Route path={pathGenerator(PAGES.CLASS, '/:id')} element={<ClassDetail />} />
       <Route path={pathGenerator(PAGES.PAYMENT, '/complete')} element={<PaymentComplete />} />
       <Route path={pathGenerator(PAGES.PAYMENT, '/:id')} element={<Payment />} />
+      <Route path={pathGenerator(PAGES.PROFILE, '/:id')} element={<Profile />} />
       <Route path='*' element={<Error />} />
     </Routes>
   );

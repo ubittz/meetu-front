@@ -50,7 +50,13 @@ function ClassBox({ classItem, ...props }: ClassBoxProps) {
         <img src={classItem.image} alt='Class Box Image' />
       </div>
       <Flex.Vertical className='tw-mt-[8px]' gap={12}>
-        <Flex.Horizontal>{classItem.badgeList?.map((badge) => <Badge theme={badge.theme}>{badge.title}</Badge>)}</Flex.Horizontal>
+        <Flex.Horizontal>
+          {classItem.badgeList?.map((badge, index) => (
+            <Badge key={index} theme={badge.theme}>
+              {badge.title}
+            </Badge>
+          ))}
+        </Flex.Horizontal>
         <Flex.Vertical gap={4}>
           <Typography.Main className='class_box__title' fontSize='14px' fontWeight={500}>
             {classItem.title}

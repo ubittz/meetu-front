@@ -54,7 +54,7 @@ function ClassDetail() {
   const handleChangeTab = (index: number) => {
     if (!tabListRef.current || !scrollWrapRef.current) return;
     const targetNode = tabListRef.current.childNodes[index] as HTMLElement;
-    scrollWrapRef.current.scrollTo({ top: targetNode.offsetTop, behavior: 'smooth' });
+    scrollWrapRef.current.scrollTo({ top: targetNode.offsetTop - 52, behavior: 'smooth' });
   };
 
   const handleScroll: UIEventHandler<HTMLDivElement> = (e) => {

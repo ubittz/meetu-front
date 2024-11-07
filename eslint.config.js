@@ -22,6 +22,7 @@ export default tseslint.config(
     rules: {
       ...importPlugin.configs.react.rules,
       ...reactHooks.configs.recommended.rules,
+      '@typescript-eslint/ban-ts-comment': ['error', { 'ts-ignore': 'allow-with-description' }],
       'no-empty-pattern': 'off',
       'react/react-in-jsx-scope': 'off',
       '@typescript-eslint/no-empty-object-type': 'off',

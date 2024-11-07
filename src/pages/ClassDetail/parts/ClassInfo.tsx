@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react';
 
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 import Badge from '@@components/Badge';
@@ -8,6 +9,8 @@ import Button from '@@components/Button';
 import Flex from '@@components/Flex';
 import Typography from '@@components/Typography';
 import { COLORS } from '@@constants/colors';
+import { PAGES } from '@@router/constants';
+import { pathGenerator } from '@@router/utils';
 
 const StyledClassInfo = styled(Flex.Vertical)`
   padding: 24px 20px 30px;
@@ -27,7 +30,13 @@ const StyledClassInfo = styled(Flex.Vertical)`
 `;
 
 function ClassInfo({ setPaddingTop }: { setPaddingTop: (paddingTop: number) => void }) {
+  const navigate = useNavigate();
+
   const ref = useRef<HTMLDivElement>(null);
+
+  const handleClickShowHost = () => {
+    navigate(pathGenerator(PAGES.PROFILE, '/1'));
+  };
 
   useEffect(() => {
     if (ref.current?.clientHeight) {
@@ -89,7 +98,7 @@ function ClassInfo({ setPaddingTop }: { setPaddingTop: (paddingTop: number) => v
           </Typography.Point>
         </Flex.Horizontal>
       </Flex.Vertical>
-      <Button.Tiny theme='outline' className='tw-mt-[4px]'>
+      <Button.Tiny theme='outline' className='tw-mt-[4px]' onClick={handleClickShowHost}>
         호스트 정보
       </Button.Tiny>
     </StyledClassInfo>
