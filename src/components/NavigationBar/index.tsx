@@ -33,7 +33,7 @@ const NAVIGATION_LIST: NavigationItemType[] = [
   },
   {
     title: '모임찾기',
-    path: pathGenerator(PAGES.HOME),
+    path: pathGenerator(PAGES.FIND_CLASS),
     activeIcon: <ActiveFindClassIcon />,
     inactiveIcon: <InactiveFindClassIcon />,
   },

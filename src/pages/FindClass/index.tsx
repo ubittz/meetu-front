@@ -1,6 +1,6 @@
 import { ChangeEventHandler, useState } from 'react';
 
-import { useNavigate, useParams } from 'react-router-dom';
+import { Navigate, useNavigate, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 
 import ClassBox from '@@components/ClassBox';
@@ -63,7 +63,7 @@ const StyledSelect = styled.select`
   outline: none;
 `;
 
-function HomeCategory() {
+function FindClass() {
   const navigate = useNavigate();
 
   const { id } = useParams();
@@ -73,7 +73,7 @@ function HomeCategory() {
 
   const handleChangeCategory: ChangeEventHandler<HTMLSelectElement> = (e) => {
     setSelectedCategory(+e.target.value);
-    navigate(pathGenerator(PAGES.HOME, `/category/${e.target.value}`), {
+    navigate(pathGenerator(PAGES.FIND_CLASS, `/${e.target.value}`), {
       replace: true,
     });
   };
@@ -81,6 +81,10 @@ function HomeCategory() {
   const handleChangeFilter: ChangeEventHandler<HTMLSelectElement> = (e) => {
     setSelectedFilter(e.target.value);
   };
+
+  if (!id) {
+    return <Navigate to={pathGenerator(PAGES.FIND_CLASS, '/1')} replace />;
+  }
 
   return (
     <StyledHomeCategory navigation>
@@ -113,4 +117,4 @@ function HomeCategory() {
   );
 }
 
-export default HomeCategory;
+export default FindClass;

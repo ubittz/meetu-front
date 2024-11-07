@@ -20,7 +20,7 @@ function CategoryItem({ item }: { item: { id: number; title: string; icon: React
   const navigate = useNavigate();
 
   const handleClick = () => {
-    navigate(pathGenerator(PAGES.HOME, `/category/${item.id}`));
+    navigate(pathGenerator(PAGES.FIND_CLASS, `/${item.id}`));
   };
 
   return (

@@ -6,8 +6,8 @@ import FindId from '@@pages/FindAccount/FindId';
 import FindIdComplete from '@@pages/FindAccount/FindIdComplete';
 import FindPassword from '@@pages/FindAccount/FindPassword';
 import ResetPassword from '@@pages/FindAccount/ResetPassword';
+import FindClass from '@@pages/FindClass';
 import Home from '@@pages/Home';
-import HomeCategory from '@@pages/HomeCategory';
 import Login from '@@pages/Login';
 import Payment from '@@pages/Payment';
 import PaymentComplete from '@@pages/Payment/Complete';
@@ -28,7 +28,8 @@ function Router() {
       <Route path={pathGenerator(PAGES.FIND_ACCOUNT, '/password')} element={<FindPassword />} />
       <Route path={pathGenerator(PAGES.FIND_ACCOUNT, '/password/reset')} element={<ResetPassword />} />
       <Route path={pathGenerator(PAGES.HOME)} element={<Home />} />
-      <Route path={pathGenerator(PAGES.HOME, '/category/:id')} element={<HomeCategory />} />
+      <Route path={pathGenerator(PAGES.FIND_CLASS)} element={<FindClass />} />
+      <Route path={pathGenerator(PAGES.FIND_CLASS, '/:id')} element={<FindClass />} />
       <Route path={pathGenerator(PAGES.CLASS, '/:id')} element={<ClassDetail />} />
       <Route path={pathGenerator(PAGES.PAYMENT, '/complete')} element={<PaymentComplete />} />
       <Route path={pathGenerator(PAGES.PAYMENT, '/:id')} element={<Payment />} />
