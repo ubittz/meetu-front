@@ -8,6 +8,7 @@ const StyledRadio = styled.label`
   display: flex;
   align-items: center;
   gap: 4px;
+
   .radio__icon {
     position: relative;
 
@@ -44,11 +45,11 @@ const StyledRadio = styled.label`
   }
 `;
 
-function Radio({ children, ...props }: RadioProps) {
+function Radio({ iconProps: { className, ...iconProps } = {}, children, ...props }: RadioProps) {
   return (
     <StyledRadio>
       <input type='radio' hidden {...props} />
-      <div className='radio__icon' />
+      <div className={`radio__icon ${className ?? ''}`} {...iconProps} />
       <Typography.Main fontSize='14px'>{children}</Typography.Main>
     </StyledRadio>
   );

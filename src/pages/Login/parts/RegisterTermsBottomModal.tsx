@@ -9,7 +9,7 @@ import Flex from '@@components/Flex';
 import FooterContainer from '@@components/FooterContainer';
 import Typography from '@@components/Typography';
 import { COLORS } from '@@constants/colors';
-import { TermsRightArrowIcon } from '@@pages/Login/icons';
+import { TermsRightArrowIcon } from '@@constants/icons';
 import { PAGES } from '@@router/constants';
 import { pathGenerator } from '@@router/utils';
 

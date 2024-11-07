@@ -9,6 +9,8 @@ import ResetPassword from '@@pages/FindAccount/ResetPassword';
 import Home from '@@pages/Home';
 import HomeCategory from '@@pages/HomeCategory';
 import Login from '@@pages/Login';
+import Payment from '@@pages/Payment';
+import PaymentComplete from '@@pages/Payment/Complete';
 import Register from '@@pages/Register';
 import RegisterComplete from '@@pages/Register/Complete';
 import { PAGES, ROUTE_PREFIX } from '@@router/constants';
@@ -28,6 +30,8 @@ function Router() {
       <Route path={pathGenerator(PAGES.HOME)} element={<Home />} />
       <Route path={pathGenerator(PAGES.HOME, '/category/:id')} element={<HomeCategory />} />
       <Route path={pathGenerator(PAGES.CLASS, '/:id')} element={<ClassDetail />} />
+      <Route path={pathGenerator(PAGES.PAYMENT, '/complete')} element={<PaymentComplete />} />
+      <Route path={pathGenerator(PAGES.PAYMENT, '/:id')} element={<Payment />} />
       <Route path='*' element={<Error />} />
     </Routes>
   );

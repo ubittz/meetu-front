@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 
 import BottomModal from '@@components/BottomModal';
@@ -45,8 +45,10 @@ const StyledEnrollBottomModalBody = styled(Flex.Vertical)`
 function EnrollBottomModal(props: Omit<BottomModalProps, 'title'>) {
   const navigate = useNavigate();
 
+  const { id } = useParams();
+
   const handleClickEnroll = () => {
-    navigate(pathGenerator(PAGES.PAYMENT));
+    navigate(pathGenerator(PAGES.PAYMENT, `/${id}`));
   };
 
   return (
