@@ -2,8 +2,7 @@ import { useFormikContext } from 'formik';
 
 import Flex from '@@components/Flex';
 import InputFormGroup from '@@components/InputFormGroup';
-
-import { PaymentForm } from '../types';
+import { PaymentForm } from '@@pages/Payment/types';
 
 function OrdererInfo() {
   const { getFieldProps } = useFormikContext<PaymentForm>();

@@ -5,11 +5,10 @@ import Flex from '@@components/Flex';
 import InputFormGroup from '@@components/InputFormGroup';
 import Radio from '@@components/Radio';
 import { COLORS } from '@@constants/colors';
+import { PAYMENT_METHOD } from '@@pages/Payment/constants';
+import KakaoPay from '@@pages/Payment/parts/EazyPaymentMethod/KakaoPay';
+import NaverPay from '@@pages/Payment/parts/EazyPaymentMethod/NaverPay';
 import { PaymentForm } from '@@pages/Payment/types';
-
-import { PAYMENT_METHOD } from '../constants';
-import KakaoPay from './EazyPaymentMethod/KakaoPay';
-import NaverPay from './EazyPaymentMethod/NaverPay';
 
 const StyledPaymentMethod = styled(Flex.Vertical)`
   margin-top: 8px;

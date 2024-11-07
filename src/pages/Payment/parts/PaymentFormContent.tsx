@@ -7,15 +7,14 @@ import Flex from '@@components/Flex';
 import FooterContainer from '@@components/FooterContainer';
 import FullScreen from '@@components/FullScreen';
 import Header from '@@components/Header';
-
-import { PaymentForm } from '../types';
-import OrdererInfo from './OrdererInfo';
-import PaymentInfo from './PaymentInfo';
-import PaymentMethod from './PaymentMethod';
-import PaymentProductInfo from './PaymentProductInfo';
-import PaymentSection from './PaymentSection';
-import PaymentTerms from './PaymentTemrs';
-import PointBenefits from './PointBenefits';
+import OrdererInfo from '@@pages/Payment/parts/OrdererInfo';
+import PaymentInfo from '@@pages/Payment/parts/PaymentInfo';
+import PaymentMethod from '@@pages/Payment/parts/PaymentMethod';
+import PaymentProductInfo from '@@pages/Payment/parts/PaymentProductInfo';
+import PaymentSection from '@@pages/Payment/parts/PaymentSection';
+import PaymentTerms from '@@pages/Payment/parts/PaymentTemrs';
+import PointBenefits from '@@pages/Payment/parts/PointBenefits';
+import { PaymentForm } from '@@pages/Payment/types';
 
 const StyledPaymentFormContent = styled(FullScreen)`
   .body {
