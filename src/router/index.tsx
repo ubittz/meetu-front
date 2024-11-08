@@ -9,6 +9,7 @@ import ResetPassword from '@@pages/FindAccount/ResetPassword';
 import FindClass from '@@pages/FindClass';
 import Home from '@@pages/Home';
 import Login from '@@pages/Login';
+import MyClass from '@@pages/MyClass';
 import MyPage from '@@pages/MyPage';
 import ModifyMyInfo from '@@pages/MyPage/Modify';
 import Payment from '@@pages/Payment';
@@ -45,6 +46,7 @@ function Router() {
       <Route path={pathGenerator(PAGES.MY_PAGE, '/modify')} element={<ModifyMyInfo />} />
       <Route path={pathGenerator(PAGES.MY_PAGE, '/purchase-history')} element={<PurchaseHistory />} />
       <Route path={pathGenerator(PAGES.MY_PAGE, '/purchase-history/:id')} element={<PurchaseDetail />} />
+      <Route path={pathGenerator(PAGES.MY_PAGE, '/my-class')} element={<MyClass />} />
 
       <Route path='*' element={<Error />} />
     </Routes>

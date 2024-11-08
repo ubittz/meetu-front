@@ -3,6 +3,7 @@ import { FlexProps } from '@@components/Flex/types';
 
 export interface Class {
   id: number;
+  ownerId: number;
   title: string;
   description: string;
   price: number;

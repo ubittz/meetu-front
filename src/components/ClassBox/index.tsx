@@ -1,3 +1,5 @@
+import { PropsWithChildren } from 'react';
+
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -19,6 +21,7 @@ const StyledClassBox = styled(Flex.Vertical)`
 
     & > img {
       height: 100%;
+      width: 100%;
       object-fit: cover;
     }
   }
@@ -37,7 +40,7 @@ const StyledClassBox = styled(Flex.Vertical)`
   }
 `;
 
-function ClassBox({ classItem, ...props }: ClassBoxProps) {
+function ClassBox({ classItem, children, ...props }: PropsWithChildren<ClassBoxProps>) {
   const navigate = useNavigate();
 
   const handleClick = () => {
@@ -71,6 +74,7 @@ function ClassBox({ classItem, ...props }: ClassBoxProps) {
           {classItem.price.toLocaleString()}원
         </Typography.Main>
       </Flex.Vertical>
+      {children}
     </StyledClassBox>
   );
 }

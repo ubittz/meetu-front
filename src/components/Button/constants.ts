@@ -8,5 +8,6 @@ export const BUTTON_SIZE = {
 
 export const BUTTON_THEME = {
   PRIMARY: 'primary',
+  SECONDARY: 'secondary',
   OUTLINE: 'outline',
 } as const;
