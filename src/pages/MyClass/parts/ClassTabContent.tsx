@@ -1,7 +1,6 @@
 import { Class } from '@@components/ClassBox/types';
 import Flex from '@@components/Flex';
-
-import MyClassItem from './MyClassItem';
+import MyClassItem from '@@pages/MyClass/parts/MyClassItem';
 
 function ClassTabContent({ classList }: { classList: Class[] }) {
   return (

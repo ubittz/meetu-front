@@ -11,8 +11,7 @@ import { ACCOUNT_TYPE } from '@@components/ProfileDetail/constants';
 import Tab from '@@components/Tab';
 import Typography from '@@components/Typography';
 import { CLASS_LIST } from '@@pages/Home/constants';
-
-import ContentTabContent from './parts/ClassTabContent';
+import ContentTabContent from '@@pages/MyClass/parts/ClassTabContent';
 
 const TAB_LIST = ['전체', '진행예정', '모임확정', '진행완료'];
 

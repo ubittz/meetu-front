@@ -9,12 +9,11 @@ import FullScreen from '@@components/FullScreen';
 import Header from '@@components/Header';
 import Typography from '@@components/Typography';
 import { COLORS } from '@@constants/colors';
+import { DefaultUserIcon, PlusIcon } from '@@pages/MyPage/icons';
+import ModifyFormInputContent from '@@pages/MyPage/parts/ModifyFormInputContent';
 import { ModifyMyInfoForm } from '@@pages/MyPage/types';
 import { PAGES } from '@@router/constants';
 import { pathGenerator } from '@@router/utils';
-
-import { DefaultUserIcon, PlusIcon } from '../icons';
-import ModifyFormInputContent from './ModifyFormInputContent';
 
 const StyledModifyMyPageFormContent = styled(FullScreen)`
   .body {

@@ -4,8 +4,7 @@ import Flex from '@@components/Flex';
 import FormGroup from '@@components/FormGroup';
 import InputFormGroup from '@@components/InputFormGroup';
 import Radio from '@@components/Radio';
-
-import { ModifyMyInfoForm } from '../types';
+import { ModifyMyInfoForm } from '@@pages/MyPage/types';
 
 function ModifyFormInputContent() {
   const { getFieldProps } = useFormikContext<ModifyMyInfoForm>();

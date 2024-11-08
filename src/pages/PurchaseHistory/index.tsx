@@ -5,9 +5,8 @@ import FullScreen from '@@components/FullScreen';
 import Header from '@@components/Header';
 import Pagination from '@@components/Pagination';
 import Typography from '@@components/Typography';
+import GuideCard from '@@pages/PurchaseHistory/parts/GuideCard';
 import HistoryListItem from '@@pages/PurchaseHistory/parts/HistoryListItem';
-
-import GuideCard from './parts/GuideCard';
 
 function PurchaseHistory() {
   const navigate = useNavigate();

@@ -4,11 +4,10 @@ import Flex from '@@components/Flex';
 import FullScreen from '@@components/FullScreen';
 import Header from '@@components/Header';
 import Typography from '@@components/Typography';
-
-import ClassInfo from './parts/ClassInfo';
-import OrdererInfo from './parts/OrdererInfo';
-import PaymentInfo from './parts/PaymentInfo';
-import PurchaseInfo from './parts/PurchaseInfo';
+import ClassInfo from '@@pages/PurchaseHistory/parts/ClassInfo';
+import OrdererInfo from '@@pages/PurchaseHistory/parts/OrdererInfo';
+import PaymentInfo from '@@pages/PurchaseHistory/parts/PaymentInfo';
+import PurchaseInfo from '@@pages/PurchaseHistory/parts/PurchaseInfo';
 
 function PurchaseDetail() {
   const navigate = useNavigate();

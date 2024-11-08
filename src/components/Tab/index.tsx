@@ -3,8 +3,7 @@ import { PropsWithChildren } from 'react';
 import styled from 'styled-components';
 
 import Flex from '@@components/Flex';
-
-import TabHeader from './TabHeader';
+import TabHeader from '@@components/Tab/TabHeader';
 
 const StyledTabCover = styled.div<{ $itemCount: number; $selectedIndex: number }>`
   width: 100%;
