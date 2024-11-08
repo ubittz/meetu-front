@@ -24,6 +24,10 @@ const StyledRadio = styled.label`
     }
   }
 
+  & > input:checked:read-only + .radio__icon {
+    background: ${COLORS.TEXT_100};
+  }
+
   & > input:checked + .radio__icon {
     background: ${COLORS.MAIN};
     border: none;

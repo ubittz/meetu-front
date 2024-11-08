@@ -23,7 +23,7 @@ const TextField = styled.input`
   }
 
   &:read-only {
-    background: ${COLORS.TEXT_100};
+    background: #f8f8f8;
   }
 `;
 
