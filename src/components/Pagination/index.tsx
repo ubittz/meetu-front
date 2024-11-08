@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 import Flex from '@@components/Flex';
+import { FlexProps } from '@@components/Flex/types';
 import { COLORS } from '@@constants/colors';
 
 const StyledPagination = styled(Flex.Horizontal)`
@@ -36,9 +37,9 @@ const StyledPagination = styled(Flex.Horizontal)`
   }
 `;
 
-function Pagination({ length, currentPage }: { length: number; currentPage: number }) {
+function Pagination({ length, currentPage, ...props }: { length: number; currentPage: number } & FlexProps) {
   return (
-    <StyledPagination justifyContent='center' gap={8}>
+    <StyledPagination justifyContent='center' gap={8} {...props}>
       {Array.from({ length: Math.min(length, 5) }).map((_, index) => (
         <Flex.Horizontal
           key={index}

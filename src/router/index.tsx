@@ -14,6 +14,8 @@ import ModifyMyInfo from '@@pages/MyPage/Modify';
 import Payment from '@@pages/Payment';
 import PaymentComplete from '@@pages/Payment/Complete';
 import Profile from '@@pages/Profile';
+import PurchaseHistory from '@@pages/PurchaseHistory';
+import PurchaseDetail from '@@pages/PurchaseHistory/Detail';
 import Register from '@@pages/Register';
 import RegisterComplete from '@@pages/Register/Complete';
 import { PAGES, ROUTE_PREFIX } from '@@router/constants';
@@ -41,6 +43,8 @@ function Router() {
 
       <Route path={pathGenerator(PAGES.MY_PAGE)} element={<MyPage />} />
       <Route path={pathGenerator(PAGES.MY_PAGE, '/modify')} element={<ModifyMyInfo />} />
+      <Route path={pathGenerator(PAGES.MY_PAGE, '/purchase-history')} element={<PurchaseHistory />} />
+      <Route path={pathGenerator(PAGES.MY_PAGE, '/purchase-history/:id')} element={<PurchaseDetail />} />
 
       <Route path='*' element={<Error />} />
     </Routes>

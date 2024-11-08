@@ -1,11 +1,11 @@
 import styled from 'styled-components';
 
 import Flex from '@@components/Flex';
+import Pagination from '@@components/Pagination';
 import TabHeader from '@@components/Tab/TabHeader';
 import Typography from '@@components/Typography';
 import { TAB_LIST } from '@@pages/ClassDetail/constants';
 import { StartIcon } from '@@pages/ClassDetail/icons';
-import Pagination from '@@pages/ClassDetail/parts/Pagination';
 import ReviewCard from '@@pages/ClassDetail/parts/ReviewCrad';
 
 const StyledReview = styled(Flex.Vertical)`
