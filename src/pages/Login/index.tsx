@@ -1,18 +1,21 @@
 import { useState } from 'react';
 
 import { Formik } from 'formik';
-import { Link, useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 import Flex from '@@components/Flex';
+import Modal from '@@components/Modal';
+import { useModal } from '@@components/Modal/hooks';
 import Typography from '@@components/Typography';
 import { COLORS } from '@@constants/colors';
 import { AppleLogoIcon, GoogleLogoIcon, KakaoLogoIcon, MainLogoIcon, NaverLogoIcon } from '@@pages/Login/icons';
 import RegisterTermsBottomModal from '@@pages/Login/parts/\bRegisterTermsBottomModal';
 import LoginFormContent from '@@pages/Login/parts/LoginFormContent';
 import { LoginForm } from '@@pages/Login/types';
-import { PAGES } from '@@router/constants';
-import { pathGenerator } from '@@router/utils';
+import { useActionSubscribe } from '@@store/middlewares/actionMiddleware';
+import { loginFailure, loginRequest } from '@@stores/auth/reducer';
 
 const StyledLogin = styled(Flex.Vertical)`
   height: 100vh;
@@ -50,23 +53,36 @@ const initialValues: LoginForm = {
 };
 
 function Login() {
-  const navigate = useNavigate();
-
-  const [visible, setVisible] = useState(false);
+  const dispatch = useDispatch();
+  const [bottomModalVisible, setBottomModalVisible] = useState(false);
+  const { visible, content, setVisible, setContent } = useModal();
 
   const handleSubmit = (form: LoginForm) => {
-    // 로그인 로직 들어가야함
-    console.log(form);
-    navigate(pathGenerator(PAGES.HOME));
+    dispatch(loginRequest(form));
   };
 
   const handleClickRegister = () => {
-    setVisible(true);
+    setBottomModalVisible(true);
   };
+
+  const handleConfirm = () => {
+    setVisible(false);
+  };
+
+  useActionSubscribe({
+    type: loginFailure.type,
+    callback: ({ payload }: ReturnType<typeof loginFailure>) => {
+      setContent(payload);
+      setVisible(true);
+    },
+  });
 
   return (
     <StyledLogin>
-      <RegisterTermsBottomModal visible={visible} setVisible={setVisible} />
+      <Modal visible={visible} setVisible={setVisible} onConfirm={handleConfirm}>
+        {content}
+      </Modal>
+      <RegisterTermsBottomModal visible={bottomModalVisible} setVisible={setBottomModalVisible} />
       <Flex.Vertical className='login__header' alignItems='center'>
         <MainLogoIcon />
         <Typography.Sub>밋유에 오신 것을 환영합니다!</Typography.Sub>

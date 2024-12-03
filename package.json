@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.3.0",
+    "axios": "^1.7.8",
     "date-fns": "^4.1.0",
     "formik": "^2.4.6",
     "keen-slider": "^6.8.6",
@@ -35,6 +36,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.11.1",
+    "@types/axios": "^0.14.4",
     "@types/qs": "^6.9.17",
     "@types/react": "^18.3.10",
     "@types/react-dom": "^18.3.0",

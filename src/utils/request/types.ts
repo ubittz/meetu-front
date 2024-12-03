@@ -1,6 +1,10 @@
 import { AxiosError, AxiosResponse } from 'axios';
 import { SWRConfiguration } from 'swr';
 
+import { asType } from '@@types/common';
+
+import { ERROR_CODE } from './constants';
+
 // eslint-disable-next-line
 export interface SWRListConfig<D, Q = Record<string, any>> {
   query?: PageQuery & Q;
@@ -40,4 +44,11 @@ export interface PageMetaResponse {
 export interface UseQueryParamsConfig<TQuery extends object> {
   initialSearch?: (query: TQuery) => boolean;
   queryKey?: string | string[];
+}
+
+export type MeetuErrorCode = asType<typeof ERROR_CODE>;
+
+export interface MeetuErrorResponse {
+  errorCode: MeetuErrorCode;
+  message: string;
 }
