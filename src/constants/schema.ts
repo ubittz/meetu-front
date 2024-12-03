@@ -1,0 +1,22 @@
+import { boolean, object, ref, string } from 'yup';
+
+export const registerSchema = object({
+  userId: string().required('아이디를 입력해주세요.'),
+  username: string().required('이름을 입력해주세요'),
+  password: string().required('비밀번호를 입력해주세요.'),
+  passwordCheck: string()
+    .required('비밀번호를 확인해주세요.')
+    .oneOf([ref('password')], '비밀번호가 일치하지 않습니다.'),
+  birth: string()
+    .required('생일을 입력해주세요.')
+    .matches(new RegExp(/^\d{4}-\d{2}-\d{2}$/), { message: '생일을 정확히 입력해주세요.' }),
+  gender: string().matches(new RegExp(/(T|F)/)),
+  tel: string()
+    .required('전화번호를 입력해주세요.')
+    .matches(/^0\d{9,10}$/, { message: '전화번호를 정확히 입력해주세요.' }),
+  email: string()
+    .required('이메일을 입력해주세요.')
+    .matches(/^[a-zA-Z0-9+-_.]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/, { message: '이메일을 정확히 입력해주세요.' }),
+  checkedId: boolean().isTrue('아이디 중복체크를 해주세요.'),
+  checkedEmail: boolean().isTrue('이메일 중복체크를 해주세요.'),
+});

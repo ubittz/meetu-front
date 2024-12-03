@@ -8,6 +8,9 @@ const StyledBasicButton = styled.button<{ $size: ButtonSize; $theme: ButtonTheme
   font-size: 14px;
   font-weight: 700;
   line-height: 1.3em;
+  &:disabled {
+    opacity: 0.6;
+  }
   ${({ theme, $size }) => theme.button.size[$size]}
   ${({ theme, $theme }) => theme.button.theme[$theme]}
 `;

@@ -1,6 +1,6 @@
 export const GENDER = {
-  MALE: 'male',
-  FEMALE: 'female',
+  MALE: 'T',
+  FEMALE: 'F',
 } as const;
 
 export const GENDER_STRING = {

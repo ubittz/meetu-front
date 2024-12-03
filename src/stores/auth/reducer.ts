@@ -12,6 +12,14 @@ const PREFIX = 'auth';
 export const loginRequest = createAction<LoginDTO>(`${PREFIX}/loginRequest`);
 export const loginFailure = createAction<string>(`${PREFIX}/loginFailure`);
 
+export const checkDuplicateIdRequest = createAction<string>(`${PREFIX}/checkDuplicateIdRequest`);
+export const checkDuplicateIdSuccess = createAction(`${PREFIX}/checkDuplicateIdSuccess`);
+export const checkDuplicateIdFailure = createAction(`${PREFIX}/checkDuplicateIdFailure`);
+
+export const checkDuplicateEmailRequest = createAction<string>(`${PREFIX}/checkDuplicateEmailRequest`);
+export const checkDuplicateEmailSuccess = createAction(`${PREFIX}/checkDuplicateEmailSuccess`);
+export const checkDuplicateEmailFailure = createAction(`${PREFIX}/checkDuplicateEmailFailure`);
+
 const authSlice = createSlice({
   name: PREFIX,
   initialState,

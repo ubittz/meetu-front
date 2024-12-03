@@ -7,6 +7,18 @@ import TextField from '@@components/InputFormGroup/parts/TextField';
 import { InputFormGroupProps } from '@@components/InputFormGroup/types';
 
 const StyledInputFormGroup = styled(FormGroup)`
+  position: relative;
+  padding-bottom: 14px;
+
+  .input_form_group__error {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+
+    font-size: 12px;
+    color: #d02828;
+    line-height: 12px;
+  }
   .input_form_group__input_wrap {
     & > input {
       flex: 1;
@@ -19,13 +31,14 @@ const StyledInputFormGroup = styled(FormGroup)`
   }
 `;
 
-function InputFormGroup({ inputProps, buttonProps, ...props }: InputFormGroupProps) {
+function InputFormGroup({ errorMessage, inputProps, buttonProps, ...props }: InputFormGroupProps) {
   return (
     <StyledInputFormGroup {...props}>
       <Flex.Horizontal className='input_form_group__input_wrap' gap={12}>
         <TextField {...inputProps} />
         {buttonProps && <Button.Large {...buttonProps} />}
       </Flex.Horizontal>
+      {errorMessage && <span className='input_form_group__error'>{errorMessage}</span>}
     </StyledInputFormGroup>
   );
 }

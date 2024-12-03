@@ -20,7 +20,7 @@ const StyledRegisterFormContent = styled(FullScreen)`
 `;
 
 function RegisterFormContent() {
-  const { handleSubmit } = useFormikContext<RegisterForm>();
+  const { handleSubmit, isValid } = useFormikContext<RegisterForm>();
 
   return (
     <Form onSubmit={handleSubmit}>
@@ -33,7 +33,9 @@ function RegisterFormContent() {
           <Button.Medium theme='outline' type='button'>
             취소
           </Button.Medium>
-          <Button.Medium type='submit'>회원가입</Button.Medium>
+          <Button.Medium type='submit' disabled={!isValid}>
+            회원가입
+          </Button.Medium>
         </FooterContainer>
       </StyledRegisterFormContent>
     </Form>

@@ -32,7 +32,8 @@
     "styled-components": "^6.1.13",
     "styled-normalize": "^8.1.1",
     "swr": "^2.2.5",
-    "vite-tsconfig-paths": "^5.0.1"
+    "vite-tsconfig-paths": "^5.0.1",
+    "yup": "^1.4.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.11.1",
@@ -45,6 +46,7 @@
     "@types/react-transition-group": "^4.4.11",
     "@types/redux-actions": "^2.6.5",
     "@types/redux-logger": "^3.0.13",
+    "@types/yup": "^0.32.0",
     "@vite-pwa/assets-generator": "^0.2.6",
     "@vitejs/plugin-react": "^4.3.2",
     "autoprefixer": "^10.4.20",

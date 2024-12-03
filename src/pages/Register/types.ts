@@ -2,14 +2,16 @@ import { GENDER } from '@@pages/Register/constants';
 import { asType } from '@@types/common';
 
 export interface RegisterForm {
-  id: string;
-  name: string;
+  userId: string;
+  username: string;
   password: string;
   passwordCheck: string;
+  email: string;
   birth: string;
   gender: Gender;
-  phone: string;
-  email: string;
+  tel: string;
+  checkedId: boolean;
+  checkedEmail: boolean;
 }
 
 export type Gender = asType<typeof GENDER>;

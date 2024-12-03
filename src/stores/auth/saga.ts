@@ -1,7 +1,17 @@
 import { AxiosError } from 'axios';
 import { put, takeLatest } from 'redux-saga/effects';
 
-import { loginFailure, loginRequest, loginSuccess } from '@@stores/auth/reducer';
+import {
+  loginFailure,
+  loginRequest,
+  loginSuccess,
+  checkDuplicateIdRequest,
+  checkDuplicateIdSuccess,
+  checkDuplicateIdFailure,
+  checkDuplicateEmailRequest,
+  checkDuplicateEmailSuccess,
+  checkDuplicateEmailFailure,
+} from '@@stores/auth/reducer';
 import { LoginResponse } from '@@stores/auth/types';
 import { saveToken } from '@@utils/localStorage';
 import { authenticatedRequest } from '@@utils/request';
@@ -30,6 +40,42 @@ function* login({ payload }: ReturnType<typeof loginRequest>) {
   }
 }
 
+function* checkDuplicateId({ payload }: ReturnType<typeof checkDuplicateIdRequest>) {
+  try {
+    const response: UbittzResponse<boolean> = yield authenticatedRequest.post('/api/user/check-id', {
+      data: payload,
+      headers: {
+        'Content-Type': 'text/plain',
+      },
+    });
+
+    const action = response.ok && !response.data ? checkDuplicateIdSuccess() : checkDuplicateIdFailure();
+
+    yield put(action);
+  } catch {
+    yield put(checkDuplicateIdFailure());
+  }
+}
+
+function* checkDuplicateEmail({ payload }: ReturnType<typeof checkDuplicateEmailRequest>) {
+  try {
+    const response: UbittzResponse<boolean> = yield authenticatedRequest.post('/api/user/check-email', {
+      data: payload,
+      headers: {
+        'Content-Type': 'text/plain',
+      },
+    });
+
+    const action = response.ok && !response.data ? checkDuplicateEmailSuccess() : checkDuplicateEmailFailure();
+
+    yield put(action);
+  } catch {
+    yield put(checkDuplicateEmailFailure());
+  }
+}
+
 export default function* defaultSaga() {
   yield takeLatest(loginRequest.type, login);
+  yield takeLatest(checkDuplicateIdRequest.type, checkDuplicateId);
+  yield takeLatest(checkDuplicateEmailRequest.type, checkDuplicateEmail);
 }

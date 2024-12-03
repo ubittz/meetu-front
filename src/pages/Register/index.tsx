@@ -1,6 +1,7 @@
 import { Formik } from 'formik';
 import { useNavigate } from 'react-router-dom';
 
+import { registerSchema } from '@@constants/schema';
 import { GENDER } from '@@pages/Register/constants';
 import RegisterFormContent from '@@pages/Register/parts/RegisterFormContent';
 import { RegisterForm } from '@@pages/Register/types';
@@ -8,14 +9,16 @@ import { PAGES } from '@@router/constants';
 import { pathGenerator } from '@@router/utils';
 
 const initialValues: RegisterForm = {
-  id: '',
-  name: '',
+  userId: '',
+  checkedId: false,
+  username: '',
   password: '',
   passwordCheck: '',
   birth: '',
   gender: GENDER.MALE,
-  phone: '',
+  tel: '',
   email: '',
+  checkedEmail: false,
 };
 
 function Register() {
@@ -27,7 +30,7 @@ function Register() {
   };
 
   return (
-    <Formik initialValues={initialValues} onSubmit={handleSubmit}>
+    <Formik initialValues={initialValues} onSubmit={handleSubmit} validationSchema={registerSchema}>
       <RegisterFormContent />
     </Formik>
   );
