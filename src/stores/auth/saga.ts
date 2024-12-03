@@ -11,6 +11,9 @@ import {
   checkDuplicateEmailRequest,
   checkDuplicateEmailSuccess,
   checkDuplicateEmailFailure,
+  registerRequest,
+  registerSuccess,
+  registerFailure,
 } from '@@stores/auth/reducer';
 import { LoginResponse } from '@@stores/auth/types';
 import { saveToken } from '@@utils/localStorage';
@@ -74,8 +77,23 @@ function* checkDuplicateEmail({ payload }: ReturnType<typeof checkDuplicateEmail
   }
 }
 
+function* register({ payload }: ReturnType<typeof registerRequest>) {
+  try {
+    const response: UbittzResponse<boolean> = yield authenticatedRequest.put('/api/user/register', {
+      data: payload,
+    });
+
+    const action = response.ok ? registerSuccess() : registerFailure('가입을 실패했습니다.');
+
+    yield put(action);
+  } catch (e) {
+    yield put(registerFailure((e as Error).message));
+  }
+}
+
 export default function* defaultSaga() {
   yield takeLatest(loginRequest.type, login);
   yield takeLatest(checkDuplicateIdRequest.type, checkDuplicateId);
   yield takeLatest(checkDuplicateEmailRequest.type, checkDuplicateEmail);
+  yield takeLatest(registerRequest.type, register);
 }

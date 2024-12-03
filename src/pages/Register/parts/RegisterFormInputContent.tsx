@@ -14,8 +14,6 @@ function RegisterFormInputContent() {
 
   const { visible, content, setVisible, handleConfirm, handleClickCheckId, handleClickCheckEmail } = useRegisterForm();
 
-  console.log(values);
-
   return (
     <Flex.Vertical gap={30}>
       <Modal visible={visible} setVisible={setVisible} onConfirm={handleConfirm}>

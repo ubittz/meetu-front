@@ -3,7 +3,9 @@ import { boolean, object, ref, string } from 'yup';
 export const registerSchema = object({
   userId: string().required('아이디를 입력해주세요.'),
   username: string().required('이름을 입력해주세요'),
-  password: string().required('비밀번호를 입력해주세요.'),
+  password: string()
+    .required('비밀번호를 입력해주세요.')
+    .matches(new RegExp(/^[a-zA-Z0-9]{8,20}$/), { message: '비밀번호는 영문 대소문자 + 숫자 조합 8~20글자 입니다.' }),
   passwordCheck: string()
     .required('비밀번호를 확인해주세요.')
     .oneOf([ref('password')], '비밀번호가 일치하지 않습니다.'),
