@@ -14,6 +14,8 @@ import { AppleLogoIcon, GoogleLogoIcon, KakaoLogoIcon, MainLogoIcon, NaverLogoIc
 import RegisterTermsBottomModal from '@@pages/Login/parts/\bRegisterTermsBottomModal';
 import LoginFormContent from '@@pages/Login/parts/LoginFormContent';
 import { LoginForm } from '@@pages/Login/types';
+import { PAGES } from '@@router/constants';
+import { pathGenerator } from '@@router/utils';
 import { useActionSubscribe } from '@@store/middlewares/actionMiddleware';
 import { loginFailure, loginRequest } from '@@stores/auth/reducer';
 
@@ -93,9 +95,9 @@ function Login() {
         </Formik>
         <Flex.Horizontal justifyContent='space-between'>
           <Flex.Horizontal gap={12} alignItems='stretch'>
-            <StyledFindLink to={''}>ID 찾기</StyledFindLink>
+            <StyledFindLink to={pathGenerator(PAGES.FIND_ACCOUNT, '/id')}>ID 찾기</StyledFindLink>
             <div className='login__divider' />
-            <StyledFindLink to={''}>Password 찾기</StyledFindLink>
+            <StyledFindLink to={pathGenerator(PAGES.FIND_ACCOUNT, '/password')}>Password 찾기</StyledFindLink>
           </Flex.Horizontal>
           <StyledRegisterButton onClick={handleClickRegister}>회원가입</StyledRegisterButton>
         </Flex.Horizontal>
