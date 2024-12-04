@@ -63,16 +63,26 @@ const StyledBottomModal = styled(Flex.Vertical)`
     left: 0;
     width: 100%;
     background: ${COLORS.TEXT_500};
+    max-height: 100%;
 
     z-index: 1000;
 
     .bottom_modal__header {
+      flex: 0 0 auto;
       height: 52px;
       padding: 0 20px;
     }
 
     .bottom_modal__header-blank {
       width: 24px;
+    }
+
+    .bottom_modal__body {
+      overflow-y: scroll;
+      overflow: none;
+      &:-webkit-scrollbar {
+        display: none;
+      }
     }
   }
 `;
@@ -96,7 +106,7 @@ function BottomModal({ title, visible, setVisible, children }: BottomModalProps)
             </Typography.Main>
             <div className='bottom_modal__header-blank' />
           </Flex.Horizontal>
-          {children}
+          <Flex.Vertical className='bottom_modal__body'>{children}</Flex.Vertical>
         </Flex.Vertical>
       </StyledBottomModal>
     </CSSTransition>
