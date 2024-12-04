@@ -22,3 +22,9 @@ export interface RegisterDTO {
   gender: Gender;
   tel: string;
 }
+
+export interface RegisterResponse {
+  id: string;
+  name: string;
+  email: string;
+}

@@ -15,7 +15,7 @@ import {
   registerSuccess,
   registerFailure,
 } from '@@stores/auth/reducer';
-import { LoginResponse } from '@@stores/auth/types';
+import { LoginResponse, RegisterResponse } from '@@stores/auth/types';
 import { saveToken } from '@@utils/localStorage';
 import { authenticatedRequest } from '@@utils/request';
 import { ERROR_CODE_STRING } from '@@utils/request/constants';
@@ -79,11 +79,11 @@ function* checkDuplicateEmail({ payload }: ReturnType<typeof checkDuplicateEmail
 
 function* register({ payload }: ReturnType<typeof registerRequest>) {
   try {
-    const response: UbittzResponse<boolean> = yield authenticatedRequest.put('/api/user/register', {
+    const response: UbittzResponse<RegisterResponse> = yield authenticatedRequest.put('/api/user/register', {
       data: payload,
     });
 
-    const action = response.ok ? registerSuccess() : registerFailure('가입을 실패했습니다.');
+    const action = response.ok ? registerSuccess(response.data) : registerFailure('가입을 실패했습니다.');
 
     yield put(action);
   } catch (e) {

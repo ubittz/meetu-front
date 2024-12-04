@@ -43,8 +43,12 @@ function Register() {
 
   useActionSubscribe({
     type: registerSuccess.type,
-    callback: () => {
-      navigate(pathGenerator(PAGES.REGISTER, '/complete'));
+    callback: ({ payload }: ReturnType<typeof registerSuccess>) => {
+      navigate(pathGenerator(PAGES.REGISTER, '/complete'), {
+        state: {
+          name: payload.name,
+        },
+      });
     },
   });
 

@@ -1,6 +1,6 @@
 import { createAction, createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { AuthState, LoginDTO, LoginResponse, RegisterDTO } from '@@stores/auth/types';
+import { AuthState, LoginDTO, LoginResponse, RegisterDTO, RegisterResponse } from '@@stores/auth/types';
 import { clearToken, getAccessToken } from '@@utils/localStorage';
 
 const initialState: AuthState = {
@@ -21,7 +21,7 @@ export const checkDuplicateEmailSuccess = createAction(`${PREFIX}/checkDuplicate
 export const checkDuplicateEmailFailure = createAction(`${PREFIX}/checkDuplicateEmailFailure`);
 
 export const registerRequest = createAction<RegisterDTO>(`${PREFIX}/registerRequest`);
-export const registerSuccess = createAction(`${PREFIX}/registerSuccess`);
+export const registerSuccess = createAction<RegisterResponse>(`${PREFIX}/registerSuccess`);
 export const registerFailure = createAction<string>(`${PREFIX}/registerFailure`);
 
 const authSlice = createSlice({

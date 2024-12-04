@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 import Button from '@@components/Button';
 import FooterContainer from '@@components/FooterContainer';
@@ -10,6 +10,7 @@ import { pathGenerator } from '@@router/utils';
 
 function RegisterComplete() {
   const navigate = useNavigate();
+  const location = useLocation();
 
   const handleClickLogin = () => {
     navigate(pathGenerator(PAGES.LOGIN));
@@ -32,7 +33,7 @@ function RegisterComplete() {
       }
     >
       <Typography.Point as='span' fontSize='inherit' fontWeight={700} color={COLORS.MAIN}>
-        홍길동
+        {location.state?.name}
       </Typography.Point>
       님의 회원가입을 축하합니다. <br />
       알차고 실속있는 서비스로 찾아뵙겠습니다.

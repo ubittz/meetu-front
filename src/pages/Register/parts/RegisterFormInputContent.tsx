@@ -31,7 +31,7 @@ function RegisterFormInputContent() {
           children: '중복체크',
           type: 'button',
           onClick: handleClickCheckId,
-          disabled: values.checkedId,
+          disabled: values.checkedId || !!errors.userId,
         }}
       />
       <InputFormGroup
@@ -104,7 +104,7 @@ function RegisterFormInputContent() {
           children: '중복체크',
           type: 'button',
           onClick: handleClickCheckEmail,
-          disabled: values.checkedEmail,
+          disabled: values.checkedEmail || !!errors.email,
         }}
       />
     </Flex.Vertical>
