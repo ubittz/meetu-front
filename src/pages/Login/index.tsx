@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 import { Formik } from 'formik';
 import { useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 import Flex from '@@components/Flex';
@@ -17,7 +17,7 @@ import { LoginForm } from '@@pages/Login/types';
 import { PAGES } from '@@router/constants';
 import { pathGenerator } from '@@router/utils';
 import { useActionSubscribe } from '@@store/middlewares/actionMiddleware';
-import { loginFailure, loginRequest } from '@@stores/auth/reducer';
+import { loginFailure, loginRequest, loginSuccess } from '@@stores/auth/reducer';
 
 const StyledLogin = styled(Flex.Vertical)`
   height: 100vh;
@@ -56,6 +56,7 @@ const initialValues: LoginForm = {
 
 function Login() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [bottomModalVisible, setBottomModalVisible] = useState(false);
   const { visible, content, setVisible, setContent } = useModal();
 
@@ -70,6 +71,13 @@ function Login() {
   const handleConfirm = () => {
     setVisible(false);
   };
+
+  useActionSubscribe({
+    type: loginSuccess.type,
+    callback: () => {
+      navigate(pathGenerator(PAGES.HOME));
+    },
+  });
 
   useActionSubscribe({
     type: loginFailure.type,

@@ -108,8 +108,8 @@ function FindClass() {
           </StyledSelect>
         </Flex.Horizontal>
         <div className='class_list'>
-          {CLASS_LIST.concat(CLASS_LIST).map((classItem) => (
-            <ClassBox classItem={classItem} />
+          {CLASS_LIST.concat(CLASS_LIST).map((classItem, index) => (
+            <ClassBox key={index} classItem={classItem} />
           ))}
         </div>
       </Flex.Vertical>

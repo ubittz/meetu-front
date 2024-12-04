@@ -26,21 +26,21 @@ export function ActiveFindClassIcon(props: DefaultIconProps) {
       <path
         d='M11.093 1.34998H1.41667V19.7399H11.093C12.3049 19.7399 13.2891 20.4258 13.2891 21.65V3.5676C13.2891 2.34345 12.3079 1.34998 11.093 1.34998Z'
         stroke='#212121'
-        stroke-linecap='round'
-        stroke-linejoin='round'
+        strokeLinecap='round'
+        strokeLinejoin='round'
       />
       <path
         d='M15.4852 1.34985H25.1616V19.7398H15.4852C14.2734 19.7398 13.2891 20.4257 13.2891 21.6499V3.56747C13.2891 2.34332 14.2703 1.34985 15.4852 1.34985Z'
         stroke='#212121'
-        stroke-linecap='round'
-        stroke-linejoin='round'
+        strokeLinecap='round'
+        strokeLinejoin='round'
       />
-      <path d='M4.81519 5.9635H9.97323' stroke='#212121' stroke-linecap='round' stroke-linejoin='round' />
-      <path d='M4.81519 10.5771H9.97323' stroke='#212121' stroke-linecap='round' stroke-linejoin='round' />
-      <path d='M4.83051 15.1907H9.97625' stroke='#212121' stroke-linecap='round' stroke-linejoin='round' />
-      <path d='M21.7628 5.9635H16.6047' stroke='#212121' stroke-linecap='round' stroke-linejoin='round' />
-      <path d='M21.7628 10.5771H16.6047' stroke='#212121' stroke-linecap='round' stroke-linejoin='round' />
-      <path d='M21.7473 15.1907H16.6016' stroke='#212121' stroke-linecap='round' stroke-linejoin='round' />
+      <path d='M4.81519 5.9635H9.97323' stroke='#212121' strokeLinecap='round' strokeLinejoin='round' />
+      <path d='M4.81519 10.5771H9.97323' stroke='#212121' strokeLinecap='round' strokeLinejoin='round' />
+      <path d='M4.83051 15.1907H9.97625' stroke='#212121' strokeLinecap='round' strokeLinejoin='round' />
+      <path d='M21.7628 5.9635H16.6047' stroke='#212121' strokeLinecap='round' strokeLinejoin='round' />
+      <path d='M21.7628 10.5771H16.6047' stroke='#212121' strokeLinecap='round' strokeLinejoin='round' />
+      <path d='M21.7473 15.1907H16.6016' stroke='#212121' strokeLinecap='round' strokeLinejoin='round' />
     </svg>
   );
 }
@@ -50,21 +50,21 @@ export function InactiveFindClassIcon(props: DefaultIconProps) {
       <path
         d='M11.093 1.34998H1.41666V19.7399H11.093C12.3048 19.7399 13.2891 20.4258 13.2891 21.65V3.5676C13.2891 2.34345 12.3079 1.34998 11.093 1.34998Z'
         stroke='#C1C1C1'
-        stroke-linecap='round'
-        stroke-linejoin='round'
+        strokeLinecap='round'
+        strokeLinejoin='round'
       />
       <path
         d='M15.4852 1.34985H25.1615V19.7398H15.4852C14.2734 19.7398 13.2891 20.4257 13.2891 21.6499V3.56747C13.2891 2.34332 14.2703 1.34985 15.4852 1.34985Z'
         stroke='#C1C1C1'
-        stroke-linecap='round'
-        stroke-linejoin='round'
+        strokeLinecap='round'
+        strokeLinejoin='round'
       />
-      <path d='M4.81516 5.9635H9.9732' stroke='#C1C1C1' stroke-linecap='round' stroke-linejoin='round' />
-      <path d='M4.81516 10.5771H9.9732' stroke='#C1C1C1' stroke-linecap='round' stroke-linejoin='round' />
-      <path d='M4.83047 15.1907H9.97622' stroke='#C1C1C1' stroke-linecap='round' stroke-linejoin='round' />
-      <path d='M21.7628 5.9635H16.6047' stroke='#C1C1C1' stroke-linecap='round' stroke-linejoin='round' />
-      <path d='M21.7628 10.5771H16.6047' stroke='#C1C1C1' stroke-linecap='round' stroke-linejoin='round' />
-      <path d='M21.7473 15.1907H16.6016' stroke='#C1C1C1' stroke-linecap='round' stroke-linejoin='round' />
+      <path d='M4.81516 5.9635H9.9732' stroke='#C1C1C1' strokeLinecap='round' strokeLinejoin='round' />
+      <path d='M4.81516 10.5771H9.9732' stroke='#C1C1C1' strokeLinecap='round' strokeLinejoin='round' />
+      <path d='M4.83047 15.1907H9.97622' stroke='#C1C1C1' strokeLinecap='round' strokeLinejoin='round' />
+      <path d='M21.7628 5.9635H16.6047' stroke='#C1C1C1' strokeLinecap='round' strokeLinejoin='round' />
+      <path d='M21.7628 10.5771H16.6047' stroke='#C1C1C1' strokeLinecap='round' strokeLinejoin='round' />
+      <path d='M21.7473 15.1907H16.6016' stroke='#C1C1C1' strokeLinecap='round' strokeLinejoin='round' />
     </svg>
   );
 }
@@ -76,15 +76,15 @@ export function ActiveMyPageIcon(props: DefaultIconProps) {
         d='M11.9801 12.72C15.2165 12.72 17.8401 10.0964 17.8401 6.86C17.8401 3.62361 15.2165 1 11.9801 1C8.74373 1 6.12012 3.62361 6.12012 6.86C6.12012 10.0964 8.74373 12.72 11.9801 12.72Z'
         fill='white'
         stroke='#212121'
-        stroke-width='1.25'
-        stroke-linejoin='round'
+        strokeWidth='1.25'
+        strokeLinejoin='round'
       />
       <path
         d='M22.96 25.89C22.96 20.92 21.17 16.52 18.43 13.8C16.74 15.37 14.47 16.35 11.98 16.35C9.49 16.35 7.22 15.38 5.53 13.8C2.79 16.52 1 20.92 1 25.89C1 26.37 1.02 26.85 1.05 27.32H22.91C22.94 26.85 22.96 26.38 22.96 25.89Z'
         fill='white'
         stroke='#212121'
-        stroke-width='1.25'
-        stroke-linejoin='round'
+        strokeWidth='1.25'
+        strokeLinejoin='round'
       />
     </svg>
   );
@@ -96,15 +96,15 @@ export function InactiveMyPageIcon(props: DefaultIconProps) {
         d='M11.9801 12.72C15.2165 12.72 17.8401 10.0964 17.8401 6.86C17.8401 3.62361 15.2165 1 11.9801 1C8.74373 1 6.12012 3.62361 6.12012 6.86C6.12012 10.0964 8.74373 12.72 11.9801 12.72Z'
         fill='white'
         stroke='#C1C1C1'
-        stroke-width='1.25'
-        stroke-linejoin='round'
+        strokeWidth='1.25'
+        strokeLinejoin='round'
       />
       <path
         d='M22.96 25.89C22.96 20.92 21.17 16.52 18.43 13.8C16.74 15.37 14.47 16.35 11.98 16.35C9.49 16.35 7.22 15.38 5.53 13.8C2.79 16.52 1 20.92 1 25.89C1 26.37 1.02 26.85 1.05 27.32H22.91C22.94 26.85 22.96 26.38 22.96 25.89Z'
         fill='white'
         stroke='#C1C1C1'
-        stroke-width='1.25'
-        stroke-linejoin='round'
+        strokeWidth='1.25'
+        strokeLinejoin='round'
       />
     </svg>
   );

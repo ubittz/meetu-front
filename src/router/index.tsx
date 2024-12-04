@@ -1,31 +1,23 @@
 import { Navigate, Route, Routes } from 'react-router-dom';
 
-import ClassDetail from '@@pages/ClassDetail';
-import Error from '@@pages/Error';
 import FindId from '@@pages/FindAccount/FindId';
 import FindIdComplete from '@@pages/FindAccount/FindIdComplete';
 import FindPassword from '@@pages/FindAccount/FindPassword';
 import ResetPassword from '@@pages/FindAccount/ResetPassword';
-import FindClass from '@@pages/FindClass';
-import Home from '@@pages/Home';
 import Login from '@@pages/Login';
-import MyClass from '@@pages/MyClass';
-import MyPage from '@@pages/MyPage';
-import ModifyMyInfo from '@@pages/MyPage/Modify';
-import Payment from '@@pages/Payment';
-import PaymentComplete from '@@pages/Payment/Complete';
-import Profile from '@@pages/Profile';
-import PurchaseHistory from '@@pages/PurchaseHistory';
-import PurchaseDetail from '@@pages/PurchaseHistory/Detail';
 import Register from '@@pages/Register';
 import RegisterComplete from '@@pages/Register/Complete';
-import { PAGES, ROUTE_PREFIX } from '@@router/constants';
+import AuthRouter from '@@router/AuthRouter';
+import { PAGES } from '@@router/constants';
 import { pathGenerator } from '@@router/utils';
+import { useAppState } from '@@store/hooks';
 
 function Router() {
+  const token = useAppState((state) => state.auth.token);
+
   return (
     <Routes>
-      <Route path='/' element={<Navigate to={ROUTE_PREFIX} />} />
+      <Route path='/' element={<Navigate to={pathGenerator(token ? PAGES.HOME : PAGES.LOGIN)} />} />
       <Route path={pathGenerator(PAGES.LOGIN)} element={<Login />} />
       <Route path={pathGenerator(PAGES.REGISTER)} element={<Register />} />
       <Route path={pathGenerator(PAGES.REGISTER, '/complete')} element={<RegisterComplete />} />
@@ -33,22 +25,7 @@ function Router() {
       <Route path={pathGenerator(PAGES.FIND_ACCOUNT, '/id/complete')} element={<FindIdComplete />} />
       <Route path={pathGenerator(PAGES.FIND_ACCOUNT, '/password')} element={<FindPassword />} />
       <Route path={pathGenerator(PAGES.FIND_ACCOUNT, '/password/reset')} element={<ResetPassword />} />
-
-      <Route path={pathGenerator(PAGES.HOME)} element={<Home />} />
-      <Route path={pathGenerator(PAGES.FIND_CLASS)} element={<FindClass />} />
-      <Route path={pathGenerator(PAGES.FIND_CLASS, '/:id')} element={<FindClass />} />
-      <Route path={pathGenerator(PAGES.CLASS, '/:id')} element={<ClassDetail />} />
-      <Route path={pathGenerator(PAGES.PAYMENT, '/complete')} element={<PaymentComplete />} />
-      <Route path={pathGenerator(PAGES.PAYMENT, '/:id')} element={<Payment />} />
-      <Route path={pathGenerator(PAGES.PROFILE, '/:id')} element={<Profile />} />
-
-      <Route path={pathGenerator(PAGES.MY_PAGE)} element={<MyPage />} />
-      <Route path={pathGenerator(PAGES.MY_PAGE, '/modify')} element={<ModifyMyInfo />} />
-      <Route path={pathGenerator(PAGES.MY_PAGE, '/purchase-history')} element={<PurchaseHistory />} />
-      <Route path={pathGenerator(PAGES.MY_PAGE, '/purchase-history/:id')} element={<PurchaseDetail />} />
-      <Route path={pathGenerator(PAGES.MY_PAGE, '/my-class')} element={<MyClass />} />
-
-      <Route path='*' element={<Error />} />
+      <Route path='*' element={token ? <AuthRouter /> : <Navigate to={pathGenerator(PAGES.LOGIN)} replace />} />
     </Routes>
   );
 }
