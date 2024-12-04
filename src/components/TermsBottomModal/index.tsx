@@ -15,6 +15,16 @@ const StyledBody = styled(Flex.Vertical)`
     padding: 24px 20px 40px;
     flex: 1;
 
+    .terms__list_box:not(:first-child) {
+      margin-top: 12px;
+      border-top: 1px solid #aaa;
+      padding-top: 6px;
+    }
+
+    .terms__list_box__section:not(:first-child) {
+      padding-top: 12px;
+    }
+
     .terms__list_first {
       font-weight: bold;
     }
@@ -39,6 +49,12 @@ const StyledBody = styled(Flex.Vertical)`
       list-style: auto;
     }
 
+    h2 {
+      font-weight: bold;
+      font-size: 16px;
+      margin-bottom: 12px;
+    }
+
     h3 {
       font-size: 14px;
       font-weight: bold;
@@ -60,7 +76,9 @@ function TermsBottomModal({ visible, setVisible, type }: TermsBottomModalProps) 
       <StyledBody>
         <Flex.Vertical className='terms_bottom_modal__content'>{TERMS_TYPE_CONTENT[type]}</Flex.Vertical>
         <FooterContainer>
-          <Button.Medium onClick={handleClickConfirm}>확인</Button.Medium>
+          <Button.Medium type='button' onClick={handleClickConfirm}>
+            확인
+          </Button.Medium>
         </FooterContainer>
       </StyledBody>
     </BottomModal>

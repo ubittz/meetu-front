@@ -1,3 +1,5 @@
+import { ChangeEventHandler, useState } from 'react';
+
 import { useNavigate, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -47,8 +49,14 @@ function EnrollBottomModal(props: Omit<BottomModalProps, 'title'>) {
 
   const { id } = useParams();
 
+  const [agree, setAgree] = useState(false);
+
   const handleClickEnroll = () => {
     navigate(pathGenerator(PAGES.PAYMENT, `/${id}`));
+  };
+
+  const handleChangeAgree: ChangeEventHandler<HTMLInputElement> = (e) => {
+    setAgree(e.target.checked);
   };
 
   return (
@@ -90,12 +98,14 @@ function EnrollBottomModal(props: Omit<BottomModalProps, 'title'>) {
           </Flex.Vertical>
         </Flex.Vertical>
         <Flex.Horizontal className='tw-mt-[20px] tw-mb-[30px] tw-px-[20px]'>
-          <CheckBox>
+          <CheckBox checked={agree} onChange={handleChangeAgree}>
             <Typography.Main fontWeight={700}>밋유 모임 약관에 동의합니다.</Typography.Main>
           </CheckBox>
         </Flex.Horizontal>
         <FooterContainer>
-          <Button.Medium onClick={handleClickEnroll}>신청하기</Button.Medium>
+          <Button.Medium onClick={handleClickEnroll} disabled={!agree}>
+            신청하기
+          </Button.Medium>
         </FooterContainer>
       </StyledEnrollBottomModalBody>
     </BottomModal>
