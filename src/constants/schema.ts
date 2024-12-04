@@ -22,3 +22,7 @@ export const registerSchema = object({
   checkedId: boolean().isTrue('아이디 중복체크를 해주세요.'),
   checkedEmail: boolean().isTrue('이메일 중복체크를 해주세요.'),
 });
+
+export const paymentSchema = object({
+  agree: boolean().isTrue(),
+});

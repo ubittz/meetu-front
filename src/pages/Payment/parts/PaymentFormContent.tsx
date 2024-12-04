@@ -9,7 +9,6 @@ import FullScreen from '@@components/FullScreen';
 import Header from '@@components/Header';
 import OrdererInfo from '@@pages/Payment/parts/OrdererInfo';
 import PaymentInfo from '@@pages/Payment/parts/PaymentInfo';
-import PaymentMethod from '@@pages/Payment/parts/PaymentMethod';
 import PaymentProductInfo from '@@pages/Payment/parts/PaymentProductInfo';
 import PaymentSection from '@@pages/Payment/parts/PaymentSection';
 import PaymentTerms from '@@pages/Payment/parts/PaymentTemrs';
@@ -25,7 +24,7 @@ const StyledPaymentFormContent = styled(FullScreen)`
 function PaymentFormContent() {
   const navigate = useNavigate();
 
-  const { handleSubmit } = useFormikContext<PaymentForm>();
+  const { handleSubmit, isValid } = useFormikContext<PaymentForm>();
 
   const handleClickBack = () => {
     navigate(-1);
@@ -48,15 +47,14 @@ function PaymentFormContent() {
           <PaymentSection title='주문자 정보'>
             <OrdererInfo />
           </PaymentSection>
-          <PaymentSection title='결제 수단'>
-            <PaymentMethod />
-          </PaymentSection>
           <PaymentSection title='주문 동의' hiddenDivider>
             <PaymentTerms />
           </PaymentSection>
         </Flex.Vertical>
         <FooterContainer>
-          <Button.Medium type='submit'>50,000원 결제하기</Button.Medium>
+          <Button.Medium type='submit' disabled={!isValid}>
+            50,000원 결제하기
+          </Button.Medium>
         </FooterContainer>
       </StyledPaymentFormContent>
     </Form>

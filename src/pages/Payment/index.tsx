@@ -1,7 +1,7 @@
 import { Formik } from 'formik';
 import { useNavigate, useParams } from 'react-router-dom';
 
-import { PAYMENT_METHOD } from '@@pages/Payment/constants';
+import { paymentSchema } from '@@constants/schema';
 import PaymentFormContent from '@@pages/Payment/parts/PaymentFormContent';
 import { PaymentForm } from '@@pages/Payment/types';
 import { PAGES } from '@@router/constants';
@@ -16,7 +16,7 @@ function Payment() {
     classId: +(id ?? 0),
     ordererName: '',
     ordererPhone: '',
-    paymentMethod: PAYMENT_METHOD.CARD,
+    agree: false,
   };
 
   const handleSubmit = (form: PaymentForm) => {
@@ -26,7 +26,7 @@ function Payment() {
   };
 
   return (
-    <Formik initialValues={initialValues} onSubmit={handleSubmit}>
+    <Formik initialValues={initialValues} onSubmit={handleSubmit} validationSchema={paymentSchema}>
       <PaymentFormContent />
     </Formik>
   );
