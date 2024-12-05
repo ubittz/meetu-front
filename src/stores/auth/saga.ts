@@ -14,8 +14,11 @@ import {
   registerRequest,
   registerSuccess,
   registerFailure,
+  fetchMeRequest,
+  fetchMeSuccess,
+  fetchMeFailure,
 } from '@@stores/auth/reducer';
-import { LoginResponse, RegisterResponse } from '@@stores/auth/types';
+import { LoginResponse, RegisterResponse, User } from '@@stores/auth/types';
 import { saveToken } from '@@utils/localStorage';
 import { authenticatedRequest } from '@@utils/request';
 import { ERROR_CODE_STRING } from '@@utils/request/constants';
@@ -91,9 +94,22 @@ function* register({ payload }: ReturnType<typeof registerRequest>) {
   }
 }
 
+function* fetchMe() {
+  try {
+    const response: UbittzResponse<User> = yield authenticatedRequest.post('/api/user/get-my-info');
+
+    const action = response.ok ? fetchMeSuccess(response.data) : fetchMeFailure('가입을 실패했습니다.');
+
+    yield put(action);
+  } catch (e) {
+    yield put(fetchMeFailure((e as Error).message));
+  }
+}
+
 export default function* defaultSaga() {
   yield takeLatest(loginRequest.type, login);
   yield takeLatest(checkDuplicateIdRequest.type, checkDuplicateId);
   yield takeLatest(checkDuplicateEmailRequest.type, checkDuplicateEmail);
   yield takeLatest(registerRequest.type, register);
+  yield takeLatest(fetchMeRequest.type, fetchMe);
 }

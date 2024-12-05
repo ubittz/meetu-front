@@ -2,6 +2,7 @@ import { Gender } from '@@pages/Register/types';
 
 export interface AuthState {
   token?: string;
+  me?: User;
 }
 
 export interface LoginDTO {
@@ -27,4 +28,14 @@ export interface RegisterResponse {
   id: string;
   name: string;
   email: string;
+}
+
+export interface User {
+  id: string;
+  name: string;
+  email: string;
+  birth: string;
+  tel: string;
+  gender: Gender;
+  createDatetime: Date;
 }

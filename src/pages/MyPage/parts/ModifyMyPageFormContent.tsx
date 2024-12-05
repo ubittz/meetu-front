@@ -14,6 +14,7 @@ import ModifyFormInputContent from '@@pages/MyPage/parts/ModifyFormInputContent'
 import { ModifyMyInfoForm } from '@@pages/MyPage/types';
 import { PAGES } from '@@router/constants';
 import { pathGenerator } from '@@router/utils';
+import { useAppState } from '@@store/hooks';
 
 const StyledModifyMyPageFormContent = styled(FullScreen)`
   .body {
@@ -62,6 +63,8 @@ const StyledModifyMyPageFormContent = styled(FullScreen)`
 function ModifyMyPageFormContent() {
   const navigate = useNavigate();
 
+  const me = useAppState((state) => state.auth.me);
+
   const { handleSubmit } = useFormikContext<ModifyMyInfoForm>();
 
   const handleClickCancel = () => {
@@ -89,7 +92,7 @@ function ModifyMyPageFormContent() {
               </Flex.Horizontal>
             </div>
             <Typography.Main fontSize='20px' fontWeight={700}>
-              사용자명
+              {me?.name}
             </Typography.Main>
           </Flex.Horizontal>
           <ModifyFormInputContent />

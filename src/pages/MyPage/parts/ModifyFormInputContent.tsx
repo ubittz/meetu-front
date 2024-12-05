@@ -5,8 +5,12 @@ import FormGroup from '@@components/FormGroup';
 import InputFormGroup from '@@components/InputFormGroup';
 import Radio from '@@components/Radio';
 import { ModifyMyInfoForm } from '@@pages/MyPage/types';
+import { GENDER } from '@@pages/Register/constants';
+import { useAppState } from '@@store/hooks';
 
 function ModifyFormInputContent() {
+  const me = useAppState((state) => state.auth.me);
+
   const { getFieldProps } = useFormikContext<ModifyMyInfoForm>();
 
   return (
@@ -14,14 +18,14 @@ function ModifyFormInputContent() {
       <InputFormGroup
         label='아이디'
         inputProps={{
-          value: 'Junsu01002',
+          value: me?.id,
           readOnly: true,
         }}
       />
       <InputFormGroup
         label='이름'
         inputProps={{
-          value: '김준수',
+          value: me?.name,
           readOnly: true,
         }}
       />
@@ -43,16 +47,16 @@ function ModifyFormInputContent() {
       <InputFormGroup
         label='생년월일'
         inputProps={{
-          value: '1993-11-22',
+          value: me?.birth,
           readOnly: true,
         }}
       />
       <FormGroup label='성별'>
         <Flex.Horizontal className='tw-pt-[8px] tw-pb-[12px]' gap={30}>
-          <Radio readOnly checked={true}>
+          <Radio readOnly checked={me?.gender === GENDER.MALE}>
             남자
           </Radio>
-          <Radio readOnly checked={false}>
+          <Radio readOnly checked={me?.gender === GENDER.FEMALE}>
             여자
           </Radio>
         </Flex.Horizontal>
@@ -60,7 +64,7 @@ function ModifyFormInputContent() {
       <InputFormGroup
         label='연락처'
         inputProps={{
-          value: '010-1234-1234',
+          value: me?.tel,
           readOnly: true,
         }}
       />

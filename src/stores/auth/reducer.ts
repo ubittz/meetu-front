@@ -1,6 +1,6 @@
 import { createAction, createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { AuthState, LoginDTO, LoginResponse, RegisterDTO, RegisterResponse } from '@@stores/auth/types';
+import { AuthState, LoginDTO, LoginResponse, RegisterDTO, RegisterResponse, User } from '@@stores/auth/types';
 import { clearToken, getAccessToken } from '@@utils/localStorage';
 
 const initialState: AuthState = {
@@ -24,6 +24,9 @@ export const registerRequest = createAction<RegisterDTO>(`${PREFIX}/registerRequ
 export const registerSuccess = createAction<RegisterResponse>(`${PREFIX}/registerSuccess`);
 export const registerFailure = createAction<string>(`${PREFIX}/registerFailure`);
 
+export const fetchMeRequest = createAction(`${PREFIX}/fetchMeRequest`);
+export const fetchMeFailure = createAction<string>(`${PREFIX}/fetchMeFailure`);
+
 const authSlice = createSlice({
   name: PREFIX,
   initialState,
@@ -35,9 +38,12 @@ const authSlice = createSlice({
       state.token = undefined;
       clearToken();
     },
+    fetchMeSuccess(state, { payload }: PayloadAction<User>) {
+      state.me = payload;
+    },
   },
 });
 
-export const { loginSuccess, logout } = authSlice.actions;
+export const { loginSuccess, logout, fetchMeSuccess } = authSlice.actions;
 
 export default authSlice.reducer;

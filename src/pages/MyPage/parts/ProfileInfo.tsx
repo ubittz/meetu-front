@@ -7,6 +7,7 @@ import { DefaultUserIcon, InformationIcon, WalletIcon, FaxIcon, ListIcon } from 
 import MenuBox from '@@pages/MyPage/parts/MenuBox';
 import { PAGES } from '@@router/constants';
 import { pathGenerator } from '@@router/utils';
+import { useAppState } from '@@store/hooks';
 
 const StyledProfileInfo = styled(Flex.Vertical)`
   border-bottom: 6px solid ${COLORS.LINE_100};
@@ -46,6 +47,8 @@ const StyledProfileInfo = styled(Flex.Vertical)`
 `;
 
 function ProfileInfo() {
+  const me = useAppState((state) => state.auth.me);
+
   return (
     <StyledProfileInfo gap={30}>
       <Flex.Horizontal className='tw-px-[20px]' gap={12}>
@@ -54,7 +57,7 @@ function ProfileInfo() {
         </div>
         <Flex.Vertical gap={8}>
           <Typography.Main fontSize='20px' fontWeight={700}>
-            사용자명
+            {me?.name}
           </Typography.Main>
           <Typography.Sub fontSize='14px'>사용자 한줄 소개글입니다.</Typography.Sub>
         </Flex.Vertical>
