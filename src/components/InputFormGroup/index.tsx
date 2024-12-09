@@ -35,7 +35,7 @@ function InputFormGroup({ errorMessage, inputProps, buttonProps, ...props }: Inp
   return (
     <StyledInputFormGroup {...props}>
       <Flex.Horizontal className='input_form_group__input_wrap' gap={12}>
-        <TextField {...inputProps} />
+        <TextField {...inputProps} defaultValue='' />
         {buttonProps && <Button.Large {...buttonProps} />}
       </Flex.Horizontal>
       {errorMessage && <span className='input_form_group__error'>{errorMessage}</span>}

@@ -65,7 +65,7 @@ function ModifyMyPageFormContent() {
 
   const me = useAppState((state) => state.auth.me);
 
-  const { handleSubmit } = useFormikContext<ModifyMyInfoForm>();
+  const { handleSubmit, isValid } = useFormikContext<ModifyMyInfoForm>();
 
   const handleClickCancel = () => {
     navigate(pathGenerator(PAGES.MY_PAGE));
@@ -101,7 +101,9 @@ function ModifyMyPageFormContent() {
           <Button.Medium theme='outline' onClick={handleClickCancel}>
             취소
           </Button.Medium>
-          <Button.Medium type='submit'>저장</Button.Medium>
+          <Button.Medium type='submit' disabled={!isValid}>
+            저장
+          </Button.Medium>
         </FooterContainer>
       </StyledModifyMyPageFormContent>
     </Form>

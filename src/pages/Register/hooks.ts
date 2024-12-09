@@ -51,7 +51,7 @@ export const useRegisterForm = () => {
   useActionSubscribe({
     type: checkDuplicateEmailSuccess.type,
     callback: () => {
-      setContent('사용 가능한 이메일입니다..');
+      setContent('사용 가능한 이메일입니다.');
       setVisible(true);
       setFieldValue('checkedEmail', true);
     },

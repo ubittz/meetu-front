@@ -17,8 +17,11 @@ import {
   fetchMeRequest,
   fetchMeSuccess,
   fetchMeFailure,
+  userEditRequest,
+  userEditFailure,
+  userEditSuccess,
 } from '@@stores/auth/reducer';
-import { LoginResponse, RegisterResponse, User } from '@@stores/auth/types';
+import { LoginResponse, RegisterResponse, User, UserEditResponse } from '@@stores/auth/types';
 import { saveToken } from '@@utils/localStorage';
 import { authenticatedRequest } from '@@utils/request';
 import { ERROR_CODE_STRING } from '@@utils/request/constants';
@@ -94,6 +97,20 @@ function* register({ payload }: ReturnType<typeof registerRequest>) {
   }
 }
 
+function* userEdit({ payload }: ReturnType<typeof userEditRequest>) {
+  try {
+    const response: UbittzResponse<UserEditResponse> = yield authenticatedRequest.patch('/api/user/edit', {
+      data: payload,
+    });
+
+    const action = response.ok ? userEditSuccess(response.data) : userEditFailure('회원정보 수정을 실패했습니다.');
+
+    yield put(action);
+  } catch (e) {
+    yield put(userEditFailure((e as Error).message));
+  }
+}
+
 function* fetchMe() {
   try {
     const response: UbittzResponse<User> = yield authenticatedRequest.post('/api/user/get-my-info');
@@ -112,4 +129,5 @@ export default function* defaultSaga() {
   yield takeLatest(checkDuplicateEmailRequest.type, checkDuplicateEmail);
   yield takeLatest(registerRequest.type, register);
   yield takeLatest(fetchMeRequest.type, fetchMe);
+  yield takeLatest(userEditRequest.type, userEdit);
 }

@@ -26,3 +26,15 @@ export const registerSchema = object({
 export const paymentSchema = object({
   agree: boolean().isTrue(),
 });
+
+export const modifySchema = object({
+  password: string().matches(new RegExp(/^[a-zA-Z0-9]{8,20}$/), { message: '비밀번호는 영문 대소문자 + 숫자 조합 8~20글자 입니다.' }),
+  passwordCheck: string().oneOf([ref('password')], '비밀번호가 일치하지 않습니다.'),
+  email: string().matches(/^[a-zA-Z0-9+-_.]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/, { message: '이메일을 정확히 입력해주세요.' }),
+  checkedEmail: boolean().when('email', ([email], schema) => {
+    if (email) {
+      return schema.isTrue('이메일 중복체크를 해주세요.');
+    }
+    return schema;
+  }),
+});

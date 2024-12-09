@@ -52,6 +52,7 @@ const generatorRequest = () => {
     post: generator('post'),
     put: generator('put'),
     delete: generator('delete'),
+    patch: generator('patch'),
   };
 };
 

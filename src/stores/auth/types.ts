@@ -39,3 +39,16 @@ export interface User {
   gender: Gender;
   createDatetime: Date;
 }
+
+export interface UserEditRequestDTO {
+  id: string;
+  password?: string;
+  email?: string;
+  description?: string;
+}
+
+export interface UserEditResponse {
+  id?: string;
+  name?: string;
+  email?: string;
+}
