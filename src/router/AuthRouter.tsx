@@ -34,7 +34,7 @@ function AuthRouter() {
     <Routes>
       <Route path={pathGenerator(PAGES.HOME)} element={<Home />} />
       <Route path={pathGenerator(PAGES.FIND_CLASS)} element={<FindClass />} />
-      <Route path={pathGenerator(PAGES.FIND_CLASS, '/:id')} element={<FindClass />} />
+      <Route path={pathGenerator(PAGES.FIND_CLASS, '/:category')} element={<FindClass />} />
       <Route path={pathGenerator(PAGES.CLASS, '/:id')} element={<ClassDetail />} />
       <Route path={pathGenerator(PAGES.PAYMENT, '/complete')} element={<PaymentComplete />} />
       <Route path={pathGenerator(PAGES.PAYMENT, '/:id')} element={<Payment />} />

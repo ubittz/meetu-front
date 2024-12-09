@@ -2,8 +2,9 @@ import styled from 'styled-components';
 
 import Flex from '@@components/Flex';
 import Typography from '@@components/Typography';
-import { CATEGORY_LIST } from '@@pages/Home/constants';
 import CategoryItem from '@@pages/Home/parts/CategoryItem';
+
+import { ALL_CATEGORIES } from '../constants';
 
 const StyledCategoryList = styled(Flex.Horizontal)`
   overflow-x: scroll;
@@ -20,8 +21,8 @@ function CategoryList() {
         카테고리
       </Typography.Main>
       <StyledCategoryList gap={16} className='tw-px-[20px]'>
-        {CATEGORY_LIST.map((category) => (
-          <CategoryItem key={category.title} item={category} />
+        {ALL_CATEGORIES.map((category) => (
+          <CategoryItem key={category} category={category} />
         ))}
       </StyledCategoryList>
     </Flex.Vertical>

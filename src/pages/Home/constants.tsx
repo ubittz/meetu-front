@@ -17,63 +17,49 @@ import Class2Image from '@@pages/Home/images/class_2.jpeg';
 import Class3Image from '@@pages/Home/images/class_3.jpeg';
 import Class4Image from '@@pages/Home/images/class_4.jpeg';
 
-export const CATEGORY_LIST = [
-  {
-    id: 1,
-    icon: <ArtCategoryIcon />,
-    title: '아트',
-  },
-  {
-    id: 2,
-    icon: <BookCategoryIcon />,
-    title: '독서',
-  },
-  {
-    id: 3,
-    icon: <CookCategoryIcon />,
-    title: '쿠킹',
-  },
-  {
-    id: 4,
-    icon: <CycleCategoryIcon />,
-    title: '사이클',
-  },
-  {
-    id: 5,
-    icon: <ExerciseCategoryIcon />,
-    title: '운동',
-  },
-  {
-    id: 6,
-    icon: <MountainCategoryIcon />,
-    title: '등산',
-  },
-  {
-    id: 7,
-    icon: <MusicCategoryIcon />,
-    title: '음악',
-  },
-  {
-    id: 8,
-    icon: <PictureCategoryIcon />,
-    title: '사진',
-  },
-  {
-    id: 9,
-    icon: <TechCategoryIcon />,
-    title: '기술',
-  },
-  {
-    id: 10,
-    icon: <WineCategoryIcon />,
-    title: '와인',
-  },
-  {
-    id: 11,
-    icon: <AllCategoryIcon />,
-    title: '모두보기',
-  },
-];
+export const CATEGORY = {
+  ART: 'ART',
+  READING: 'READING',
+  COOK: 'COOK',
+  CYCLE: 'CYCLE',
+  EXERCISE: 'EXERCISE',
+  HIKING: 'HIKING',
+  MUSIC: 'MUSIC',
+  PHOTO: 'PHOTO',
+  TECH: 'TECH',
+  WIN: 'WINE',
+  ALL: 'ALL',
+} as const;
+
+export const ALL_CATEGORIES = Object.values(CATEGORY);
+
+export const CATEGORY_STRINGS = {
+  [CATEGORY.ALL]: '모두보기',
+  [CATEGORY.ART]: '아트',
+  [CATEGORY.READING]: '독서',
+  [CATEGORY.COOK]: '쿠킹',
+  [CATEGORY.CYCLE]: '사이클',
+  [CATEGORY.EXERCISE]: '운동',
+  [CATEGORY.HIKING]: '등산',
+  [CATEGORY.MUSIC]: '음악',
+  [CATEGORY.PHOTO]: '사진',
+  [CATEGORY.TECH]: '기술',
+  [CATEGORY.WIN]: '와인',
+} as const;
+
+export const CATEGORY_ICONS = {
+  [CATEGORY.ALL]: <AllCategoryIcon />,
+  [CATEGORY.ART]: <BookCategoryIcon />,
+  [CATEGORY.READING]: <CookCategoryIcon />,
+  [CATEGORY.COOK]: <CycleCategoryIcon />,
+  [CATEGORY.CYCLE]: <ExerciseCategoryIcon />,
+  [CATEGORY.EXERCISE]: <MountainCategoryIcon />,
+  [CATEGORY.HIKING]: <MusicCategoryIcon />,
+  [CATEGORY.MUSIC]: <PictureCategoryIcon />,
+  [CATEGORY.PHOTO]: <TechCategoryIcon />,
+  [CATEGORY.TECH]: <ArtCategoryIcon />,
+  [CATEGORY.WIN]: <WineCategoryIcon />,
+} as const;
 
 export const CLASS_LIST = [
   {

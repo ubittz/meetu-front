@@ -8,7 +8,8 @@ import Flex from '@@components/Flex';
 import FullScreen from '@@components/FullScreen';
 import Header from '@@components/Header';
 import { COLORS } from '@@constants/colors';
-import { CATEGORY_LIST, CLASS_LIST } from '@@pages/Home/constants';
+import { ALL_CATEGORIES, CATEGORY, CATEGORY_STRINGS, CLASS_LIST } from '@@pages/Home/constants';
+import { Category } from '@@pages/Home/types';
 import { PAGES } from '@@router/constants';
 import { pathGenerator } from '@@router/utils';
 
@@ -66,13 +67,13 @@ const StyledSelect = styled.select`
 function FindClass() {
   const navigate = useNavigate();
 
-  const { id } = useParams();
+  const { category } = useParams<{ category: Category }>();
 
-  const [selectedCategory, setSelectedCategory] = useState<number>(+(id ?? 0));
+  const [selectedCategory, setSelectedCategory] = useState<Category>(category ?? CATEGORY.ALL);
   const [selectedFilter, setSelectedFilter] = useState<string>(FILTER_OPTIONS[0].value);
 
   const handleChangeCategory: ChangeEventHandler<HTMLSelectElement> = (e) => {
-    setSelectedCategory(+e.target.value);
+    setSelectedCategory(e.target.value as Category);
     navigate(pathGenerator(PAGES.FIND_CLASS, `/${e.target.value}`), {
       replace: true,
     });
@@ -82,17 +83,17 @@ function FindClass() {
     setSelectedFilter(e.target.value);
   };
 
-  if (!id) {
-    return <Navigate to={pathGenerator(PAGES.FIND_CLASS, '/1')} replace />;
+  if (!category) {
+    return <Navigate to={pathGenerator(PAGES.FIND_CLASS, CATEGORY.ALL)} replace />;
   }
 
   return (
     <StyledHomeCategory navigation>
       <Header hiddenBack>
         <StyledHeaderSelect value={selectedCategory} defaultValue={selectedCategory} onChange={handleChangeCategory}>
-          {CATEGORY_LIST.map(({ id, title }) => (
-            <option key={id} value={+id}>
-              {title}
+          {ALL_CATEGORIES.map((category) => (
+            <option key={category} value={category}>
+              {CATEGORY_STRINGS[category]}
             </option>
           ))}
         </StyledHeaderSelect>
