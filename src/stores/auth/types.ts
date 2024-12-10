@@ -3,6 +3,7 @@ import { Gender } from '@@pages/Register/types';
 export interface AuthState {
   token?: string;
   me?: User;
+  changeKey?: string;
 }
 
 export interface LoginDTO {
@@ -51,4 +52,9 @@ export interface UserEditResponse {
   id?: string;
   name?: string;
   email?: string;
+}
+
+export interface UserVerifyIdentityResponse {
+  userId: string;
+  changeKey: string;
 }

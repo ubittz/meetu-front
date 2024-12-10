@@ -1,6 +1,7 @@
 import { AxiosError } from 'axios';
-import { put, takeLatest } from 'redux-saga/effects';
+import { put, select, takeLatest } from 'redux-saga/effects';
 
+import { AppState } from '@@store/types';
 import {
   loginFailure,
   loginRequest,
@@ -20,8 +21,17 @@ import {
   userEditRequest,
   userEditFailure,
   userEditSuccess,
+  findIdRequest,
+  findIdSuccess,
+  findIdFailure,
+  verifyIdentityRequest,
+  verifyIdentitySuccess,
+  verifyIdentityFailure,
+  verifyOTPRequest,
+  verifyOTPSuccess,
+  verifyOTPFailure,
 } from '@@stores/auth/reducer';
-import { LoginResponse, RegisterResponse, User, UserEditResponse } from '@@stores/auth/types';
+import { LoginResponse, RegisterResponse, User, UserEditResponse, UserVerifyIdentityResponse } from '@@stores/auth/types';
 import { saveToken } from '@@utils/localStorage';
 import { authenticatedRequest } from '@@utils/request';
 import { ERROR_CODE_STRING } from '@@utils/request/constants';
@@ -123,6 +133,52 @@ function* fetchMe() {
   }
 }
 
+function* findId({ payload }: ReturnType<typeof findIdRequest>) {
+  try {
+    const response: UbittzResponse<string> = yield authenticatedRequest.post('/api/user/find-id', {
+      data: payload,
+    });
+
+    const action = response.ok ? findIdSuccess(response.data) : findIdFailure('등록된 회원이 없습니다.');
+
+    yield put(action);
+  } catch (e) {
+    yield put(findIdFailure((e as Error).message));
+  }
+}
+
+function* verifyIdentity({ payload }: ReturnType<typeof verifyIdentityRequest>) {
+  try {
+    const response: UbittzResponse<UserVerifyIdentityResponse> = yield authenticatedRequest.post('/api/user/verify-identity', {
+      data: payload,
+    });
+
+    const action = response.ok ? verifyIdentitySuccess(response.data) : verifyIdentityFailure('등록된 회원이 없습니다.');
+
+    yield put(action);
+  } catch (e) {
+    yield put(verifyIdentityFailure((e as Error).message));
+  }
+}
+
+function* verifyOTP({ payload }: ReturnType<typeof verifyOTPRequest>) {
+  try {
+    const changeKey = select((state: AppState) => state.auth.changeKey);
+    const response: UbittzResponse<string> = yield authenticatedRequest.post('/api/user/verify-identity', {
+      data: {
+        ...payload,
+        changeKey,
+      },
+    });
+
+    const action = response.ok ? verifyOTPSuccess() : verifyOTPFailure('등록된 회원이 없습니다.');
+
+    yield put(action);
+  } catch (e) {
+    yield put(verifyOTPFailure((e as Error).message));
+  }
+}
+
 export default function* defaultSaga() {
   yield takeLatest(loginRequest.type, login);
   yield takeLatest(checkDuplicateIdRequest.type, checkDuplicateId);
@@ -130,4 +186,7 @@ export default function* defaultSaga() {
   yield takeLatest(registerRequest.type, register);
   yield takeLatest(fetchMeRequest.type, fetchMe);
   yield takeLatest(userEditRequest.type, userEdit);
+  yield takeLatest(findIdRequest.type, findId);
+  yield takeLatest(verifyIdentityRequest.type, verifyIdentity);
+  yield takeLatest(verifyOTPRequest.type, verifyOTP);
 }

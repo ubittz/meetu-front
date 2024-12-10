@@ -18,7 +18,7 @@ const StyledBasicButton = styled.button<{ $size: ButtonSize; $theme: ButtonTheme
 const BasicButton =
   (size: ButtonSize) =>
   ({ theme = 'primary', ...props }: ButtonProps) => {
-    return <StyledBasicButton {...props} $size={size} $theme={theme} />;
+    return <StyledBasicButton type='button' {...props} $size={size} $theme={theme} />;
   };
 
 export default BasicButton;

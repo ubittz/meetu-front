@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 import Button from '@@components/Button';
 import FooterContainer from '@@components/FooterContainer';
@@ -9,6 +9,7 @@ import { pathGenerator } from '@@router/utils';
 
 function FindIdComplete() {
   const navigate = useNavigate();
+  const { state } = useLocation();
 
   const handleClickFindPassword = () => {
     navigate(pathGenerator(PAGES.FIND_ACCOUNT, '/password'));
@@ -25,7 +26,7 @@ function FindIdComplete() {
           회원님의 아이디는
           <br />
           <Typography.Point as='span' fontSize='inherit' fontWeight='inherit'>
-            ABC***1234
+            {state.findedId}
           </Typography.Point>
           입니다.
         </>

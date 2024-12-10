@@ -38,3 +38,20 @@ export const modifySchema = object({
     return schema;
   }),
 });
+
+export const findIdSchema = object({
+  email: string()
+    .required('이메일을 입력해주세요.')
+    .matches(/^[a-zA-Z0-9+-_.]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/, { message: '이메일을 정확히 입력해주세요.' }),
+});
+
+export const verifyIdentitySchema = object({
+  id: string().required('아이디를 입력해주세요'),
+  email: string()
+    .required('이메일을 입력해주세요.')
+    .matches(/^[a-zA-Z0-9+-_.]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/, { message: '이메일을 정확히 입력해주세요.' }),
+});
+
+export const verifyOTPSchema = object({
+  otp: string().required('인증번호를 입력해주세요.'),
+});

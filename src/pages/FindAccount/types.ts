@@ -1,17 +1,17 @@
 export interface FindIdForm {
-  name: string;
-  birth: string;
   email: string;
 }
 
-export interface FindPasswordForm {
+export interface VerifyIdentityForm {
   id: string;
-  name: string;
-  birth: string;
   email: string;
 }
 
 export interface ResetPasswordForm {
   password: string;
   passwordCheck: string;
+}
+
+export interface VerifyOTPForm {
+  otp: string;
 }
