@@ -6,7 +6,7 @@ import ClassBox from '@@components/ClassBox';
 import Flex from '@@components/Flex';
 import Typography from '@@components/Typography';
 import { COLORS } from '@@constants/colors';
-import { ALL_CATEGORIES, CATEGORY, CATEGORY_STRINGS } from '@@pages/Home/constants';
+import { ALL_CATEGORIES, CATEGORY_STRINGS } from '@@pages/Home/constants';
 import { useMeetingByCategory } from '@@pages/Home/hooks';
 import ClassEmpty from '@@pages/Home/parts/ClassEmpty';
 import { Category } from '@@pages/Home/types';
@@ -27,11 +27,11 @@ const StyledSelect = styled.select`
 `;
 
 function MeetingByCategory() {
-  const [selectedCategory, setSelectedCategory] = useState<Category>(CATEGORY.ALL);
+  const [selectedCategory, setSelectedCategory] = useState<Category>();
 
-  const data = useMeetingByCategory(selectedCategory);
+  const { content } = useMeetingByCategory(selectedCategory);
 
-  console.log(data);
+  console.log(content);
 
   const handleChangeCategory: ChangeEventHandler<HTMLSelectElement> = (e) => {
     setSelectedCategory(e.target.value as Category);
@@ -45,6 +45,7 @@ function MeetingByCategory() {
         </Typography.Main>
         <Flex.Horizontal alignItems='center'>
           <StyledSelect value={selectedCategory} onChange={handleChangeCategory}>
+            <option value=''>모두보기</option>
             {ALL_CATEGORIES.map((category) => (
               <option key={category} value={category}>
                 {CATEGORY_STRINGS[category]}
@@ -54,8 +55,11 @@ function MeetingByCategory() {
         </Flex.Horizontal>
       </Flex.Horizontal>
       <StyledClassBoxList gap={10}>
-        {!data.content?.length && <ClassEmpty />}
-        {/* {data?.map((classItem) => <ClassBox key={classItem.meetingId} className='tw-w-[126px]' classItem={classItem} />)} */}
+        {content && content.length ? (
+          content.map((classItem) => <ClassBox key={classItem.meetingId} className='tw-w-[126px]' meeting={classItem} />)
+        ) : (
+          <ClassEmpty />
+        )}
       </StyledClassBoxList>
     </Flex.Vertical>
   );

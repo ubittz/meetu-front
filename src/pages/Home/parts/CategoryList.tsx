@@ -24,6 +24,7 @@ function CategoryList() {
         {ALL_CATEGORIES.map((category) => (
           <CategoryItem key={category} category={category} />
         ))}
+        <CategoryItem />
       </StyledCategoryList>
     </Flex.Vertical>
   );

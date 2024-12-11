@@ -8,6 +8,8 @@ import { Category } from '@@pages/Home/types';
 import { PAGES } from '@@router/constants';
 import { pathGenerator } from '@@router/utils';
 
+import { AllCategoryIcon } from '../icons';
+
 const StyledIcon = styled(Flex.Horizontal)`
   width: 52px;
   height: 52px;
@@ -16,7 +18,7 @@ const StyledIcon = styled(Flex.Horizontal)`
   background: #f8f8f8;
 `;
 
-function CategoryItem({ category }: { category: Category }) {
+function CategoryItem({ category }: { category?: Category }) {
   const navigate = useNavigate();
 
   const handleClick = () => {
@@ -26,9 +28,9 @@ function CategoryItem({ category }: { category: Category }) {
   return (
     <Flex.Vertical alignItems='center' flex='0 0 auto' onClick={handleClick}>
       <StyledIcon justifyContent='center' alignItems='center'>
-        {CATEGORY_ICONS[category]}
+        {category ? CATEGORY_ICONS[category] : <AllCategoryIcon />}
       </StyledIcon>
-      <Typography.Sub fontSize='12px'>{CATEGORY_STRINGS[category]}</Typography.Sub>
+      <Typography.Sub fontSize='12px'>{category ? CATEGORY_STRINGS[category] : '모두보기'}</Typography.Sub>
     </Flex.Vertical>
   );
 }

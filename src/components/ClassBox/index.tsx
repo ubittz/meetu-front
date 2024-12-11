@@ -8,8 +8,10 @@ import { ClassBoxProps } from '@@components/ClassBox/types';
 import Flex from '@@components/Flex';
 import Typography from '@@components/Typography';
 import { COLORS } from '@@constants/colors';
+import Class1Image from '@@pages/Home/images/class_1.png';
 import { PAGES } from '@@router/constants';
 import { pathGenerator } from '@@router/utils';
+import { DISTRICT } from '@@stores/meeting/constants';
 
 const StyledClassBox = styled(Flex.Vertical)`
   flex: 0 0 auto;
@@ -40,39 +42,36 @@ const StyledClassBox = styled(Flex.Vertical)`
   }
 `;
 
-function ClassBox({ classItem, children, ...props }: PropsWithChildren<ClassBoxProps>) {
+function ClassBox({ meeting, children, ...props }: PropsWithChildren<ClassBoxProps>) {
   const navigate = useNavigate();
 
   const handleClick = () => {
-    navigate(pathGenerator(PAGES.CLASS, `/${classItem.id}`));
+    navigate(pathGenerator(PAGES.CLASS, `/${meeting?.meetingId}`));
   };
+
+  if (!meeting) return null;
+
+  const district = Object.entries(DISTRICT).find(([, value]) => meeting.meetingMainPlace.includes(value))?.[0];
 
   return (
     <StyledClassBox {...props} onClick={handleClick}>
       <div className='class_box__image'>
-        <img src={classItem.image} alt='Class Box Image' />
+        <img src={Class1Image} alt='Class Box Image' />
       </div>
       <Flex.Vertical className='tw-mt-[8px]' gap={12}>
-        {!!classItem.badgeList?.length && (
-          <Flex.Horizontal>
-            {classItem.badgeList?.map((badge, index) => (
-              <Badge key={index} theme={badge.theme}>
-                {badge.title}
-              </Badge>
-            ))}
-          </Flex.Horizontal>
-        )}
+        <Flex.Horizontal gap={4}>
+          <Badge theme='primary'>HOT</Badge>
+          {district && <Badge theme='outline'>{district}</Badge>}
+        </Flex.Horizontal>
         <Flex.Vertical gap={4}>
           <Typography.Main className='class_box__title' fontSize='14px' fontWeight={500}>
-            {classItem.title}
+            {meeting.meetingName}
           </Typography.Main>
           <Typography.Third fontSize='12px' className='class_box__description'>
-            {classItem.description}
+            {meeting.meetingIntro}
           </Typography.Third>
         </Flex.Vertical>
-        <Typography.Main className='' fontWeight={700}>
-          {classItem.price.toLocaleString()}원
-        </Typography.Main>
+        <Typography.Main fontWeight={700}>{meeting.meetingCost.toLocaleString()}원</Typography.Main>
       </Flex.Vertical>
       {children}
     </StyledClassBox>

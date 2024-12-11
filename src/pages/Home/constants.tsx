@@ -10,7 +10,6 @@ import {
   PictureCategoryIcon,
   TechCategoryIcon,
   WineCategoryIcon,
-  AllCategoryIcon,
 } from '@@pages/Home/icons';
 import Class1Image from '@@pages/Home/images/class_1.png';
 import Class2Image from '@@pages/Home/images/class_2.jpeg';
@@ -28,13 +27,11 @@ export const CATEGORY = {
   PHOTO: 'PHOTO',
   TECH: 'TECH',
   WIN: 'WINE',
-  ALL: 'ALL',
 } as const;
 
 export const ALL_CATEGORIES = Object.values(CATEGORY);
 
 export const CATEGORY_STRINGS = {
-  [CATEGORY.ALL]: '모두보기',
   [CATEGORY.ART]: '아트',
   [CATEGORY.READING]: '독서',
   [CATEGORY.COOK]: '쿠킹',
@@ -48,7 +45,6 @@ export const CATEGORY_STRINGS = {
 } as const;
 
 export const CATEGORY_ICONS = {
-  [CATEGORY.ALL]: <AllCategoryIcon />,
   [CATEGORY.ART]: <BookCategoryIcon />,
   [CATEGORY.READING]: <CookCategoryIcon />,
   [CATEGORY.COOK]: <CycleCategoryIcon />,

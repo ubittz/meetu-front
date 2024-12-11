@@ -1,5 +1,6 @@
 import { BadgeTheme } from '@@components/Badge/types';
 import { FlexProps } from '@@components/Flex/types';
+import { Meeting } from '@@stores/meeting/types';
 
 export interface Class {
   id: number;
@@ -15,5 +16,6 @@ export interface Class {
 }
 
 export interface ClassBoxProps extends FlexProps {
-  classItem: Class;
+  classItem?: Class;
+  meeting?: Meeting;
 }

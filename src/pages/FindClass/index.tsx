@@ -8,7 +8,9 @@ import Flex from '@@components/Flex';
 import FullScreen from '@@components/FullScreen';
 import Header from '@@components/Header';
 import { COLORS } from '@@constants/colors';
-import { ALL_CATEGORIES, CATEGORY, CATEGORY_STRINGS, CLASS_LIST } from '@@pages/Home/constants';
+import { ALL_CATEGORIES, CATEGORY_STRINGS } from '@@pages/Home/constants';
+import { useMeetingByCategory } from '@@pages/Home/hooks';
+import ClassEmpty from '@@pages/Home/parts/ClassEmpty';
 import { Category } from '@@pages/Home/types';
 import { PAGES } from '@@router/constants';
 import { pathGenerator } from '@@router/utils';
@@ -69,8 +71,10 @@ function FindClass() {
 
   const { category } = useParams<{ category: Category }>();
 
-  const [selectedCategory, setSelectedCategory] = useState<Category>(category ?? CATEGORY.ALL);
+  const [selectedCategory, setSelectedCategory] = useState<Category | undefined>(category);
   const [selectedFilter, setSelectedFilter] = useState<string>(FILTER_OPTIONS[0].value);
+
+  const { content } = useMeetingByCategory(category);
 
   const handleChangeCategory: ChangeEventHandler<HTMLSelectElement> = (e) => {
     setSelectedCategory(e.target.value as Category);
@@ -83,14 +87,15 @@ function FindClass() {
     setSelectedFilter(e.target.value);
   };
 
-  if (!category) {
-    return <Navigate to={pathGenerator(PAGES.FIND_CLASS, `/${CATEGORY.ALL}`)} replace />;
+  if (category && !ALL_CATEGORIES.includes(category)) {
+    return <Navigate to={pathGenerator(PAGES.FIND_CLASS)} replace />;
   }
 
   return (
     <StyledHomeCategory navigation>
       <Header hiddenBack>
         <StyledHeaderSelect value={selectedCategory} defaultValue={selectedCategory} onChange={handleChangeCategory}>
+          <option value=''>모두보기</option>
           {ALL_CATEGORIES.map((category) => (
             <option key={category} value={category}>
               {CATEGORY_STRINGS[category]}
@@ -109,9 +114,7 @@ function FindClass() {
           </StyledSelect>
         </Flex.Horizontal>
         <div className='class_list'>
-          {CLASS_LIST.concat(CLASS_LIST).map((classItem, index) => (
-            <ClassBox key={index} classItem={classItem} />
-          ))}
+          {content && content.length ? content?.map((meeting) => <ClassBox key={meeting.meetingId} meeting={meeting} />) : <ClassEmpty></ClassEmpty>}
         </div>
       </Flex.Vertical>
     </StyledHomeCategory>

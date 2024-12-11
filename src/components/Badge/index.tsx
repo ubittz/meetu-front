@@ -15,7 +15,7 @@ const StyledBadge = styled(Flex.Horizontal)<{ $theme: BadgeTheme }>`
   border: 1px solid ${({ $theme }) => ($theme === BADGE_THEME.PRIMARY ? COLORS.MAIN : COLORS.LINE_100)};
 
   border-radius: 4px;
-  padding: 4px 10px;
+  padding: 4px 8px;
 `;
 
 function Badge({ theme = BADGE_THEME.PRIMARY, children }: BadgeProps) {
