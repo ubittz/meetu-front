@@ -19,14 +19,14 @@ export function SecretIcon(props: DefaultIconProps) {
         <rect width='16' height='16' fill='#D9D9D9' />
       </mask>
       <g mask='url(#mask0_263_3478)'>
-        <path d='M13.3334 5.91162H2.66675V12.6995H13.3334V5.91162Z' stroke='#555555' stroke-linecap='round' stroke-linejoin='round' />
+        <path d='M13.3334 5.91162H2.66675V12.6995H13.3334V5.91162Z' stroke='#555555' strokeLinecap='round' strokeLinejoin='round' />
         <path
           d='M5.76978 5.83677V4.2303C5.76978 2.99879 6.76856 2 8.00008 2C9.23159 2 10.2304 2.99879 10.2304 4.2303V5.83677'
           stroke='#555555'
-          stroke-linecap='round'
-          stroke-linejoin='round'
+          strokeLinecap='round'
+          strokeLinejoin='round'
         />
-        <path d='M6 9.3335H10' stroke='#555555' stroke-linecap='round' stroke-linejoin='round' />
+        <path d='M6 9.3335H10' stroke='#555555' strokeLinecap='round' strokeLinejoin='round' />
       </g>
     </svg>
   );
