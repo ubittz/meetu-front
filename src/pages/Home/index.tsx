@@ -10,6 +10,7 @@ import CategoryList from '@@pages/Home/parts/CategoryList';
 import ClassBanner from '@@pages/Home/parts/ClassBanner';
 import CopyRight from '@@pages/Home/parts/CopyRight';
 import MainBanner from '@@pages/Home/parts/MainBanner';
+import MeetingByCategory from '@@pages/Home/parts/MeetingByCategory';
 import MoodBanner from '@@pages/Home/parts/MoodBanner';
 
 const StyledHome = styled(FullScreen)`
@@ -24,8 +25,6 @@ const StyledHome = styled(FullScreen)`
 `;
 
 function Home() {
-  const handleClickRecommendShowAll = () => {};
-
   const handleClickHotShowAll = () => {};
 
   return (
@@ -38,7 +37,7 @@ function Home() {
         <CategoryList />
         <MoodBanner />
         <Flex.Vertical gap={40}>
-          <ClassBoxList title='카테고리 별 추천 모임' classList={CLASS_LIST} onClickShowAll={handleClickRecommendShowAll} />
+          <MeetingByCategory />
           <ClassBoxList title='지금 핫한 모임' classList={CLASS_LIST} onClickShowAll={handleClickHotShowAll} />
         </Flex.Vertical>
         <ClassBanner />

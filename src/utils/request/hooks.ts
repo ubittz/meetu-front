@@ -5,14 +5,14 @@ import { useSearchParams } from 'react-router-dom';
 import useSWR from 'swr';
 
 import useSearch from '@@hooks/useSearch';
-import { SWRConfig, SWRListConfig, UbittzResponse, UseQueryParamsConfig } from '@@utils/request/types';
+import { SWRConfig, SWRListConfig, MeetuResponse, UseQueryParamsConfig } from '@@utils/request/types';
 
 // eslint-disable-next-line
 export const useSWRList = <D = any, Q extends Record<string, any> = Record<string, any>>(path: string, config?: SWRListConfig<D, Q>) => {
-  const prevResponse = useRef<UbittzResponse<D>>();
+  const prevResponse = useRef<MeetuResponse<D>>();
 
   const { query, config: swrConfig } = config ?? {};
-  const response = useSWR<UbittzResponse<D>>(`${path}?${qs.stringify(query)}`, swrConfig ?? {});
+  const response = useSWR<MeetuResponse<D>>(`${path}?${qs.stringify(query)}`, swrConfig ?? {});
 
   if (!response.data && !response.error) {
     return { ...response, data: prevResponse.current };
@@ -24,7 +24,7 @@ export const useSWRList = <D = any, Q extends Record<string, any> = Record<strin
 };
 
 export const useSWRDetail = <D>(path: string, config?: SWRConfig<D>) => {
-  const response = useSWR<UbittzResponse<D>>(path, config);
+  const response = useSWR<MeetuResponse<D>>(path, config);
   return response;
 };
 

@@ -2,8 +2,7 @@ import { AxiosError, AxiosResponse } from 'axios';
 import { SWRConfiguration } from 'swr';
 
 import { asType } from '@@types/common';
-
-import { ERROR_CODE } from './constants';
+import { ERROR_CODE } from '@@utils/request/constants';
 
 // eslint-disable-next-line
 export interface SWRListConfig<D, Q = Record<string, any>> {
@@ -11,13 +10,13 @@ export interface SWRListConfig<D, Q = Record<string, any>> {
   config?: SWRConfig<D>;
 }
 
-export type SWRConfig<D> = SWRConfiguration<UbittzResponse<D>>;
+export type SWRConfig<D> = SWRConfiguration<MeetuResponse<D>>;
 
-export interface UbittzResponse<Data> extends AxiosResponse<Data> {
+export interface MeetuResponse<Data> extends AxiosResponse<Data> {
   ok: boolean;
 }
 
-export interface UbittzErrorResponse extends AxiosError {
+export interface MeetuAxiosError extends AxiosError {
   ok: boolean;
 }
 
@@ -27,18 +26,21 @@ export interface PageQuery {
   take?: number;
 }
 
-export interface UbittzPageResponse<Data> {
-  meta: PageMetaResponse;
-  data: Data[];
-}
-
-export interface PageMetaResponse {
-  total: number;
-  page: number;
-  take: number;
-  lastPage: number;
-  hasPreviousPage: boolean;
-  hasNextPage: boolean;
+export interface MeetuPageResponse<Data> {
+  empty: boolean;
+  first: boolean;
+  last: boolean;
+  number: number; // 현재 페이지
+  numberOfElements: number; // 현재 페이지에 있는 데이터 개수
+  size: number; // Take 개수
+  sort: {
+    empty: boolean;
+    sorted: boolean;
+    unsorted: boolean;
+  };
+  totalElements: number; // 전체 데이터 개수
+  totalPages: number; // 전체 페이지 수
+  content: Data[];
 }
 
 export interface UseQueryParamsConfig<TQuery extends object> {

@@ -2,14 +2,14 @@ import axios, { AxiosError, AxiosRequestConfig, AxiosResponse, Method } from 'ax
 
 import { getAccessToken } from '@@utils/localStorage';
 import { API_ENDPOINT } from '@@utils/request/constants';
-import { UbittzErrorResponse, UbittzResponse } from '@@utils/request/types';
+import { MeetuAxiosError, MeetuResponse } from '@@utils/request/types';
 
 axios.defaults.baseURL = API_ENDPOINT;
 axios.defaults.headers.common['Content-Type'] = 'application/json';
 
 const responseInterceptor = (axiosRes: AxiosResponse) => {
   // eslint-disable-next-line
-  const response: UbittzResponse<any> = {
+  const response: MeetuResponse<any> = {
     ...axiosRes,
     ok: true,
   };
@@ -18,7 +18,7 @@ const responseInterceptor = (axiosRes: AxiosResponse) => {
 };
 
 const errorInterceptor = async (axiosError: AxiosError) => {
-  const error: UbittzErrorResponse = {
+  const error: MeetuAxiosError = {
     ...axiosError,
     ok: false,
   };
@@ -32,7 +32,7 @@ const generatorRequest = () => {
   const generator =
     (method: Method) =>
     // eslint-disable-next-line
-    async <Data = any>(path: string, config?: AxiosRequestConfig): Promise<UbittzResponse<Data>> => {
+    async <Data = any>(path: string, config?: AxiosRequestConfig): Promise<MeetuResponse<Data>> => {
       const accessToken = getAccessToken();
 
       const newConfig: AxiosRequestConfig = {

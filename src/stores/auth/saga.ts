@@ -35,11 +35,11 @@ import { LoginResponse, RegisterResponse, User, UserEditResponse, UserVerifyIden
 import { saveToken } from '@@utils/localStorage';
 import { authenticatedRequest } from '@@utils/request';
 import { ERROR_CODE_STRING } from '@@utils/request/constants';
-import { MeetuErrorResponse, UbittzResponse } from '@@utils/request/types';
+import { MeetuErrorResponse, MeetuResponse } from '@@utils/request/types';
 
 function* login({ payload }: ReturnType<typeof loginRequest>) {
   try {
-    const response: UbittzResponse<LoginResponse> = yield authenticatedRequest.post('/login', {
+    const response: MeetuResponse<LoginResponse> = yield authenticatedRequest.post('/login', {
       data: payload,
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
@@ -61,7 +61,7 @@ function* login({ payload }: ReturnType<typeof loginRequest>) {
 
 function* checkDuplicateId({ payload }: ReturnType<typeof checkDuplicateIdRequest>) {
   try {
-    const response: UbittzResponse<boolean> = yield authenticatedRequest.post('/api/user/check-id', {
+    const response: MeetuResponse<boolean> = yield authenticatedRequest.post('/api/user/check-id', {
       data: payload,
       headers: {
         'Content-Type': 'text/plain',
@@ -78,7 +78,7 @@ function* checkDuplicateId({ payload }: ReturnType<typeof checkDuplicateIdReques
 
 function* checkDuplicateEmail({ payload }: ReturnType<typeof checkDuplicateEmailRequest>) {
   try {
-    const response: UbittzResponse<boolean> = yield authenticatedRequest.post('/api/user/check-email', {
+    const response: MeetuResponse<boolean> = yield authenticatedRequest.post('/api/user/check-email', {
       data: payload,
       headers: {
         'Content-Type': 'text/plain',
@@ -95,7 +95,7 @@ function* checkDuplicateEmail({ payload }: ReturnType<typeof checkDuplicateEmail
 
 function* register({ payload }: ReturnType<typeof registerRequest>) {
   try {
-    const response: UbittzResponse<RegisterResponse> = yield authenticatedRequest.put('/api/user/register', {
+    const response: MeetuResponse<RegisterResponse> = yield authenticatedRequest.put('/api/user/register', {
       data: payload,
     });
 
@@ -109,7 +109,7 @@ function* register({ payload }: ReturnType<typeof registerRequest>) {
 
 function* userEdit({ payload }: ReturnType<typeof userEditRequest>) {
   try {
-    const response: UbittzResponse<UserEditResponse> = yield authenticatedRequest.patch('/api/user/edit', {
+    const response: MeetuResponse<UserEditResponse> = yield authenticatedRequest.patch('/api/user/edit', {
       data: payload,
     });
 
@@ -123,7 +123,7 @@ function* userEdit({ payload }: ReturnType<typeof userEditRequest>) {
 
 function* fetchMe() {
   try {
-    const response: UbittzResponse<User> = yield authenticatedRequest.post('/api/user/get-my-info');
+    const response: MeetuResponse<User> = yield authenticatedRequest.post('/api/user/get-my-info');
 
     const action = response.ok ? fetchMeSuccess(response.data) : fetchMeFailure('가입을 실패했습니다.');
 
@@ -135,7 +135,7 @@ function* fetchMe() {
 
 function* findId({ payload }: ReturnType<typeof findIdRequest>) {
   try {
-    const response: UbittzResponse<string> = yield authenticatedRequest.post('/api/user/find-id', {
+    const response: MeetuResponse<string> = yield authenticatedRequest.post('/api/user/find-id', {
       data: payload,
     });
 
@@ -149,7 +149,7 @@ function* findId({ payload }: ReturnType<typeof findIdRequest>) {
 
 function* verifyIdentity({ payload }: ReturnType<typeof verifyIdentityRequest>) {
   try {
-    const response: UbittzResponse<UserVerifyIdentityResponse> = yield authenticatedRequest.post('/api/user/verify-identity', {
+    const response: MeetuResponse<UserVerifyIdentityResponse> = yield authenticatedRequest.post('/api/user/verify-identity', {
       data: payload,
     });
 
@@ -164,7 +164,7 @@ function* verifyIdentity({ payload }: ReturnType<typeof verifyIdentityRequest>) 
 function* verifyOTP({ payload }: ReturnType<typeof verifyOTPRequest>) {
   try {
     const changeKey = select((state: AppState) => state.auth.changeKey);
-    const response: UbittzResponse<string> = yield authenticatedRequest.post('/api/user/verify-identity', {
+    const response: MeetuResponse<string> = yield authenticatedRequest.post('/api/user/verify-identity', {
       data: {
         ...payload,
         changeKey,

@@ -84,7 +84,7 @@ function FindClass() {
   };
 
   if (!category) {
-    return <Navigate to={pathGenerator(PAGES.FIND_CLASS, CATEGORY.ALL)} replace />;
+    return <Navigate to={pathGenerator(PAGES.FIND_CLASS, `/${CATEGORY.ALL}`)} replace />;
   }
 
   return (
