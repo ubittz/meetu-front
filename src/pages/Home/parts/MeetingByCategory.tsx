@@ -1,4 +1,4 @@
-import { ChangeEventHandler, useState } from 'react';
+import { ChangeEventHandler } from 'react';
 
 import styled from 'styled-components';
 
@@ -7,9 +7,9 @@ import Flex from '@@components/Flex';
 import Typography from '@@components/Typography';
 import { COLORS } from '@@constants/colors';
 import { ALL_CATEGORIES, CATEGORY_STRINGS } from '@@pages/Home/constants';
-import { useMeetingByCategory } from '@@pages/Home/hooks';
 import ClassEmpty from '@@pages/Home/parts/ClassEmpty';
 import { Category } from '@@pages/Home/types';
+import { Meeting } from '@@stores/meeting/types';
 
 const StyledClassBoxList = styled(Flex.Horizontal)`
   overflow-x: scroll;
@@ -26,15 +26,17 @@ const StyledSelect = styled.select`
   outline: none;
 `;
 
-function MeetingByCategory() {
-  const [selectedCategory, setSelectedCategory] = useState<Category>();
-
-  const { content } = useMeetingByCategory(selectedCategory);
-
-  console.log(content);
-
+function MeetingByCategory({
+  meetingList,
+  category,
+  setCategory,
+}: {
+  meetingList: Meeting[];
+  category?: Category;
+  setCategory: (category?: Category) => void;
+}) {
   const handleChangeCategory: ChangeEventHandler<HTMLSelectElement> = (e) => {
-    setSelectedCategory(e.target.value as Category);
+    setCategory((e.target.value as Category) || undefined);
   };
 
   return (
@@ -44,7 +46,7 @@ function MeetingByCategory() {
           카테고리 별 추천 모임
         </Typography.Main>
         <Flex.Horizontal alignItems='center'>
-          <StyledSelect value={selectedCategory} onChange={handleChangeCategory}>
+          <StyledSelect value={category} onChange={handleChangeCategory}>
             <option value=''>모두보기</option>
             {ALL_CATEGORIES.map((category) => (
               <option key={category} value={category}>
@@ -55,8 +57,8 @@ function MeetingByCategory() {
         </Flex.Horizontal>
       </Flex.Horizontal>
       <StyledClassBoxList gap={10}>
-        {content && content.length ? (
-          content.map((classItem) => <ClassBox key={classItem.meetingId} className='tw-w-[126px]' meeting={classItem} />)
+        {meetingList.length ? (
+          meetingList.map((meeting) => <ClassBox key={meeting.meetingId} className='tw-w-[126px]' meeting={meeting} />)
         ) : (
           <ClassEmpty />
         )}

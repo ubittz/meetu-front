@@ -21,9 +21,9 @@ export interface MeetuAxiosError extends AxiosError {
 }
 
 export interface PageQuery {
-  // 1부터 시작.
+  // 0부터 시작.
   page: number;
-  take?: number;
+  size?: number;
 }
 
 export interface MeetuPageResponse<Data> {

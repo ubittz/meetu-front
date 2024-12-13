@@ -9,7 +9,7 @@ import FullScreen from '@@components/FullScreen';
 import Header from '@@components/Header';
 import { COLORS } from '@@constants/colors';
 import { ALL_CATEGORIES, CATEGORY_STRINGS } from '@@pages/Home/constants';
-import { useMeetingByCategory } from '@@pages/Home/hooks';
+import { useMeetingListByFilter } from '@@pages/Home/hooks';
 import ClassEmpty from '@@pages/Home/parts/ClassEmpty';
 import { Category } from '@@pages/Home/types';
 import { PAGES } from '@@router/constants';
@@ -74,7 +74,7 @@ function FindClass() {
   const [selectedCategory, setSelectedCategory] = useState<Category | undefined>(category);
   const [selectedFilter, setSelectedFilter] = useState<string>(FILTER_OPTIONS[0].value);
 
-  const { content } = useMeetingByCategory(category);
+  const { content } = useMeetingListByFilter({ page: 0, category });
 
   const handleChangeCategory: ChangeEventHandler<HTMLSelectElement> = (e) => {
     setSelectedCategory(e.target.value as Category);

@@ -15,7 +15,7 @@ const StyledClassBoxList = styled(Flex.Horizontal)`
   }
 `;
 
-function ClassBoxList({ title, classList, onClickShowAll, ...props }: ClassBoxListProps) {
+function ClassBoxList({ title, meetingList, onClickShowAll, ...props }: ClassBoxListProps) {
   return (
     <Flex.Vertical {...props} gap={20}>
       <Flex.Horizontal className='tw-px-[20px]' alignItems='center' justifyContent='space-between'>
@@ -30,8 +30,8 @@ function ClassBoxList({ title, classList, onClickShowAll, ...props }: ClassBoxLi
         )}
       </Flex.Horizontal>
       <StyledClassBoxList gap={10}>
-        {classList.map((classItem) => (
-          <ClassBox key={classItem.title} className='tw-w-[126px]' classItem={classItem} />
+        {meetingList.map((meeting) => (
+          <ClassBox key={meeting.meetingId} className='tw-w-[126px]' meeting={meeting} />
         ))}
       </StyledClassBoxList>
     </Flex.Vertical>

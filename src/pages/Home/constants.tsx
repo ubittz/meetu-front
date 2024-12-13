@@ -57,6 +57,12 @@ export const CATEGORY_ICONS = {
   [CATEGORY.WIN]: <WineCategoryIcon />,
 } as const;
 
+export const MEETING_ORDER_TYPE = {
+  LATEST: 'LATEST',
+  PRICE: 'PRICE',
+  REQUEST_COUNT: 'REQUEST_COUNT',
+} as const;
+
 export const CLASS_LIST = [
   {
     id: 1,
