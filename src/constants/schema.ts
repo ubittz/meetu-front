@@ -55,3 +55,8 @@ export const verifyIdentitySchema = object({
 export const verifyOTPSchema = object({
   otp: string().required('인증번호를 입력해주세요.'),
 });
+
+export const createContactSchema = object({
+  meetingId: string().required(),
+  description: string().required(),
+});

@@ -5,7 +5,7 @@ import { CheckBoxProps } from '@@components/CheckBox/types';
 import Flex from '@@components/Flex';
 import { COLORS } from '@@constants/colors';
 
-const StyledCheckBox = styled.label`
+const StyledCheckBox = styled.label<{ $size: number }>`
   display: flex;
   align-items: center;
   gap: 8px;
@@ -14,8 +14,8 @@ const StyledCheckBox = styled.label`
     flex: 0 0 auto;
     position: relative;
 
-    width: 20px;
-    height: 20px;
+    width: ${({ $size }) => $size}px;
+    height: ${({ $size }) => $size}px;
 
     background: ${COLORS.LINE_100};
     border-radius: 4px;
@@ -26,9 +26,9 @@ const StyledCheckBox = styled.label`
   }
 `;
 
-function CheckBox({ children, ...props }: CheckBoxProps) {
+function CheckBox({ children, size = 20, ...props }: CheckBoxProps) {
   return (
-    <StyledCheckBox>
+    <StyledCheckBox $size={size}>
       <input type='checkbox' hidden {...props} />
       <Flex.Horizontal className='checkbox__icon' alignItems='center' justifyContent='center'>
         <CheckIcon />

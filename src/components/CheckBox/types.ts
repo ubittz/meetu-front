@@ -1,3 +1,5 @@
 import { InputHTMLAttributes, PropsWithChildren } from 'react';
 
-export type CheckBoxProps = PropsWithChildren<InputHTMLAttributes<HTMLInputElement>>;
+export type CheckBoxProps = PropsWithChildren<InputHTMLAttributes<HTMLInputElement>> & {
+  size?: number;
+};

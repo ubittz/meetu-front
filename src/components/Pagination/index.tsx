@@ -39,12 +39,18 @@ const StyledPagination = styled(Flex.Horizontal)`
   }
 `;
 
-function Pagination({ current, lastPage, pageKey = 'page', ...props }: { current: number; lastPage: number; pageKey?: string } & FlexProps) {
+function Pagination({
+  current,
+  lastPage,
+  pageKey = 'page',
+  replace = false,
+  ...props
+}: { current: number; lastPage: number; pageKey?: string; replace?: boolean } & FlexProps) {
   const [searchParams, setSearchParams] = useSearchParams();
 
   const handleChange = (value: number) => {
     searchParams.set(pageKey, String(value - 1));
-    setSearchParams(searchParams);
+    setSearchParams(searchParams, { replace: replace });
   };
 
   return (
@@ -61,15 +67,5 @@ function Pagination({ current, lastPage, pageKey = 'page', ...props }: { current
     </StyledPagination>
   );
 }
-//   {Array.from({ length: Math.min(length, 5) }).map((_, index) => (
-//     <Flex.Horizontal
-//       key={index}
-//       className={`pagination__item ${index + 1 === currentPage && 'selected'}`}
-//       alignItems='center'
-//       justifyContent='center'
-//     >
-//       {index + 1}
-//     </Flex.Horizontal>
-//   ))}
 
 export default Pagination;

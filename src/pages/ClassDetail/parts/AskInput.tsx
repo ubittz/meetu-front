@@ -1,10 +1,15 @@
-import { FormEventHandler, InputHTMLAttributes } from 'react';
-
+import { Field, FieldProps, Form, useFormikContext } from 'formik';
 import styled from 'styled-components';
 
+import CheckBox from '@@components/CheckBox';
+import Flex from '@@components/Flex';
+import Typography from '@@components/Typography';
 import { COLORS } from '@@constants/colors';
+import { useActionSubscribe } from '@@store/middlewares/actionMiddleware';
+import { createContactSuccess } from '@@stores/meeting/reducer';
+import { ContactAddDTO } from '@@stores/meeting/types';
 
-const StyledAskInput = styled.form`
+const StyledAskInput = styled(Form)`
   display: flex;
   align-items: center;
   gap: 2px;
@@ -39,17 +44,39 @@ const StyledAskInput = styled.form`
   }
 `;
 
-function AskInput({ onSubmit, ...props }: { onSubmit?: FormEventHandler<HTMLFormElement> } & InputHTMLAttributes<HTMLInputElement>) {
-  const handleSubmit: FormEventHandler<HTMLFormElement> = (e) => {
-    e.preventDefault();
-    onSubmit?.(e);
-  };
+function AskInput({ setSuccessVisible }: { setSuccessVisible: (visible: boolean) => void }) {
+  const { handleSubmit, getFieldProps, isValid, resetForm } = useFormikContext<ContactAddDTO>();
+
+  useActionSubscribe({
+    type: createContactSuccess.type,
+    callback: () => {
+      resetForm();
+      setSuccessVisible(true);
+    },
+  });
 
   return (
-    <StyledAskInput onSubmit={handleSubmit}>
-      <input {...props} />
-      <button>입력</button>
-    </StyledAskInput>
+    <Flex.Vertical gap={12}>
+      <StyledAskInput onSubmit={handleSubmit}>
+        <input {...getFieldProps('description')} placeholder='문의글을 작성해보세요!' />
+        <button type='submit' disabled={!isValid}>
+          입력
+        </button>
+      </StyledAskInput>
+      <Flex.Horizontal>
+        <Field
+          type='checkbox'
+          name='secretStatus'
+          as={(props: FieldProps['field']) => (
+            <CheckBox {...props} size={18}>
+              <Typography.Sub as='span' fontSize='14px'>
+                비밀글
+              </Typography.Sub>
+            </CheckBox>
+          )}
+        />
+      </Flex.Horizontal>
+    </Flex.Vertical>
   );
 }
 

@@ -49,8 +49,8 @@ export const useQueryParams = <TQuery extends object>(initialQuery: TQuery, { in
 
   useEffect(() => {
     if (initialSearch?.(query)) {
-      const queryString = qs.stringify(initialQuery);
-      setSearchParams(queryString);
+      const queryString = qs.stringify({ ...query, ...initialQuery });
+      setSearchParams(queryString, { replace: true });
     }
   }, [query, initialSearch, setSearchParams, initialQuery]);
 

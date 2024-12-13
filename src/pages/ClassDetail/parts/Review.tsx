@@ -9,7 +9,7 @@ import { TAB_LIST } from '@@pages/ClassDetail/constants';
 import { StartIcon } from '@@pages/ClassDetail/icons';
 import ReviewCard from '@@pages/ClassDetail/parts/ReviewCrad';
 import ClassEmpty from '@@pages/Home/parts/ClassEmpty';
-import { useReviewList } from '@@stores/meeting/hooks';
+import { useMeetingDetail, useReviewList } from '@@stores/meeting/hooks';
 import { useQueryParams } from '@@utils/request/hooks';
 
 const StyledReview = styled(Flex.Vertical)`
@@ -19,6 +19,10 @@ const StyledReview = styled(Flex.Vertical)`
 `;
 
 function Review({ onChangeTab }: { onChangeTab: (index: number) => void }) {
+  const { id } = useParams();
+
+  const { data } = useMeetingDetail(id ?? '');
+
   const {
     query: { reviewPage },
   } = useQueryParams(
@@ -27,14 +31,11 @@ function Review({ onChangeTab }: { onChangeTab: (index: number) => void }) {
       initialSearch: ({ reviewPage }) => reviewPage === undefined,
     }
   );
-  const { id } = useParams();
 
   const { content, page } = useReviewList({
     id: id ?? '',
     page: reviewPage,
   });
-
-  const AVERAGE_SCORE = 4;
 
   return (
     <StyledReview>
@@ -46,7 +47,7 @@ function Review({ onChangeTab }: { onChangeTab: (index: number) => void }) {
           </Typography.Sub>
           <Flex.Horizontal gap={2}>
             {Array.from({ length: 5 }).map((_, index) => (
-              <StartIcon key={index} width={12} height={12} fill={index <= AVERAGE_SCORE - 1} />
+              <StartIcon key={index} width={12} height={12} fill={index <= Math.round(data?.avgScore ?? 0) - 1} />
             ))}
           </Flex.Horizontal>
         </Flex.Horizontal>
@@ -58,7 +59,7 @@ function Review({ onChangeTab }: { onChangeTab: (index: number) => void }) {
               <ClassEmpty>리뷰를 남겨보세요.</ClassEmpty>
             )}
           </Flex.Vertical>
-          <Pagination current={page.current} lastPage={page.lastPage} pageKey='reviewPage' />
+          <Pagination current={page.current} lastPage={page.lastPage} pageKey='reviewPage' replace />
         </Flex.Vertical>
       </Flex.Vertical>
     </StyledReview>

@@ -1,4 +1,4 @@
-import { Meeting, MeetingSingleResponse, ReviewListQuery, ReviewListResponse } from '@@stores/meeting/types';
+import { ContactListQuery, ContactResponse, Meeting, MeetingSingleResponse, ReviewListQuery, ReviewListResponse } from '@@stores/meeting/types';
 import { useSWRDetail, useSWRList } from '@@utils/request/hooks';
 import { MeetuPageResponse } from '@@utils/request/types';
 import { formatSWRListResponse } from '@@utils/request/utils';
@@ -20,6 +20,14 @@ export const useMeetingMyList = () => {
 
 export const useReviewList = (query: ReviewListQuery) => {
   const data = useSWRList<MeetuPageResponse<ReviewListResponse>>('/api/meeting/review/list', {
+    query,
+  });
+
+  return formatSWRListResponse(data);
+};
+
+export const useContactList = (query: ContactListQuery) => {
+  const data = useSWRList<MeetuPageResponse<ContactResponse>>('/api/meeting/contact/list', {
     query,
   });
 

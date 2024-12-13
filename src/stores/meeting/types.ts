@@ -33,6 +33,7 @@ export interface MeetingSingleResponse {
   processGuide: string;
   item: string;
   guestCount: number;
+  avgScore: number;
 }
 
 export interface ReviewListResponse {
@@ -43,7 +44,27 @@ export interface ReviewListResponse {
   createDatetime: Date;
 }
 
+export interface ContactResponse {
+  no: number;
+  userId: string;
+  descript: string;
+  secretStatus: boolean;
+  answerStatus: boolean;
+  createDatetime: Date;
+}
+
 export interface ReviewListQuery {
   page: number;
   id: string;
+}
+export interface ContactListQuery {
+  page: number;
+  id: string;
+}
+
+export interface ContactAddDTO {
+  meetingId: string;
+  description: string;
+  secretStatus: boolean;
+  contactAnswerStatus: boolean;
 }

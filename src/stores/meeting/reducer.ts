@@ -1,6 +1,6 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createAction, createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { Meeting, MeetingState } from '@@stores/meeting/types';
+import { ContactAddDTO, Meeting, MeetingState } from '@@stores/meeting/types';
 import { getRecentMeeting, saveRecentMeeting } from '@@utils/localStorage';
 
 const PREFIX = 'meeting';
@@ -10,6 +10,10 @@ const recentList = getRecentMeeting();
 const initialState: MeetingState = {
   recentList: recentList,
 };
+
+export const createContactRequest = createAction<ContactAddDTO>(`${PREFIX}/createContactRequest`);
+export const createContactSuccess = createAction(`${PREFIX}/createContactSuccess`);
+export const createContactFailure = createAction<string>(`${PREFIX}/createContactFailure`);
 
 const meetingSlice = createSlice({
   name: PREFIX,
