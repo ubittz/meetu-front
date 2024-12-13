@@ -6,10 +6,12 @@ import { Link, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 import Flex from '@@components/Flex';
+import FullLoading from '@@components/FullLoading';
 import Modal from '@@components/Modal';
 import { useModal } from '@@components/Modal/hooks';
 import Typography from '@@components/Typography';
 import { COLORS } from '@@constants/colors';
+import { useRequestFlag } from '@@hooks/useRequestFlag';
 import { AppleLogoIcon, GoogleLogoIcon, KakaoLogoIcon, MainLogoIcon, NaverLogoIcon } from '@@pages/Login/icons';
 import RegisterTermsBottomModal from '@@pages/Login/parts/\bRegisterTermsBottomModal';
 import LoginFormContent from '@@pages/Login/parts/LoginFormContent';
@@ -57,6 +59,8 @@ const initialValues: LoginForm = {
 function Login() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const isLoading = useRequestFlag(loginRequest.type);
   const [bottomModalVisible, setBottomModalVisible] = useState(false);
   const { visible, content, setVisible, setContent } = useModal();
 
@@ -89,6 +93,7 @@ function Login() {
 
   return (
     <StyledLogin>
+      <FullLoading visible={isLoading} />
       <Modal visible={visible} setVisible={setVisible} onConfirm={handleConfirm}>
         {content}
       </Modal>
