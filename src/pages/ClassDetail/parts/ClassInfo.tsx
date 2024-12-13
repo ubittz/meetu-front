@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react';
 
-import { useNavigate } from 'react-router-dom';
+import { format } from 'date-fns';
+import { useNavigate, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 
 import Badge from '@@components/Badge';
@@ -9,8 +10,10 @@ import Button from '@@components/Button';
 import Flex from '@@components/Flex';
 import Typography from '@@components/Typography';
 import { COLORS } from '@@constants/colors';
+import { CATEGORY_STRINGS } from '@@pages/Home/constants';
 import { PAGES } from '@@router/constants';
 import { pathGenerator } from '@@router/utils';
+import { useMeetingDetail } from '@@stores/meeting/hooks';
 
 const StyledClassInfo = styled(Flex.Vertical)`
   padding: 24px 20px 30px;
@@ -31,8 +34,11 @@ const StyledClassInfo = styled(Flex.Vertical)`
 
 function ClassInfo({ setPaddingTop }: { setPaddingTop: (paddingTop: number) => void }) {
   const navigate = useNavigate();
+  const { id } = useParams();
 
   const ref = useRef<HTMLDivElement>(null);
+
+  const { data } = useMeetingDetail(id ?? '');
 
   const handleClickShowHost = () => {
     navigate(pathGenerator(PAGES.PROFILE, '/1'));
@@ -54,10 +60,10 @@ function ClassInfo({ setPaddingTop }: { setPaddingTop: (paddingTop: number) => v
         </Flex.Horizontal>
         <Flex.Vertical gap={8}>
           <Typography.Main fontSize='20px' fontWeight={700}>
-            미식가들의 쿠킹 클래스
+            {data?.name}
           </Typography.Main>
           <Typography.Sub fontSize='16px' fontWeight={700}>
-            김탁구
+            {data?.hostName}
           </Typography.Sub>
         </Flex.Vertical>
       </Flex.Vertical>
@@ -67,34 +73,32 @@ function ClassInfo({ setPaddingTop }: { setPaddingTop: (paddingTop: number) => v
           <Typography.Third fontSize='14px' fontWeight={700}>
             주소
           </Typography.Third>
-          <Typography.Main fontSize='14px'>서울특별시 강남구 도산대로 17-8</Typography.Main>
+          <Typography.Main fontSize='14px'>{data?.address}</Typography.Main>
         </Flex.Horizontal>
         <Flex.Horizontal className='class_detail__top_content'>
           <Typography.Third fontSize='14px' fontWeight={700}>
             진행일
           </Typography.Third>
-          <Typography.Main fontSize='14px'>2024년 12월 26일</Typography.Main>
+          <Typography.Main fontSize='14px'>{data?.processDate && format(data.processDate, 'yyyy년 MM월 dd일')}</Typography.Main>
         </Flex.Horizontal>
         <Flex.Horizontal className='class_detail__top_content'>
           <Typography.Third fontSize='14px' fontWeight={700}>
             모임설명
           </Typography.Third>
-          <Typography.Main fontSize='14px'>
-            새로운 요리 기술을 배우고, 맛있는 음식을 함께 만들고 나누는 시간. 미식가들의 만남을 통해 새로운 레시피도 얻어가세요.
-          </Typography.Main>
+          <Typography.Main fontSize='14px'>{data?.descript}</Typography.Main>
         </Flex.Horizontal>
         <Flex.Horizontal className='class_detail__top_content'>
           <Typography.Third fontSize='14px' fontWeight={700}>
             카테고리
           </Typography.Third>
-          <Typography.Main fontSize='14px'>#쿠킹</Typography.Main>
+          <Typography.Main fontSize='14px'>{data?.category && CATEGORY_STRINGS[data.category]}</Typography.Main>
         </Flex.Horizontal>
         <Flex.Horizontal className='class_detail__top_content'>
           <Typography.Third fontSize='14px' fontWeight={700}>
             가격
           </Typography.Third>
           <Typography.Point fontSize='14px' fontWeight={700}>
-            50,000원
+            {(data?.cost ?? 0).toLocaleString()}원
           </Typography.Point>
         </Flex.Horizontal>
       </Flex.Vertical>

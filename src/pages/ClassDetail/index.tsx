@@ -1,11 +1,12 @@
 import { UIEventHandler, useRef, useState } from 'react';
 
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 
 import Button from '@@components/Button';
 import Flex from '@@components/Flex';
 import FooterContainer from '@@components/FooterContainer';
+import FullLoading from '@@components/FullLoading';
 import Header from '@@components/Header';
 import { HeaderProps } from '@@components/Header/types';
 import Ask from '@@pages/ClassDetail/parts/Ask';
@@ -14,6 +15,7 @@ import DetailInfo from '@@pages/ClassDetail/parts/DetailInfo';
 import EnrollBottomModal from '@@pages/ClassDetail/parts/EnrollBottomModal';
 import Review from '@@pages/ClassDetail/parts/Review';
 import Background from '@@pages/Home/images/class_4.jpeg';
+import { useMeetingDetail } from '@@stores/meeting/hooks';
 
 const StyledClassDetail = styled(Flex.Vertical)<{ $scrollPadding: number }>`
   height: 100vh;
@@ -43,6 +45,9 @@ const StyledClassDetail = styled(Flex.Vertical)<{ $scrollPadding: number }>`
 
 function ClassDetail() {
   const navigate = useNavigate();
+  const { id } = useParams();
+
+  const { isLoading } = useMeetingDetail(id ?? '');
 
   const [paddingTop, setPaddingTop] = useState<number>(0);
   const [headerTheme, setHeaderTheme] = useState<HeaderProps['theme']>('transparent');
@@ -71,6 +76,7 @@ function ClassDetail() {
 
   return (
     <StyledClassDetail $scrollPadding={paddingTop}>
+      <FullLoading visible={isLoading} />
       <Header theme={headerTheme} onBack={handleBack} />
       <Flex.Vertical ref={scrollWrapRef} className='scroll_wrap' onScroll={handleScroll}>
         <EnrollBottomModal visible={visible} setVisible={setVisible} />

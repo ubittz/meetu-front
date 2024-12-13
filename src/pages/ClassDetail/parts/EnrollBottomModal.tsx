@@ -1,5 +1,6 @@
 import { ChangeEventHandler, useState } from 'react';
 
+import { format } from 'date-fns';
 import { useNavigate, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -14,6 +15,7 @@ import { COLORS } from '@@constants/colors';
 import Image from '@@pages/Home/images/class_4.jpeg';
 import { PAGES } from '@@router/constants';
 import { pathGenerator } from '@@router/utils';
+import { useMeetingDetail } from '@@stores/meeting/hooks';
 
 const StyledEnrollBottomModalBody = styled(Flex.Vertical)`
   padding-top: 20px;
@@ -49,6 +51,8 @@ function EnrollBottomModal(props: Omit<BottomModalProps, 'title'>) {
 
   const { id } = useParams();
 
+  const { data } = useMeetingDetail(id ?? '');
+
   const [agree, setAgree] = useState(false);
 
   const handleClickEnroll = () => {
@@ -69,9 +73,9 @@ function EnrollBottomModal(props: Omit<BottomModalProps, 'title'>) {
             </div>
             <Flex.Vertical gap={8}>
               <Typography.Main fontSize='20px' fontWeight={700}>
-                미식가들의 쿠킹 클래스
+                {data?.intro}
               </Typography.Main>
-              <Typography.Sub fontWeight={700}>김탁구</Typography.Sub>
+              <Typography.Sub fontWeight={700}>{data?.hostName}</Typography.Sub>
             </Flex.Vertical>
           </Flex.Horizontal>
           <Flex.Vertical gap={12}>
@@ -79,20 +83,20 @@ function EnrollBottomModal(props: Omit<BottomModalProps, 'title'>) {
               <Typography.Third fontSize='14px' fontWeight={700}>
                 주소
               </Typography.Third>
-              <Typography.Main fontSize='14px'>서울특별시 강남구 도산대로 17-8</Typography.Main>
+              <Typography.Main fontSize='14px'>{data?.address}</Typography.Main>
             </Flex.Horizontal>
             <Flex.Horizontal className='enroll__info_content' gap={12}>
               <Typography.Third fontSize='14px' fontWeight={700}>
                 진행일
               </Typography.Third>
-              <Typography.Main fontSize='14px'>2024년 12월 26일</Typography.Main>
+              <Typography.Main fontSize='14px'>{data?.processDate && format(data.processDate, 'yyyy년 MM월 dd일')}</Typography.Main>
             </Flex.Horizontal>
             <Flex.Horizontal className='enroll__info_content' gap={12}>
               <Typography.Third fontSize='14px' fontWeight={700}>
                 가격
               </Typography.Third>
               <Typography.Point fontSize='14px' fontWeight={700}>
-                50,000원
+                {(data?.cost ?? 0).toLocaleString()}원
               </Typography.Point>
             </Flex.Horizontal>
           </Flex.Vertical>

@@ -1,5 +1,6 @@
 import { PropsWithChildren } from 'react';
 
+import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 
 import Flex from '@@components/Flex';
@@ -8,6 +9,7 @@ import Typography from '@@components/Typography';
 import { COLORS } from '@@constants/colors';
 import { TAB_LIST } from '@@pages/ClassDetail/constants';
 import DetailImage from '@@pages/ClassDetail/images/detail.png';
+import { useMeetingDetail } from '@@stores/meeting/hooks';
 
 const StyledDetailInfo = styled(Flex.Vertical)`
   .detail_info__contents {
@@ -25,6 +27,10 @@ function TitleTypography(props: PropsWithChildren) {
 }
 
 function DetailInfo({ onChangeTab }: { onChangeTab: (index: number) => void }) {
+  const { id } = useParams();
+
+  const { data } = useMeetingDetail(id ?? '');
+
   return (
     <StyledDetailInfo>
       <TabHeader itemList={TAB_LIST} selectedIndex={0} onChange={onChangeTab} />
@@ -35,59 +41,19 @@ function DetailInfo({ onChangeTab }: { onChangeTab: (index: number) => void }) {
         </Flex.Vertical>
         <div className='divider' />
         <Flex.Vertical gap={12}>
-          <TitleTypography>상세정보</TitleTypography>
+          <TitleTypography>진행정보</TitleTypography>
           <Typography.Sub fontSize='14px'>
-            텍스트로 작성된 데이터가 노출됩니다.
-            <br />
-            텍스트로 작성된 데이터가 노출됩니다.
-            <br />
-            텍스트로 작성된 데이터가 노출됩니다.
-            <br />
-            텍스트로 작성된 데이터가 노출됩니다.
-            <br />
-            텍스트로 작성된 데이터가 노출됩니다.
-            <br />
-            텍스트로 작성된 데이터가 노출됩니다.
-            <br />
-            텍스트로 작성된 데이터가 노출됩니다.
-            <br />
-            텍스트로 작성된 데이터가 노출됩니다.
-            <br />
-            텍스트로 작성된 데이터가 노출됩니다.
-            <br />
-            텍스트로 작성된 데이터가 노출됩니다.
-            <br />
-            텍스트로 작성된 데이터가 노출됩니다.
-            <br />
+            {data?.processGuide.split('\n').map((line, index) => (
+              <Typography.Sub key={index} fontSize='inherit'>
+                {line}
+              </Typography.Sub>
+            ))}
           </Typography.Sub>
         </Flex.Vertical>
         <div className='divider' />
         <Flex.Vertical gap={12}>
           <TitleTypography>제공 / 준비물</TitleTypography>
-          <Typography.Sub fontSize='14px'>
-            텍스트로 작성된 데이터가 노출됩니다.
-            <br />
-            텍스트로 작성된 데이터가 노출됩니다.
-            <br />
-            텍스트로 작성된 데이터가 노출됩니다.
-            <br />
-            텍스트로 작성된 데이터가 노출됩니다.
-            <br />
-            텍스트로 작성된 데이터가 노출됩니다.
-            <br />
-            텍스트로 작성된 데이터가 노출됩니다.
-            <br />
-            텍스트로 작성된 데이터가 노출됩니다.
-            <br />
-            텍스트로 작성된 데이터가 노출됩니다.
-            <br />
-            텍스트로 작성된 데이터가 노출됩니다.
-            <br />
-            텍스트로 작성된 데이터가 노출됩니다.
-            <br />
-            텍스트로 작성된 데이터가 노출됩니다.
-            <br />
-          </Typography.Sub>
+          <Typography.Sub fontSize='14px'>{data?.item}</Typography.Sub>
         </Flex.Vertical>
       </Flex.Vertical>
     </StyledDetailInfo>
