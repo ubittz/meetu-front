@@ -4,6 +4,7 @@ import ClassBox from '@@components/ClassBox';
 import Flex from '@@components/Flex';
 import Typography from '@@components/Typography';
 import { RightArrowIcon } from '@@pages/Home/icons';
+import ClassEmpty from '@@pages/Home/parts/ClassEmpty';
 import { ClassBoxListProps } from '@@pages/Home/types';
 
 const StyledClassBoxList = styled(Flex.Horizontal)`
@@ -15,7 +16,7 @@ const StyledClassBoxList = styled(Flex.Horizontal)`
   }
 `;
 
-function ClassBoxList({ title, meetingList, onClickShowAll, ...props }: ClassBoxListProps) {
+function ClassBoxList({ title, meetingList, emptyContent, onClickShowAll, ...props }: ClassBoxListProps) {
   return (
     <Flex.Vertical {...props} gap={20}>
       <Flex.Horizontal className='tw-px-[20px]' alignItems='center' justifyContent='space-between'>
@@ -30,9 +31,11 @@ function ClassBoxList({ title, meetingList, onClickShowAll, ...props }: ClassBox
         )}
       </Flex.Horizontal>
       <StyledClassBoxList gap={10}>
-        {meetingList.map((meeting) => (
-          <ClassBox key={meeting.meetingId} className='tw-w-[126px]' meeting={meeting} />
-        ))}
+        {meetingList.length ? (
+          meetingList.map((meeting) => <ClassBox key={meeting.meetingId} className='tw-w-[126px]' meeting={meeting} />)
+        ) : (
+          <ClassEmpty>{emptyContent}</ClassEmpty>
+        )}
       </StyledClassBoxList>
     </Flex.Vertical>
   );

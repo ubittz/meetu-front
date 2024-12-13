@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { Route, Routes } from 'react-router-dom';
 
+import FullLoading from '@@components/FullLoading';
 import ClassDetail from '@@pages/ClassDetail';
 import FindClass from '@@pages/FindClass';
 import Home from '@@pages/Home';
@@ -29,6 +30,10 @@ function AuthRouter() {
       dispatch(fetchMeRequest());
     }
   }, [me, token, dispatch]);
+
+  if (!me) {
+    return <FullLoading visible />;
+  }
 
   return (
     <Routes>

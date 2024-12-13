@@ -10,6 +10,7 @@ const StyledFullLoading = styled(Flex.Vertical)`
   width: 100%;
   height: 100%;
   background: rgba(0, 0, 0, 0.8);
+  z-index: 9999;
 
   .full_loading__indicator {
     width: 40px;

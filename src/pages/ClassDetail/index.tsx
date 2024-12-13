@@ -1,5 +1,6 @@
-import { UIEventHandler, useRef, useState } from 'react';
+import { UIEventHandler, useEffect, useRef, useState } from 'react';
 
+import { useDispatch } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -16,6 +17,8 @@ import EnrollBottomModal from '@@pages/ClassDetail/parts/EnrollBottomModal';
 import Review from '@@pages/ClassDetail/parts/Review';
 import Background from '@@pages/Home/images/class_4.jpeg';
 import { useMeetingDetail } from '@@stores/meeting/hooks';
+import { appendRecentMeeting } from '@@stores/meeting/reducer';
+import { singleResponseToMeeting } from '@@stores/meeting/utils';
 
 const StyledClassDetail = styled(Flex.Vertical)<{ $scrollPadding: number }>`
   height: 100vh;
@@ -44,10 +47,11 @@ const StyledClassDetail = styled(Flex.Vertical)<{ $scrollPadding: number }>`
 `;
 
 function ClassDetail() {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const { id } = useParams();
 
-  const { isLoading } = useMeetingDetail(id ?? '');
+  const { data, isLoading } = useMeetingDetail(id ?? '');
 
   const [paddingTop, setPaddingTop] = useState<number>(0);
   const [headerTheme, setHeaderTheme] = useState<HeaderProps['theme']>('transparent');
@@ -73,6 +77,12 @@ function ClassDetail() {
   const handleClickEnroll = () => {
     setVisible(true);
   };
+
+  useEffect(() => {
+    if (data?.id) {
+      dispatch(appendRecentMeeting(singleResponseToMeeting(data)));
+    }
+  }, [data, dispatch]);
 
   return (
     <StyledClassDetail $scrollPadding={paddingTop}>

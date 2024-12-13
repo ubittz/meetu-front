@@ -1,5 +1,9 @@
 import { Category } from '@@pages/Home/types';
 
+export interface MeetingState {
+  recentList: Meeting[];
+}
+
 export interface Meeting {
   meetingId: string;
   meetingName: string;
@@ -16,6 +20,7 @@ export interface Meeting {
 }
 
 export interface MeetingSingleResponse {
+  id: string;
   name: string;
   hostName: string;
   address: string;

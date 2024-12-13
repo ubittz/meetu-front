@@ -3,7 +3,8 @@ import styled from 'styled-components';
 import ClassBoxList from '@@components/ClassBoxList';
 import Flex from '@@components/Flex';
 import { COLORS } from '@@constants/colors';
-import { CLASS_LIST } from '@@pages/Home/constants';
+import { useAppState } from '@@store/hooks';
+import { useMeetingMyList } from '@@stores/meeting/hooks';
 
 const StyledClassInfo = styled(Flex.Vertical)`
   padding: 30px 0;
@@ -11,18 +12,16 @@ const StyledClassInfo = styled(Flex.Vertical)`
 `;
 
 function ClassInfo() {
-  const handleClickMyClass = () => {};
+  const { recentList } = useAppState((state) => state.meeting);
 
-  const handleClickRecentClass = () => {};
+  const { content: myContent } = useMeetingMyList();
+
+  const handleClickMyClass = () => {};
 
   return (
     <StyledClassInfo gap={40}>
-      <ClassBoxList
-        title='카테고리 별 추천 모임'
-        classList={CLASS_LIST.map((classItem) => ({ ...classItem, badgeList: undefined }))}
-        onClickShowAll={handleClickMyClass}
-      />
-      <ClassBoxList title='최근 본 모임' classList={CLASS_LIST} onClickShowAll={handleClickRecentClass} />
+      <ClassBoxList title='내 모임' meetingList={myContent ?? []} onClickShowAll={handleClickMyClass} emptyContent='모임에 참여해보세요.' />
+      <ClassBoxList title='최근 본 모임' meetingList={recentList} />
     </StyledClassInfo>
   );
 }

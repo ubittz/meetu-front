@@ -34,17 +34,20 @@ function Home() {
 
   const { content: contentByCategory, isLoading: categoryLoading } = useMeetingListByFilter({
     page: 0,
+    size: 8,
     category: selectedCategory,
     orderType: 'LATEST',
   });
 
   const { content: contentByRequest, isLoading: requestLoading } = useMeetingListByFilter({
     page: 0,
+    size: 8,
     orderType: MEETING_ORDER_TYPE.REQUEST_COUNT,
   });
 
   const { content: contentByLatest, isLoading: latestLoading } = useMeetingListByFilter({
     page: 0,
+    size: 8,
     orderType: MEETING_ORDER_TYPE.LATEST,
   });
 
