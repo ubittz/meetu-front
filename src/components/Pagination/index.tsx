@@ -1,3 +1,5 @@
+import { Pagination as MUIPagination } from '@mui/material';
+import { useSearchParams } from 'react-router-dom';
 import styled from 'styled-components';
 
 import Flex from '@@components/Flex';
@@ -37,21 +39,37 @@ const StyledPagination = styled(Flex.Horizontal)`
   }
 `;
 
-function Pagination({ length, currentPage, ...props }: { length: number; currentPage: number } & FlexProps) {
+function Pagination({ current, lastPage, pageKey = 'page', ...props }: { current: number; lastPage: number; pageKey?: string } & FlexProps) {
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const handleChange = (value: number) => {
+    searchParams.set(pageKey, String(value - 1));
+    setSearchParams(searchParams);
+  };
+
   return (
     <StyledPagination justifyContent='center' gap={8} {...props}>
-      {Array.from({ length: Math.min(length, 5) }).map((_, index) => (
-        <Flex.Horizontal
-          key={index}
-          className={`pagination__item ${index + 1 === currentPage && 'selected'}`}
-          alignItems='center'
-          justifyContent='center'
-        >
-          {index + 1}
-        </Flex.Horizontal>
-      ))}
+      <MUIPagination
+        hideNextButton
+        hidePrevButton
+        count={lastPage}
+        page={current + 1}
+        onChange={(_, value) => {
+          handleChange(value);
+        }}
+      />
     </StyledPagination>
   );
 }
+//   {Array.from({ length: Math.min(length, 5) }).map((_, index) => (
+//     <Flex.Horizontal
+//       key={index}
+//       className={`pagination__item ${index + 1 === currentPage && 'selected'}`}
+//       alignItems='center'
+//       justifyContent='center'
+//     >
+//       {index + 1}
+//     </Flex.Horizontal>
+//   ))}
 
 export default Pagination;

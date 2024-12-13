@@ -34,3 +34,16 @@ export interface MeetingSingleResponse {
   item: string;
   guestCount: number;
 }
+
+export interface ReviewListResponse {
+  reviewNo: number;
+  userId: string;
+  reviewScore: number;
+  reviewDescript: string;
+  createDatetime: Date;
+}
+
+export interface ReviewListQuery {
+  page: number;
+  id: string;
+}

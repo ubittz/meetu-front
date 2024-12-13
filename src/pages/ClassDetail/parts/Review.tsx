@@ -1,3 +1,4 @@
+import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 
 import Flex from '@@components/Flex';
@@ -7,6 +8,9 @@ import Typography from '@@components/Typography';
 import { TAB_LIST } from '@@pages/ClassDetail/constants';
 import { StartIcon } from '@@pages/ClassDetail/icons';
 import ReviewCard from '@@pages/ClassDetail/parts/ReviewCrad';
+import ClassEmpty from '@@pages/Home/parts/ClassEmpty';
+import { useReviewList } from '@@stores/meeting/hooks';
+import { useQueryParams } from '@@utils/request/hooks';
 
 const StyledReview = styled(Flex.Vertical)`
   .review__contents {
@@ -15,6 +19,21 @@ const StyledReview = styled(Flex.Vertical)`
 `;
 
 function Review({ onChangeTab }: { onChangeTab: (index: number) => void }) {
+  const {
+    query: { reviewPage },
+  } = useQueryParams(
+    { reviewPage: 0 },
+    {
+      initialSearch: ({ reviewPage }) => reviewPage === undefined,
+    }
+  );
+  const { id } = useParams();
+
+  const { content, page } = useReviewList({
+    id: id ?? '',
+    page: reviewPage,
+  });
+
   const AVERAGE_SCORE = 4;
 
   return (
@@ -23,7 +42,7 @@ function Review({ onChangeTab }: { onChangeTab: (index: number) => void }) {
       <Flex.Vertical className='review__contents'>
         <Flex.Horizontal className='tw-mt-[30px] tw-mb-[12px]' alignItems='center' justifyContent='space-between'>
           <Typography.Sub fontSize='14px' fontWeight={700}>
-            Feel new happy 리뷰 (9)
+            Feel new happy 리뷰 ({page.total})
           </Typography.Sub>
           <Flex.Horizontal gap={2}>
             {Array.from({ length: 5 }).map((_, index) => (
@@ -33,13 +52,13 @@ function Review({ onChangeTab }: { onChangeTab: (index: number) => void }) {
         </Flex.Horizontal>
         <Flex.Vertical gap={12}>
           <Flex.Vertical>
-            <ReviewCard />
-            <ReviewCard />
-            <ReviewCard />
-            <ReviewCard />
-            <ReviewCard />
+            {content && content.length ? (
+              content.map((review) => <ReviewCard key={review.reviewNo} review={review} />)
+            ) : (
+              <ClassEmpty>리뷰를 남겨보세요.</ClassEmpty>
+            )}
           </Flex.Vertical>
-          <Pagination length={5} currentPage={1} />
+          <Pagination current={page.current} lastPage={page.lastPage} pageKey='reviewPage' />
         </Flex.Vertical>
       </Flex.Vertical>
     </StyledReview>

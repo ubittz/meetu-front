@@ -28,10 +28,10 @@ export const formatSWRListResponse = <Data>(response: SWRResponse<MeetuResponse<
     ...swrResponse,
     content,
     page: {
-      total: totalElements,
-      current: number,
-      lastPage: totalPages,
-      limit: size,
+      total: totalElements ?? 0,
+      current: number ?? 0,
+      lastPage: totalPages ?? 0,
+      limit: size ?? 0,
     },
   } as const;
 };
