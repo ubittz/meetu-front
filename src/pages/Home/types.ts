@@ -17,5 +17,5 @@ export type MeetingOrderType = asType<typeof MEETING_ORDER_TYPE>;
 export interface MeetingListWithCategoryQuery extends PageQuery {
   category?: Category;
   orderType?: MeetingOrderType;
-  isAsc?: false;
+  isAsc?: boolean;
 }

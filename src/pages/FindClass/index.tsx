@@ -15,24 +15,8 @@ import { Category } from '@@pages/Home/types';
 import { PAGES } from '@@router/constants';
 import { pathGenerator } from '@@router/utils';
 
-const FILTER_OPTIONS = [
-  {
-    value: 'recent',
-    label: '최신순으로 보기',
-  },
-  {
-    value: 'recommend',
-    label: '밋유 추천순',
-  },
-  {
-    value: 'priceAsc',
-    label: '가격 높은순',
-  },
-  {
-    value: 'priceDesc',
-    label: '가격 낮은순',
-  },
-];
+import { ALL_FIND_CLASS_ORDER, FIND_CLASS_ORDER, FIND_CLASS_ORDER_STRING, QUERY_BY_FIND_CLASS_ORDER } from './constants';
+import { FindClassOrder } from './types';
 
 const StyledHomeCategory = styled(FullScreen)`
   .body {
@@ -72,9 +56,9 @@ function FindClass() {
   const { category } = useParams<{ category: Category }>();
 
   const [selectedCategory, setSelectedCategory] = useState<Category | undefined>(category);
-  const [selectedFilter, setSelectedFilter] = useState<string>(FILTER_OPTIONS[0].value);
+  const [selectedOrder, setSelectedOrder] = useState<FindClassOrder>(FIND_CLASS_ORDER.RECENT);
 
-  const { content } = useMeetingListByFilter({ page: 0, category });
+  const { content } = useMeetingListByFilter({ page: 0, category, ...QUERY_BY_FIND_CLASS_ORDER[selectedOrder] });
 
   const handleChangeCategory: ChangeEventHandler<HTMLSelectElement> = (e) => {
     setSelectedCategory(e.target.value as Category);
@@ -84,7 +68,7 @@ function FindClass() {
   };
 
   const handleChangeFilter: ChangeEventHandler<HTMLSelectElement> = (e) => {
-    setSelectedFilter(e.target.value);
+    setSelectedOrder(e.target.value as FindClassOrder);
   };
 
   if (category && !ALL_CATEGORIES.includes(category)) {
@@ -105,10 +89,10 @@ function FindClass() {
       </Header>
       <Flex.Vertical className='body' gap={22}>
         <Flex.Horizontal justifyContent='flex-end'>
-          <StyledSelect value={selectedFilter} onChange={handleChangeFilter}>
-            {FILTER_OPTIONS.map(({ value, label }) => (
-              <option key={value} value={value}>
-                {label}
+          <StyledSelect value={selectedOrder} onChange={handleChangeFilter}>
+            {ALL_FIND_CLASS_ORDER.map((order) => (
+              <option key={order} value={order}>
+                {FIND_CLASS_ORDER_STRING[order]}
               </option>
             ))}
           </StyledSelect>
