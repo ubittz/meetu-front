@@ -1007,6 +1007,13 @@
     "@babel/helper-string-parser" "^7.25.9"
     "@babel/helper-validator-identifier" "^7.25.9"
 
+"@bootpay/client-js@^5.0.2":
+  version "5.0.2"
+  resolved "https://registry.yarnpkg.com/@bootpay/client-js/-/client-js-5.0.2.tgz#cb3e9a4ee65ee34c24742f36f37b492b3fc1eefb"
+  integrity sha512-lIx2UdoS1p577Et/Ci9pi8RyF1YsYEyy+S1YanL1TQ7aNVMGPLWW2YbDVcbge8DnkAfuicvPOAKKuE1ZxKCRpw==
+  dependencies:
+    typescript "^5.5.4"
+
 "@canvas/image-data@^1.0.0":
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/@canvas/image-data/-/image-data-1.0.0.tgz#3bd2cd856e13fc9e2c25feff360a4056857b0367"
@@ -5569,6 +5576,11 @@ typescript@^5.5.3:
   version "5.6.3"
   resolved "https://registry.yarnpkg.com/typescript/-/typescript-5.6.3.tgz#5f3449e31c9d94febb17de03cc081dd56d81db5b"
   integrity sha512-hjcS1mhfuyi4WW8IWtjP7brDrG2cuDZukyrYrSauoXGNgx0S7zceP07adYkJycEr56BOUTNPzbInooiN3fn1qw==
+
+typescript@^5.5.4:
+  version "5.7.2"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-5.7.2.tgz#3169cf8c4c8a828cde53ba9ecb3d2b1d5dd67be6"
+  integrity sha512-i5t66RHxDvVN40HfDd1PsEThGNnlMCMT3jMUuoh9/0TaqWevNontacunWyN02LA9/fIbEWlcHZcgTKb9QoaLfg==
 
 unbox-primitive@^1.0.2:
   version "1.0.2"

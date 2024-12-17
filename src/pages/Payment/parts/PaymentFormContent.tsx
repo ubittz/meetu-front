@@ -24,7 +24,7 @@ const StyledPaymentFormContent = styled(FullScreen)`
 function PaymentFormContent() {
   const navigate = useNavigate();
 
-  const { handleSubmit, isValid } = useFormikContext<PaymentForm>();
+  const { handleSubmit, errors, isValid } = useFormikContext<PaymentForm>();
 
   const handleClickBack = () => {
     navigate(-1);
@@ -47,7 +47,7 @@ function PaymentFormContent() {
           <PaymentSection title='주문자 정보'>
             <OrdererInfo />
           </PaymentSection>
-          <PaymentSection title='주문 동의' hiddenDivider>
+          <PaymentSection title='주문 동의' errorMessage={errors.agreeFinancial} hiddenDivider>
             <PaymentTerms />
           </PaymentSection>
         </Flex.Vertical>

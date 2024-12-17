@@ -1,6 +1,6 @@
 export interface PaymentForm {
-  classId: number;
-  ordererName: string;
-  ordererPhone: string;
-  agree: boolean;
+  meetingId: string;
+  customerName: string;
+  customerTel: string;
+  agreeFinancial: boolean;
 }

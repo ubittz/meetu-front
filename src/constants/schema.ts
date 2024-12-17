@@ -23,10 +23,6 @@ export const registerSchema = object({
   checkedEmail: boolean().isTrue('이메일 중복체크를 해주세요.'),
 });
 
-export const paymentSchema = object({
-  agree: boolean().isTrue(),
-});
-
 export const modifySchema = object({
   password: string().matches(new RegExp(/^[a-zA-Z0-9]{8,20}$/), { message: '비밀번호는 영문 대소문자 + 숫자 조합 8~20글자 입니다.' }),
   passwordCheck: string().oneOf([ref('password')], '비밀번호가 일치하지 않습니다.'),
@@ -59,4 +55,14 @@ export const verifyOTPSchema = object({
 export const createContactSchema = object({
   meetingId: string().required(),
   description: string().required(),
+});
+
+export const paymentSchema = object({
+  customerName: string().required('주문자 이름을 입력해주세요.'),
+  customerTel: string()
+    .required('주문자 연락처를 입력해주세요.')
+    .matches(/\d{10,11}/, {
+      message: '주문자 연락처를 입력해주세요.',
+    }),
+  agreeFinancial: boolean().isTrue('주문 관련 약관을 동의해주세요.'),
 });

@@ -11,6 +11,7 @@
     "gen-pwa": "pwa-assets-generator --preset minimal public/icon.svg"
   },
   "dependencies": {
+    "@bootpay/client-js": "^5.0.2",
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.0",
     "@mui/icons-material": "^6.2.0",

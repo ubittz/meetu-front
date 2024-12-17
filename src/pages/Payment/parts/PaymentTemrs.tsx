@@ -33,7 +33,7 @@ function PaymentTerms() {
       <Flex.Vertical gap={8}>
         <Field
           type='checkbox'
-          name='agree'
+          name='agreeFinancial'
           as={(props: FieldProps['field']) => (
             <CheckBox {...props}>
               <Typography.Main fontWeight={700}>아래의 내용에 모두 동의합니다.</Typography.Main>
@@ -46,7 +46,7 @@ function PaymentTerms() {
         <Flex.Horizontal justifyContent='space-between' alignItems='center' flex='1'>
           <Field
             type='checkbox'
-            name='agree'
+            name='agreeFinancial'
             as={(props: FieldProps['field']) => (
               <CheckBox {...props}>
                 <Typography.Third>전자금융거래 약관 동의(필수)</Typography.Third>

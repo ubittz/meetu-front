@@ -4,7 +4,8 @@ import styled from 'styled-components';
 import Flex from '@@components/Flex';
 import Typography from '@@components/Typography';
 import { COLORS } from '@@constants/colors';
-import { CLASS_LIST } from '@@pages/Home/constants';
+import Class1Image from '@@pages/Home/images/class_1.png';
+import { useMeetingDetail } from '@@stores/meeting/hooks';
 
 const StyledPaymentProductInfo = styled(Flex.Vertical)`
   .product_info__image {
@@ -25,27 +26,27 @@ const StyledPaymentProductInfo = styled(Flex.Vertical)`
 function PaymentProductInfo() {
   const { id } = useParams();
 
-  const product = CLASS_LIST.find((classItem) => classItem.id === +(id ?? 0));
+  const { data } = useMeetingDetail(id ?? '');
 
-  if (!product) return;
+  if (!data) return;
 
   return (
     <StyledPaymentProductInfo gap={20}>
       <Flex.Horizontal gap={10} alignItems='center'>
         <div className='product_info__image'>
-          <img src={product.image} alt='Product Image' />
+          <img src={Class1Image} alt='Product Image' />
         </div>
         <Flex.Vertical gap={4}>
-          <Typography.Main fontWeight={700}>{product.title}</Typography.Main>
+          <Typography.Main fontWeight={700}>{data.name}</Typography.Main>
           <Typography.Sub fontWeight={700} fontSize='14px'>
-            김탁구
+            {data.hostName}
           </Typography.Sub>
         </Flex.Vertical>
       </Flex.Horizontal>
       <Flex.Horizontal justifyContent='space-between'>
         <Typography.Sub fontSize='14px'>주소</Typography.Sub>
         <Typography.Main fontSize='14px' fontWeight={700}>
-          서울특별시 강남구 도산대로 17-8
+          {data.address}
         </Typography.Main>
       </Flex.Horizontal>
     </StyledPaymentProductInfo>

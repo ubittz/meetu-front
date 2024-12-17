@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 import Flex from '@@components/Flex';
 import Typography from '@@components/Typography';
-import { CLASS_LIST } from '@@pages/Home/constants';
+import { useMeetingDetail } from '@@stores/meeting/hooks';
 
 const StyledPaymentInfo = styled(Flex.Vertical)`
   .payment_info__receipt {
@@ -14,16 +14,16 @@ const StyledPaymentInfo = styled(Flex.Vertical)`
 
 function PaymentInfo() {
   const { id } = useParams();
-  const product = CLASS_LIST.find((item) => item.id === +(id ?? 0));
+  const { data } = useMeetingDetail(id ?? '');
 
-  if (!product) return;
+  if (!data) return;
 
   return (
     <StyledPaymentInfo gap={20}>
       <Flex.Vertical gap={8} className='payment_info__receipt'>
         <Flex.Horizontal justifyContent='space-between'>
           <Typography.Sub fontSize='14px'>주문금액</Typography.Sub>
-          <Typography.Sub fontSize='14px'>{product.price.toLocaleString()} 원</Typography.Sub>
+          <Typography.Sub fontSize='14px'>{data.cost.toLocaleString()} 원</Typography.Sub>
         </Flex.Horizontal>
         <Flex.Horizontal justifyContent='space-between'>
           <Typography.Sub fontSize='14px'>주문할인</Typography.Sub>
@@ -43,7 +43,7 @@ function PaymentInfo() {
           최종결제금액
         </Typography.Main>
         <Typography.Point fontSize='20px' fontWeight={700}>
-          {product.price.toLocaleString()} 원
+          {data.cost.toLocaleString()}원
         </Typography.Point>
       </Flex.Horizontal>
     </StyledPaymentInfo>

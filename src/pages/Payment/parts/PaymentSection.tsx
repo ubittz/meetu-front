@@ -1,5 +1,6 @@
-import { PropsWithChildren } from 'react';
+import { PropsWithChildren, ReactNode } from 'react';
 
+import { FormHelperText } from '@mui/material';
 import styled from 'styled-components';
 
 import Flex from '@@components/Flex';
@@ -11,12 +12,20 @@ const StyledPaymentSection = styled(Flex.Vertical)<{ $hiddenDivider: boolean }>`
   ${({ $hiddenDivider }) => !$hiddenDivider && `border-bottom: 8px solid ${COLORS.LINE_100};`}
 `;
 
-function PaymentSection({ hiddenDivider = false, title, children }: PropsWithChildren<{ title: string; hiddenDivider?: boolean }>) {
+function PaymentSection({
+  hiddenDivider = false,
+  title,
+  errorMessage,
+  children,
+}: PropsWithChildren<{ title: string; hiddenDivider?: boolean; errorMessage?: ReactNode }>) {
   return (
     <StyledPaymentSection $hiddenDivider={hiddenDivider}>
-      <Typography.Main className='tw-mb-[12px]' fontWeight={700} fontSize='20px'>
-        {title}
-      </Typography.Main>
+      <Flex.Horizontal gap={12}>
+        <Typography.Main className='tw-mb-[12px]' fontWeight={700} fontSize='20px'>
+          {title}
+        </Typography.Main>
+        {errorMessage && <FormHelperText error>{errorMessage}</FormHelperText>}
+      </Flex.Horizontal>
       {children}
     </StyledPaymentSection>
   );
