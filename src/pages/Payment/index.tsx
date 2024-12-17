@@ -8,12 +8,13 @@ import { useModal } from '@@components/Modal/hooks';
 import { paymentSchema } from '@@constants/schema';
 import PaymentFormContent from '@@pages/Payment/parts/PaymentFormContent';
 import { PaymentForm } from '@@pages/Payment/types';
+import { sanitizePaymentAddForm } from '@@pages/Payment/utils';
 import { PAGES } from '@@router/constants';
 import { pathGenerator } from '@@router/utils';
 import { useActionSubscribe } from '@@store/middlewares/actionMiddleware';
+import { BOOTPAY_FAIL_CODE } from '@@stores/payment/constants';
 import { fetchPaymentConfigFailure, fetchPaymentConfigRequest, fetchPaymentConfigSuccess } from '@@stores/payment/reducer';
-
-import { sanitizePaymentAddForm } from './utils';
+import { BootpayFailCode, BootpaySuccessCode } from '@@stores/payment/types';
 
 function Payment() {
   const navigate = useNavigate();
@@ -21,7 +22,7 @@ function Payment() {
 
   const { id } = useParams();
 
-  const { visible, setVisible } = useModal();
+  const { visible, setVisible, content, setContent } = useModal();
 
   const initialValues: PaymentForm = {
     meetingId: id ?? '',
@@ -44,16 +45,31 @@ function Payment() {
       try {
         const response = await Bootpay.requestPayment({
           application_id: applicationId,
-          price: config.payFinalAmount,
-          order_name: '테스트 결제',
-          order_id: 'TEST_ORDER_1',
+          price: 100,
+          // price: config.payFinalAmount,
+          order_name: config.meetingName,
+          order_id: config.payId,
           extra: {
             open_type: 'iframe',
+            escrow: false,
+          },
+          user: {
+            username: config.orderName,
+            phone: config.orderTel,
           },
         });
-        console.log(response);
+        const code: BootpaySuccessCode = response.data;
+
+        navigate(pathGenerator(PAGES.PAYMENT, '/complete'), {
+          state: {
+            code,
+          },
+        });
       } catch (error) {
-        console.log(error);
+        const newError = error as unknown as { message: string; event: BootpayFailCode };
+        if (newError.event === BOOTPAY_FAIL_CODE.ERROR) {
+          setContent(newError.message as string);
+        }
       }
     },
   });
@@ -61,6 +77,7 @@ function Payment() {
   useActionSubscribe({
     type: fetchPaymentConfigFailure.type,
     callback: () => {
+      setContent('결제 정보를 가져오는데에 실패했습니다.');
       setVisible(true);
     },
   });
@@ -69,7 +86,7 @@ function Payment() {
     <Formik initialValues={initialValues} onSubmit={handleSubmit} validationSchema={paymentSchema}>
       <>
         <Modal visible={visible} setVisible={setVisible} onConfirm={handleConfirm}>
-          결제 정보를 가져오는데에 실패했습니다.
+          {content}
         </Modal>
         <PaymentFormContent />
       </>
