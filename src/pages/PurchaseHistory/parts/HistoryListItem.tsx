@@ -1,3 +1,4 @@
+import { format } from 'date-fns';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -8,6 +9,7 @@ import { COLORS } from '@@constants/colors';
 import Image from '@@pages/Home/images/class_4.jpeg';
 import { PAGES } from '@@router/constants';
 import { pathGenerator } from '@@router/utils';
+import { PaymentListResponse } from '@@stores/payment/types';
 
 const StyledHistoryListItem = styled(Flex.Vertical)`
   padding: 16px 12px 20px;
@@ -34,11 +36,11 @@ const StyledHistoryListItem = styled(Flex.Vertical)`
   }
 `;
 
-function HistoryListItem() {
+function HistoryListItem({ payment }: { payment: PaymentListResponse }) {
   const navigate = useNavigate();
 
   const handleClick = () => {
-    navigate(pathGenerator(PAGES.MY_PAGE, '/purchase-history/1'));
+    navigate(pathGenerator(PAGES.MY_PAGE, `/purchase-history/${payment.id}`));
   };
 
   return (
@@ -52,24 +54,24 @@ function HistoryListItem() {
             <Typography.Third className='item__label' fontSize='12px'>
               결제번호
             </Typography.Third>
-            <Typography.Sub fontSize='12px'>20020725P074416</Typography.Sub>
+            <Typography.Sub fontSize='12px'>{payment.id}</Typography.Sub>
           </Flex.Horizontal>
           <Typography.Main fontSize='14px' fontWeight={700}>
-            미식가들의 쿠킹 클래스
+            {payment.meetingName}
           </Typography.Main>
           <Flex.Vertical gap={4}>
             <Flex.Horizontal gap={10}>
               <Typography.Third className='item__label' fontSize='12px'>
                 결제일자
               </Typography.Third>
-              <Typography.Sub fontSize='12px'>2024.07.26</Typography.Sub>
+              <Typography.Sub fontSize='12px'>{format(payment.createDatetime, 'yyyy.MM.dd')}</Typography.Sub>
             </Flex.Horizontal>
             <Flex.Horizontal gap={10}>
               <Typography.Third className='item__label' fontSize='12px'>
                 결제금액
               </Typography.Third>
               <Typography.Point fontSize='12px' fontWeight={700}>
-                50,000원
+                {payment.latestCost.toLocaleString()}원
               </Typography.Point>
             </Flex.Horizontal>
           </Flex.Vertical>

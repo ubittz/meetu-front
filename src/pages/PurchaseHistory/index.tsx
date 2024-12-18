@@ -5,11 +5,24 @@ import FullScreen from '@@components/FullScreen';
 import Header from '@@components/Header';
 import Pagination from '@@components/Pagination';
 import Typography from '@@components/Typography';
+import { usePaymentList } from '@@pages/PurchaseHistory/hooks';
 import GuideCard from '@@pages/PurchaseHistory/parts/GuideCard';
 import HistoryListItem from '@@pages/PurchaseHistory/parts/HistoryListItem';
+import { useQueryParams } from '@@utils/request/hooks';
+import { PageQuery } from '@@utils/request/types';
+
+const initialQuery: PageQuery = {
+  page: 0,
+};
 
 function PurchaseHistory() {
   const navigate = useNavigate();
+
+  const { query } = useQueryParams(initialQuery, {
+    initialSearch: ({ page }) => page === undefined,
+  });
+
+  const { content, page } = usePaymentList(query);
 
   const handleClickBack = () => {
     navigate(-1);
@@ -25,13 +38,9 @@ function PurchaseHistory() {
           <Flex.Horizontal justifyContent='flex-end'>
             <Typography.Third fontSize='10px'>1년 이후 내역은 고객센터로 문의 바랍니다.</Typography.Third>
           </Flex.Horizontal>
-          <HistoryListItem />
-          <HistoryListItem />
-          <HistoryListItem />
-          <HistoryListItem />
-          <HistoryListItem />
+          {content?.map((payment) => <HistoryListItem key={payment.id} payment={payment} />)}
         </Flex.Vertical>
-        <Pagination className='tw-mt-[20px]' length={5} currentPage={1} />
+        <Pagination className='tw-mt-[20px]' current={page.current} lastPage={page.lastPage} replace />
         <Flex.Vertical className='tw-mt-[60px]' gap={30}>
           <GuideCard title='결제 유의사항'>
             <Typography.Sub>1. 유의사항 1번의 텍스트가 노출됩니다.</Typography.Sub>

@@ -45,8 +45,8 @@ function Payment() {
       try {
         const response = await Bootpay.requestPayment({
           application_id: applicationId,
-          price: 100,
           // price: config.payFinalAmount,
+          price: 100,
           order_name: config.meetingName,
           order_id: config.payId,
           extra: {
