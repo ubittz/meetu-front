@@ -40,6 +40,7 @@ export interface User {
   gender: Gender;
   createDatetime: Date;
   isHost: boolean;
+  imageUrl: string;
 }
 
 export interface UserEditRequestDTO {

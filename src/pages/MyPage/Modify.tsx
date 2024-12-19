@@ -1,12 +1,14 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { Formik } from 'formik';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
+import FullLoading from '@@components/FullLoading';
 import Modal from '@@components/Modal';
 import { useModal } from '@@components/Modal/hooks';
 import { modifySchema } from '@@constants/schema';
+import { useRequestFlag } from '@@hooks/useRequestFlag';
 import ModifyMyPageFormContent from '@@pages/MyPage/parts/ModifyMyPageFormContent';
 import { ModifyMyInfoForm } from '@@pages/MyPage/types';
 import { sanitizeEditForm } from '@@pages/MyPage/utils';
@@ -14,7 +16,16 @@ import { PAGES } from '@@router/constants';
 import { pathGenerator } from '@@router/utils';
 import { useAppState } from '@@store/hooks';
 import { useActionSubscribe } from '@@store/middlewares/actionMiddleware';
-import { userEditFailure, userEditRequest, userEditSuccess } from '@@stores/auth/reducer';
+import {
+  changeProfileFailure,
+  changeProfileRequest,
+  changeProfileSuccess,
+  userEditFailure,
+  userEditRequest,
+  userEditSuccess,
+} from '@@stores/auth/reducer';
+
+type RequestStatus = 'idle' | 'failure' | 'success';
 
 function ModifyMyInfo() {
   const dispatch = useDispatch();
@@ -22,16 +33,26 @@ function ModifyMyInfo() {
 
   const user = useAppState((state) => state.auth.me);
 
-  const { visible, setVisible, content, setContent } = useModal();
+  const [requestStatus, setRequestStatus] = useState<{ image: RequestStatus; profile: RequestStatus }>({
+    image: 'idle',
+    profile: 'idle',
+  });
   const [editType, setEditType] = useState<'success' | 'failure'>('success');
 
-  const initialValues: ModifyMyInfoForm = {
-    id: user?.id ?? '',
-    checkedEmail: false,
-  };
+  const { visible, setVisible, content, setContent } = useModal();
+
+  const profileLoading = useRequestFlag(userEditRequest.type);
+  const imageLoading = useRequestFlag(changeProfileRequest.type);
 
   const handleSubmit = (form: ModifyMyInfoForm) => {
     const data = sanitizeEditForm(form);
+
+    if (form.image && typeof form.image !== 'string') {
+      dispatch(changeProfileRequest(form.image));
+    } else {
+      setRequestStatus({ ...requestStatus, image: 'success' });
+    }
+
     dispatch(userEditRequest(data));
   };
 
@@ -46,28 +67,63 @@ function ModifyMyInfo() {
   useActionSubscribe({
     type: userEditSuccess.type,
     callback: () => {
-      setContent('회원정보 수정이 완료되었습니다.');
-      setVisible(true);
-      setEditType('success');
+      setRequestStatus({ ...requestStatus, profile: 'success' });
     },
   });
 
   useActionSubscribe({
     type: userEditFailure.type,
-    callback: ({ payload }: ReturnType<typeof userEditFailure>) => {
-      setContent(payload ?? '회원정보 수정을 실패했습니다.');
+    callback: () => {
+      setRequestStatus({ ...requestStatus, profile: 'failure' });
       setVisible(true);
       setEditType('failure');
     },
   });
 
+  useActionSubscribe({
+    type: changeProfileSuccess.type,
+    callback: () => {
+      setRequestStatus({ ...requestStatus, image: 'success' });
+    },
+  });
+
+  useActionSubscribe({
+    type: changeProfileFailure.type,
+    callback: () => {
+      setRequestStatus({ ...requestStatus, image: 'failure' });
+    },
+  });
+
+  useEffect(() => {
+    const values = Object.values(requestStatus);
+
+    if (values.includes('idle')) {
+      return;
+    } else if (values.includes('failure')) {
+      setEditType('failure');
+      setContent('회원정보 수정을 실패했습니다.');
+    } else {
+      setEditType('success');
+      setContent('회원정보 수정을 완료했습니다.');
+    }
+
+    setVisible(true);
+  }, [requestStatus, setContent, setVisible]);
+
   if (!user) {
     return 'Loading...';
   }
 
+  const initialValues: ModifyMyInfoForm = {
+    id: user.id ?? '',
+    checkedEmail: false,
+    image: user.imageUrl,
+  };
+
   return (
     <Formik initialValues={initialValues} onSubmit={handleSubmit} validationSchema={modifySchema}>
       <>
+        <FullLoading visible={profileLoading || imageLoading} />
         <Modal visible={visible} setVisible={setVisible} onConfirm={handleConfirm}>
           {content}
         </Modal>

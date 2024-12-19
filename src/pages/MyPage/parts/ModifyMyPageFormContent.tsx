@@ -1,3 +1,5 @@
+import { ChangeEventHandler } from 'react';
+
 import { Form, useFormikContext } from 'formik';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
@@ -7,6 +9,8 @@ import Flex from '@@components/Flex';
 import FooterContainer from '@@components/FooterContainer';
 import FullScreen from '@@components/FullScreen';
 import Header from '@@components/Header';
+import Modal from '@@components/Modal';
+import { useModal } from '@@components/Modal/hooks';
 import Typography from '@@components/Typography';
 import { COLORS } from '@@constants/colors';
 import { DefaultUserIcon, PlusIcon } from '@@pages/MyPage/icons';
@@ -15,6 +19,7 @@ import { ModifyMyInfoForm } from '@@pages/MyPage/types';
 import { PAGES } from '@@router/constants';
 import { pathGenerator } from '@@router/utils';
 import { useAppState } from '@@store/hooks';
+import { getImageURL } from '@@utils/file';
 
 const StyledModifyMyPageFormContent = styled(FullScreen)`
   .body {
@@ -36,6 +41,12 @@ const StyledModifyMyPageFormContent = styled(FullScreen)`
           border-radius: 50%;
           border: 1px solid ${COLORS.LINE_100};
           overflow: hidden;
+
+          & > img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+          }
 
           & > svg {
             position: absolute;
@@ -65,10 +76,26 @@ function ModifyMyPageFormContent() {
 
   const me = useAppState((state) => state.auth.me);
 
-  const { handleSubmit, isValid } = useFormikContext<ModifyMyInfoForm>();
+  const { values, handleSubmit, setFieldValue, isValid } = useFormikContext<ModifyMyInfoForm>();
+  const { visible, setVisible } = useModal();
+
+  const imageURL = getImageURL(values.image);
+
+  const handleChangeProfileImage: ChangeEventHandler<HTMLInputElement> = (e) => {
+    const file = e.target.files?.[0];
+    if (file && file.size > 1024 * 1024) {
+      setVisible(true);
+    } else {
+      setFieldValue('image', file);
+    }
+  };
 
   const handleClickCancel = () => {
     navigate(pathGenerator(PAGES.MY_PAGE));
+  };
+
+  const handleConfirm = () => {
+    setVisible(false);
   };
 
   const handleClickBack = () => {
@@ -77,20 +104,22 @@ function ModifyMyPageFormContent() {
 
   return (
     <Form onSubmit={handleSubmit}>
+      <Modal visible={visible} setVisible={setVisible} onConfirm={handleConfirm}>
+        1MB 이하의 이미지만 업로드해주세요.
+      </Modal>
       <StyledModifyMyPageFormContent>
         <Header onBack={handleClickBack}>
           <Typography.Main fontWeight={600}>회원정보 수정</Typography.Main>
         </Header>
         <Flex.Vertical className='body'>
           <Flex.Horizontal className='modif__profile_info' alignItems='center' gap={12}>
-            <div className='modify__image'>
-              <div className='modify__image__wrap'>
-                <DefaultUserIcon />
-              </div>
+            <label className='modify__image'>
+              <input type='file' hidden accept='image/*' onChange={handleChangeProfileImage} size={1024 * 1024} />
+              <div className='modify__image__wrap'>{imageURL ? <img src={imageURL} /> : <DefaultUserIcon />}</div>
               <Flex.Horizontal className='modify__image__plus' justifyContent='center' alignItems='center'>
                 <PlusIcon />
               </Flex.Horizontal>
-            </div>
+            </label>
             <Typography.Main fontSize='20px' fontWeight={700}>
               {me?.name}
             </Typography.Main>

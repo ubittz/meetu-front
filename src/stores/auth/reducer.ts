@@ -41,6 +41,9 @@ export const fetchMeFailure = createAction<string>(`${PREFIX}/fetchMeFailure`);
 export const userEditRequest = createAction<UserEditRequestDTO>(`${PREFIX}/userEditRequest`);
 export const userEditFailure = createAction<string>(`${PREFIX}/userEditFailure`);
 
+export const changeProfileRequest = createAction<File>(`${PREFIX}/changeProfileRequest`);
+export const changeProfileFailure = createAction<string>(`${PREFIX}/changeProfileFailure`);
+
 export const findIdRequest = createAction<FindIdForm>(`${PREFIX}/findIdRequest`);
 export const findIdSuccess = createAction<string>(`${PREFIX}/findIdSuccess`);
 export const findIdFailure = createAction<string>(`${PREFIX}/findIdFailure`);
@@ -70,12 +73,16 @@ const authSlice = createSlice({
       if (!state.me) return;
       state.me = { ...state.me, name: payload.name ?? state.me.name, email: payload.email ?? state.me.email };
     },
+    changeProfileSuccess(state, { payload }: PayloadAction<string>) {
+      if (!state.me) return;
+      state.me = { ...state.me, imageUrl: payload };
+    },
     verifyIdentitySuccess(state, { payload }: PayloadAction<UserVerifyIdentityResponse>) {
       state.changeKey = payload.changeKey;
     },
   },
 });
 
-export const { loginSuccess, logout, fetchMeSuccess, userEditSuccess, verifyIdentitySuccess } = authSlice.actions;
+export const { loginSuccess, logout, fetchMeSuccess, userEditSuccess, changeProfileSuccess, verifyIdentitySuccess } = authSlice.actions;
 
 export default authSlice.reducer;

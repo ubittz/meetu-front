@@ -5,4 +5,5 @@ export interface ModifyMyInfoForm {
   email?: string;
   description?: string;
   checkedEmail: boolean;
+  image?: File | string;
 }

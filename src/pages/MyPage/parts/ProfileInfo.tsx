@@ -52,9 +52,7 @@ function ProfileInfo() {
   return (
     <StyledProfileInfo gap={30}>
       <Flex.Horizontal className='tw-px-[20px]' gap={12}>
-        <div className='profile_info__image'>
-          <DefaultUserIcon />
-        </div>
+        <div className='profile_info__image'>{me?.imageUrl ? <img src={me.imageUrl} /> : <DefaultUserIcon />}</div>
         <Flex.Vertical gap={8}>
           <Typography.Main fontSize='20px' fontWeight={700}>
             {me?.name}

@@ -5,4 +5,5 @@ export interface UserProfileResponse {
   writeReviewCount: number;
   description: string;
   isHost: boolean;
+  imageUrl: string;
 }

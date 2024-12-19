@@ -21,6 +21,9 @@ import {
   userEditRequest,
   userEditFailure,
   userEditSuccess,
+  changeProfileRequest,
+  changeProfileSuccess,
+  changeProfileFailure,
   findIdRequest,
   findIdSuccess,
   findIdFailure,
@@ -179,6 +182,26 @@ function* verifyOTP({ payload }: ReturnType<typeof verifyOTPRequest>) {
   }
 }
 
+function* changeProfile({ payload }: ReturnType<typeof changeProfileRequest>) {
+  try {
+    const formData = new FormData();
+    formData.append('file', payload);
+
+    const response: MeetuResponse<string> = yield authenticatedRequest.post('/api/user/upload/profile-image', {
+      data: formData,
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
+
+    const action = response.ok ? changeProfileSuccess(response.data) : changeProfileFailure('프로필 사진 수정을 실패했습니다.');
+
+    yield put(action);
+  } catch (e) {
+    yield put(changeProfileFailure((e as Error).message));
+  }
+}
+
 export default function* defaultSaga() {
   yield takeLatest(loginRequest.type, login);
   yield takeLatest(checkDuplicateIdRequest.type, checkDuplicateId);
@@ -189,4 +212,5 @@ export default function* defaultSaga() {
   yield takeLatest(findIdRequest.type, findId);
   yield takeLatest(verifyIdentityRequest.type, verifyIdentity);
   yield takeLatest(verifyOTPRequest.type, verifyOTP);
+  yield takeLatest(changeProfileRequest.type, changeProfile);
 }
