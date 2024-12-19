@@ -53,9 +53,15 @@ export interface ContactResponse {
   createDatetime: Date;
 }
 
-export interface ReviewListQuery {
+export interface MeetingByUserQuery {
   page: number;
+  size?: number;
+  userId?: string;
+}
+
+export interface ReviewListQuery {
   id: string;
+  page: number;
 }
 export interface ContactListQuery {
   page: number;

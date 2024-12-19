@@ -7,11 +7,11 @@ import Flex from '@@components/Flex';
 import FooterContainer from '@@components/FooterContainer';
 import FullScreen from '@@components/FullScreen';
 import Header from '@@components/Header';
-import { ACCOUNT_TYPE } from '@@components/ProfileDetail/constants';
 import Tab from '@@components/Tab';
 import Typography from '@@components/Typography';
 import { CLASS_LIST } from '@@pages/Home/constants';
 import ContentTabContent from '@@pages/MyClass/parts/ClassTabContent';
+import { ACCOUNT_TYPE } from '@@pages/Profile/constants';
 
 const TAB_LIST = ['전체', '진행예정', '모임확정', '진행완료'];
 

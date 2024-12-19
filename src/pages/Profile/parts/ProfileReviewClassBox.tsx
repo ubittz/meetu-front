@@ -4,11 +4,14 @@ import styled from 'styled-components';
 
 import Button from '@@components/Button';
 import Flex from '@@components/Flex';
-import { ProfileReviewDownArrowIcon } from '@@components/ProfileDetail/icons';
-import ProfileReviewBox from '@@components/ProfileDetail/parts/ProfileReviewBox';
-import { ProfileReviewClass } from '@@components/ProfileDetail/types';
 import Typography from '@@components/Typography';
 import { COLORS } from '@@constants/colors';
+import Class1Image from '@@pages/Home/images/class_1.png';
+import ClassEmpty from '@@pages/Home/parts/ClassEmpty';
+import { ProfileReviewDownArrowIcon } from '@@pages/Profile/icons';
+import ProfileReviewBox from '@@pages/Profile/parts/ProfileReviewBox';
+import { useReviewList } from '@@stores/meeting/hooks';
+import { Meeting } from '@@stores/meeting/types';
 
 const StyledProfileReviewClassBox = styled(Flex.Vertical)`
   .review_class__image {
@@ -32,8 +35,16 @@ const StyledProfileReviewClassBox = styled(Flex.Vertical)`
   }
 `;
 
-function ProfileReviewClassBox({ reviewClass }: { reviewClass: ProfileReviewClass }) {
+function ProfileReviewClassBox({ meeting }: { meeting: Meeting }) {
   const [visible, setVisible] = useState<boolean>(false);
+
+  const { content, isLoading } = useReviewList(
+    {
+      page: 0,
+      id: meeting.meetingId,
+    },
+    !visible
+  );
 
   const handleClickView = () => {
     setVisible((prev) => !prev);
@@ -42,23 +53,25 @@ function ProfileReviewClassBox({ reviewClass }: { reviewClass: ProfileReviewClas
   return (
     <StyledProfileReviewClassBox>
       <div className='review_class__image'>
-        <img src={reviewClass.image} alt='Class Image' />
+        <img src={Class1Image} alt='Class Image' />
       </div>
       <Flex.Vertical gap={4}>
         <Typography.Main fontSize='14px' fontWeight={500}>
-          {reviewClass.title}
+          {meeting.meetingName}
         </Typography.Main>
-        <Typography.Third fontSize='12px'>{reviewClass.description}</Typography.Third>
+        <Typography.Third fontSize='12px'>{meeting.meetingDescript}</Typography.Third>
       </Flex.Vertical>
       <Flex.Vertical className='tw-mt-[20px]' gap={20}>
-        <Button.Tiny className='review_class__button' onClick={handleClickView}>
-          해당 모임에 대한 리뷰 보기 <ProfileReviewDownArrowIcon className='tw-ml-[11px]' />
+        <Button.Tiny className='review_class__button' onClick={handleClickView} disabled={isLoading}>
+          해당 모임에 대한 리뷰 보기 <ProfileReviewDownArrowIcon className={`tw-ml-[11px] ${visible ? 'tw-rotate-180' : ''}`} />
         </Button.Tiny>
         {visible && (
           <Flex.Vertical gap={12}>
-            {reviewClass.reviews.map((review) => (
-              <ProfileReviewBox key={review.id} review={review} />
-            ))}
+            {content && content.length ? (
+              content.slice(0, 4).map((review) => <ProfileReviewBox key={review.reviewNo} review={review} />)
+            ) : (
+              <ClassEmpty>이 모임에 대한 리뷰가 없습니다.</ClassEmpty>
+            )}
           </Flex.Vertical>
         )}
       </Flex.Vertical>

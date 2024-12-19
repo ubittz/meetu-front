@@ -39,6 +39,7 @@ export interface User {
   tel: string;
   gender: Gender;
   createDatetime: Date;
+  isHost: boolean;
 }
 
 export interface UserEditRequestDTO {

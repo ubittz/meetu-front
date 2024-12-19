@@ -44,8 +44,9 @@ function Pagination({
   lastPage,
   pageKey = 'page',
   replace = false,
+  onChange,
   ...props
-}: { current: number; lastPage: number; pageKey?: string; replace?: boolean } & FlexProps) {
+}: { current: number; lastPage: number; pageKey?: string; replace?: boolean; onChange?: (value: number) => void } & Omit<FlexProps, 'onChange'>) {
   const [searchParams, setSearchParams] = useSearchParams();
 
   const handleChange = (value: number) => {
@@ -61,7 +62,11 @@ function Pagination({
         count={lastPage}
         page={current + 1}
         onChange={(_, value) => {
-          handleChange(value);
+          if (onChange) {
+            onChange(value);
+          } else {
+            handleChange(value);
+          }
         }}
       />
     </StyledPagination>

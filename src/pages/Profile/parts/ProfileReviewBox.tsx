@@ -2,10 +2,12 @@ import { format } from 'date-fns';
 import styled from 'styled-components';
 
 import Flex from '@@components/Flex';
-import { ProfileReview } from '@@components/ProfileDetail/types';
 import Typography from '@@components/Typography';
 import { COLORS } from '@@constants/colors';
 import { StartIcon } from '@@pages/ClassDetail/icons';
+import ReviewImage from '@@pages/Profile/images/review_iamge.jpeg';
+import ProfileImage from '@@pages/Profile/images/review_profile_image.png';
+import { ReviewListResponse } from '@@stores/meeting/types';
 
 const StyledProfileReviewBox = styled(Flex.Vertical)`
   padding: 16px 10px 20px;
@@ -62,29 +64,26 @@ const StyledProfileReviewBox = styled(Flex.Vertical)`
   }
 `;
 
-function ProfileReviewBox({ review }: { review: ProfileReview }) {
+function ProfileReviewBox({ review }: { review: ReviewListResponse }) {
   return (
     <StyledProfileReviewBox>
       <Flex.Horizontal className='profile_review__top' gap={12}>
         <div className='profile_review__image'>
-          <img src={review.image} alt='Review Image' />
+          <img src={ReviewImage} alt='Review Image' />
         </div>
         <Flex.Vertical>
-          <Typography.Main fontSize='14px' fontWeight={700}>
-            {review.title}
-          </Typography.Main>
           <Flex.Horizontal className='tw-mt-[8px]' gap={4}>
             <Typography.Sub fontSize='12px' fontWeight={700}>
-              {review.score}.0
+              {review.reviewScore}.0
             </Typography.Sub>
             <Flex.Horizontal gap={2}>
               {Array.from({ length: 5 }).map((_, index) => (
-                <StartIcon fill={index <= review.score - 1} />
+                <StartIcon key={index} fill={index <= review.reviewScore - 1} />
               ))}
             </Flex.Horizontal>
           </Flex.Horizontal>
           <Typography.Sub className='tw-mt-[12px] profile_review__description' fontSize='12px'>
-            {review.description}
+            {review.reviewDescript}
           </Typography.Sub>
           <Typography.Third className='tw-mt-[4px]' fontSize='10px'>
             더보기
@@ -94,13 +93,13 @@ function ProfileReviewBox({ review }: { review: ProfileReview }) {
       <Flex.Horizontal className='profile_review__bottom' alignItems='center' justifyContent='space-between'>
         <Flex.Horizontal alignItems='center' gap={4}>
           <div className='profile_review__profile_image'>
-            <img src={review.profileImage} alt='Profile Image' />
+            <img src={ProfileImage} alt='Profile Image' />
           </div>
           <Typography.Sub fontSize='10px' fontWeight='bold'>
-            {review.writer}
+            {review.userId}
           </Typography.Sub>
         </Flex.Horizontal>
-        <Typography.Third fontSize='10px'>{format(review.createdAt, 'yyyy. MM. dd')}</Typography.Third>
+        <Typography.Third fontSize='10px'>{format(review.createDatetime, 'yyyy. MM. dd')}</Typography.Third>
       </Flex.Horizontal>
     </StyledProfileReviewBox>
   );

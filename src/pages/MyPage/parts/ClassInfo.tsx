@@ -4,7 +4,7 @@ import ClassBoxList from '@@components/ClassBoxList';
 import Flex from '@@components/Flex';
 import { COLORS } from '@@constants/colors';
 import { useAppState } from '@@store/hooks';
-import { useMeetingMyList } from '@@stores/meeting/hooks';
+import { useMeetingByUser } from '@@stores/meeting/hooks';
 
 const StyledClassInfo = styled(Flex.Vertical)`
   padding: 30px 0;
@@ -14,7 +14,7 @@ const StyledClassInfo = styled(Flex.Vertical)`
 function ClassInfo() {
   const { recentList } = useAppState((state) => state.meeting);
 
-  const { content: myContent } = useMeetingMyList();
+  const { content: myContent } = useMeetingByUser({ page: 0, size: 3 });
 
   const handleClickMyClass = () => {};
 

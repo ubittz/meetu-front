@@ -8,9 +8,12 @@ import { ERROR_CODE } from '@@utils/request/constants';
 export interface SWRListConfig<D, Q = Record<string, any>> {
   query?: PageQuery & Q;
   config?: SWRConfig<D>;
+  skip?: boolean;
 }
 
-export type SWRConfig<D> = SWRConfiguration<MeetuResponse<D>>;
+export type SWRConfig<D> = SWRConfiguration<MeetuResponse<D>> & {
+  skip?: boolean;
+};
 
 export interface MeetuResponse<Data> extends AxiosResponse<Data> {
   ok: boolean;

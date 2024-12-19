@@ -12,7 +12,7 @@ export const useSWRList = <D = any, Q extends Record<string, any> = Record<strin
   const prevResponse = useRef<MeetuResponse<D>>();
 
   const { query, config: swrConfig } = config ?? {};
-  const response = useSWR<MeetuResponse<D>>(`${path}?${qs.stringify(query)}`, swrConfig ?? {});
+  const response = useSWR<MeetuResponse<D>>(config?.skip ? null : `${path}?${qs.stringify(query)}`, swrConfig ?? {});
 
   if (!response.data && !response.error) {
     return { ...response, data: prevResponse.current };
@@ -24,7 +24,7 @@ export const useSWRList = <D = any, Q extends Record<string, any> = Record<strin
 };
 
 export const useSWRDetail = <D>(path: string, config?: SWRConfig<D>) => {
-  const response = useSWR<MeetuResponse<D>>(path, config);
+  const response = useSWR<MeetuResponse<D>>(config?.skip ? null : path, config);
   return response;
 };
 

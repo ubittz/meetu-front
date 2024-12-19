@@ -41,7 +41,7 @@ function ClassInfo({ setPaddingTop }: { setPaddingTop: (paddingTop: number) => v
   const { data } = useMeetingDetail(id ?? '');
 
   const handleClickShowHost = () => {
-    navigate(pathGenerator(PAGES.PROFILE, '/1'));
+    // navigate(pathGenerator(PAGES.PROFILE, `/${data.}`));
   };
 
   useEffect(() => {
