@@ -13,6 +13,7 @@ import { COLORS } from '@@constants/colors';
 import { CATEGORY_STRINGS } from '@@pages/Home/constants';
 import { PAGES } from '@@router/constants';
 import { pathGenerator } from '@@router/utils';
+import { DISTRICT } from '@@stores/meeting/constants';
 import { useMeetingDetail } from '@@stores/meeting/hooks';
 
 const StyledClassInfo = styled(Flex.Vertical)`
@@ -40,6 +41,8 @@ function ClassInfo({ setPaddingTop }: { setPaddingTop: (paddingTop: number) => v
 
   const { data } = useMeetingDetail(id ?? '');
 
+  const district = Object.entries(DISTRICT).find(([, value]) => data?.address.includes(value))?.[0];
+
   const handleClickShowHost = () => {
     // navigate(pathGenerator(PAGES.PROFILE, `/${data.}`));
   };
@@ -56,7 +59,7 @@ function ClassInfo({ setPaddingTop }: { setPaddingTop: (paddingTop: number) => v
       <Flex.Vertical gap={16}>
         <Flex.Horizontal gap={8}>
           <Badge theme={BADGE_THEME.PRIMARY}>HOT</Badge>
-          <Badge theme={BADGE_THEME.OUTLINE}>SEOUL</Badge>
+          {district && <Badge theme={BADGE_THEME.OUTLINE}>{district}</Badge>}
         </Flex.Horizontal>
         <Flex.Vertical gap={8}>
           <Typography.Main fontSize='20px' fontWeight={700}>
