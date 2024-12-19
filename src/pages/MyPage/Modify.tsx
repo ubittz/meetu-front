@@ -20,6 +20,7 @@ import {
   changeProfileFailure,
   changeProfileRequest,
   changeProfileSuccess,
+  fetchMeRequest,
   userEditFailure,
   userEditRequest,
   userEditSuccess,
@@ -58,6 +59,7 @@ function ModifyMyInfo() {
 
   const handleConfirm = () => {
     if (editType === 'success') {
+      dispatch(fetchMeRequest());
       navigate(pathGenerator(PAGES.MY_PAGE));
     } else {
       setVisible(false);
@@ -118,6 +120,7 @@ function ModifyMyInfo() {
     id: user.id ?? '',
     checkedEmail: false,
     image: user.imageUrl,
+    description: user.userDescription,
   };
 
   return (

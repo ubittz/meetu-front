@@ -40,6 +40,7 @@ export interface User {
   gender: Gender;
   createDatetime: Date;
   isHost: boolean;
+  userDescription?: string;
   imageUrl: string;
 }
 
