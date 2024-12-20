@@ -67,9 +67,11 @@ function ProfileInfo() {
         <MenuBox to={pathGenerator(PAGES.MY_PAGE, '/purchase-history')} icon={<WalletIcon />}>
           결제 내역
         </MenuBox>
-        <MenuBox to={pathGenerator(PAGES.MY_PAGE, '/request-host-register')} icon={<FaxIcon />}>
-          호스트 등록 신청
-        </MenuBox>
+        {!me?.isHost && (
+          <MenuBox to={pathGenerator(PAGES.MY_PAGE, '/request-host-register')} icon={<FaxIcon />}>
+            호스트 등록 신청
+          </MenuBox>
+        )}
         <MenuBox to={pathGenerator(PAGES.MY_PAGE, '/my-class')} icon={<ListIcon />}>
           내 모임
         </MenuBox>
