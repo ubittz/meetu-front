@@ -4,7 +4,6 @@ import FindId from '@@pages/FindAccount/FindId';
 import FindIdComplete from '@@pages/FindAccount/FindIdComplete';
 import FindPassword from '@@pages/FindAccount/FindPassword';
 import ResetPassword from '@@pages/FindAccount/ResetPassword';
-import VerifyOTP from '@@pages/FindAccount/VerifyOTP';
 import Login from '@@pages/Login';
 import Register from '@@pages/Register';
 import RegisterComplete from '@@pages/Register/Complete';
@@ -25,7 +24,6 @@ function Router() {
       <Route path={pathGenerator(PAGES.FIND_ACCOUNT, '/id')} element={<FindId />} />
       <Route path={pathGenerator(PAGES.FIND_ACCOUNT, '/id/complete')} element={<FindIdComplete />} />
       <Route path={pathGenerator(PAGES.FIND_ACCOUNT, '/password')} element={<FindPassword />} />
-      <Route path={pathGenerator(PAGES.FIND_ACCOUNT, '/password/otp')} element={<VerifyOTP />} />
       <Route path={pathGenerator(PAGES.FIND_ACCOUNT, '/password/reset')} element={<ResetPassword />} />
       <Route path='*' element={token ? <AuthRouter /> : <Navigate to={pathGenerator(PAGES.LOGIN)} replace />} />
     </Routes>

@@ -1,6 +1,6 @@
 import { createAction, createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { FindIdForm, VerifyIdentityForm, VerifyOTPForm } from '@@pages/FindAccount/types';
+import { FindIdForm, VerifyIdentityForm } from '@@pages/FindAccount/types';
 import {
   AuthState,
   LoginDTO,
@@ -8,6 +8,7 @@ import {
   RegisterDTO,
   RegisterResponse,
   User,
+  UserChangePasswordRequest,
   UserEditRequestDTO,
   UserEditResponse,
   UserVerifyIdentityResponse,
@@ -49,11 +50,16 @@ export const findIdSuccess = createAction<string>(`${PREFIX}/findIdSuccess`);
 export const findIdFailure = createAction<string>(`${PREFIX}/findIdFailure`);
 
 export const verifyIdentityRequest = createAction<VerifyIdentityForm>(`${PREFIX}/verifyIdentityRequest`);
+export const verifyIdentitySuccess = createAction<UserVerifyIdentityResponse>(`${PREFIX}/verifyIdentitySuccess`);
 export const verifyIdentityFailure = createAction<string>(`${PREFIX}/verifyIdentityFailure`);
 
-export const verifyOTPRequest = createAction<VerifyOTPForm>(`${PREFIX}/verifyOTPRequest`);
+export const verifyOTPRequest = createAction<string>(`${PREFIX}/verifyOTPRequest`);
 export const verifyOTPSuccess = createAction(`${PREFIX}/verifyOTPSuccess`);
 export const verifyOTPFailure = createAction<string>(`${PREFIX}/verifyOTPFailure`);
+
+export const resetPasswordRequest = createAction<UserChangePasswordRequest>(`${PREFIX}/resetPasswordRequest`);
+export const resetPasswordSuccess = createAction(`${PREFIX}/resetPasswordSuccess`);
+export const resetPasswordFailure = createAction<string>(`${PREFIX}/resetPasswordFailure`);
 
 const authSlice = createSlice({
   name: PREFIX,
@@ -77,12 +83,9 @@ const authSlice = createSlice({
       if (!state.me) return;
       state.me = { ...state.me, imageUrl: payload };
     },
-    verifyIdentitySuccess(state, { payload }: PayloadAction<UserVerifyIdentityResponse>) {
-      state.changeKey = payload.changeKey;
-    },
   },
 });
 
-export const { loginSuccess, logout, fetchMeSuccess, userEditSuccess, changeProfileSuccess, verifyIdentitySuccess } = authSlice.actions;
+export const { loginSuccess, logout, fetchMeSuccess, userEditSuccess, changeProfileSuccess } = authSlice.actions;
 
 export default authSlice.reducer;

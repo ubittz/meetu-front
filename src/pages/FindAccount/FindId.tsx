@@ -1,3 +1,5 @@
+import { useState } from 'react';
+
 import { Formik } from 'formik';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -14,13 +16,17 @@ import { findIdFailure, findIdRequest, findIdSuccess } from '@@stores/auth/reduc
 
 const initialValues: FindIdForm = {
   email: '',
+  authNumber: '',
 };
 
 function FindId() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const { visible, setVisible } = useModal();
+  const [findedId, setFindedId] = useState<string>();
+
+  const { visible: successVisible, setVisible: setSuccessVisible } = useModal();
+  const { visible, setVisible, content, setContent } = useModal();
 
   const handleSubmit = (form: FindIdForm) => {
     dispatch(findIdRequest(form));
@@ -30,20 +36,26 @@ function FindId() {
     setVisible(false);
   };
 
+  const handleConfirmSuccess = () => {
+    navigate(pathGenerator(PAGES.FIND_ACCOUNT, '/id/complete'), {
+      state: {
+        findedId,
+      },
+    });
+  };
+
   useActionSubscribe({
     type: findIdSuccess.type,
     callback: ({ payload }: ReturnType<typeof findIdSuccess>) => {
-      navigate(pathGenerator(PAGES.FIND_ACCOUNT, '/id/complete'), {
-        state: {
-          findedId: payload,
-        },
-      });
+      setSuccessVisible(true);
+      setFindedId(payload);
     },
   });
 
   useActionSubscribe({
     type: findIdFailure.type,
-    callback: () => {
+    callback: ({ payload }: ReturnType<typeof findIdFailure>) => {
+      setContent(payload);
       setVisible(true);
     },
   });
@@ -51,8 +63,11 @@ function FindId() {
   return (
     <Formik initialValues={initialValues} onSubmit={handleSubmit} validationSchema={findIdSchema}>
       <>
+        <Modal visible={successVisible} setVisible={setSuccessVisible} onConfirm={handleConfirmSuccess}>
+          인증을 완료했습니다.
+        </Modal>
         <Modal visible={visible} setVisible={setVisible} onConfirm={handleConfirm}>
-          인증을 실패했습니다.
+          {content}
         </Modal>
         <FindIdFormContent />
       </>

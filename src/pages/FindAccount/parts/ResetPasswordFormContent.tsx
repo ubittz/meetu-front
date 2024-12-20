@@ -21,7 +21,7 @@ const StyledFindIdFormContent = styled(FullScreen)`
 function ResetPasswordFormContent() {
   const navigate = useNavigate();
 
-  const { getFieldProps, handleSubmit } = useFormikContext<ResetPasswordForm>();
+  const { getFieldProps, handleSubmit, errors, isValid } = useFormikContext<ResetPasswordForm>();
 
   const handleClickSkip = () => {
     navigate(pathGenerator(PAGES.LOGIN));
@@ -44,6 +44,7 @@ function ResetPasswordFormContent() {
                 placeholder: '비밀번호를 입력해주세요',
                 type: 'password',
               }}
+              errorMessage={errors.password}
             />
             <InputFormGroup
               inputProps={{
@@ -51,6 +52,7 @@ function ResetPasswordFormContent() {
                 placeholder: '비밀번호를 한번 더 입력해주세요.',
                 type: 'password',
               }}
+              errorMessage={errors.passwordCheck}
             />
           </Flex.Vertical>
         </Flex.Vertical>
@@ -58,7 +60,9 @@ function ResetPasswordFormContent() {
           <Button.Medium theme='outline' type='button' onClick={handleClickSkip}>
             다음에 변경
           </Button.Medium>
-          <Button.Medium type='submit'>비밀번호 재설정</Button.Medium>
+          <Button.Medium type='submit' disabled={!isValid}>
+            비밀번호 재설정
+          </Button.Medium>
         </FooterContainer>
       </StyledFindIdFormContent>
     </Form>

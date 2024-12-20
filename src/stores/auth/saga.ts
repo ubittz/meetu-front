@@ -1,7 +1,6 @@
 import { AxiosError } from 'axios';
-import { put, select, takeLatest } from 'redux-saga/effects';
+import { put, takeLatest } from 'redux-saga/effects';
 
-import { AppState } from '@@store/types';
 import {
   loginFailure,
   loginRequest,
@@ -33,6 +32,9 @@ import {
   verifyOTPRequest,
   verifyOTPSuccess,
   verifyOTPFailure,
+  resetPasswordRequest,
+  resetPasswordSuccess,
+  resetPasswordFailure,
 } from '@@stores/auth/reducer';
 import { LoginResponse, RegisterResponse, User, UserEditResponse, UserVerifyIdentityResponse } from '@@stores/auth/types';
 import { saveToken } from '@@utils/localStorage';
@@ -141,10 +143,12 @@ function* findId({ payload }: ReturnType<typeof findIdRequest>) {
     const response: MeetuResponse<string> = yield authenticatedRequest.post('/api/user/find-id', {
       data: payload,
     });
-
-    const action = response.ok ? findIdSuccess(response.data) : findIdFailure('등록된 회원이 없습니다.');
-
-    yield put(action);
+    if (response.ok) {
+      yield put(findIdSuccess(response.data));
+    } else {
+      const errorMessage = (response as unknown as AxiosError<{ errorMessage: string }>).response?.data?.errorMessage;
+      yield put(findIdFailure(errorMessage || '인증을 실패했습니다.'));
+    }
   } catch (e) {
     yield put(findIdFailure((e as Error).message));
   }
@@ -156,9 +160,12 @@ function* verifyIdentity({ payload }: ReturnType<typeof verifyIdentityRequest>) 
       data: payload,
     });
 
-    const action = response.ok ? verifyIdentitySuccess(response.data) : verifyIdentityFailure('등록된 회원이 없습니다.');
-
-    yield put(action);
+    if (response.ok) {
+      yield put(verifyIdentitySuccess(response.data));
+    } else {
+      const errorMessage = (response as unknown as AxiosError<{ errorMessage: string }>).response?.data?.errorMessage;
+      yield put(verifyIdentityFailure(errorMessage || '인증을 실패했습니다.'));
+    }
   } catch (e) {
     yield put(verifyIdentityFailure((e as Error).message));
   }
@@ -166,11 +173,10 @@ function* verifyIdentity({ payload }: ReturnType<typeof verifyIdentityRequest>) 
 
 function* verifyOTP({ payload }: ReturnType<typeof verifyOTPRequest>) {
   try {
-    const changeKey = select((state: AppState) => state.auth.changeKey);
-    const response: MeetuResponse<string> = yield authenticatedRequest.post('/api/user/verify-identity', {
-      data: {
-        ...payload,
-        changeKey,
+    const response: MeetuResponse<string> = yield authenticatedRequest.post('/api/user/send-auth', {
+      data: payload,
+      headers: {
+        'Content-Type': 'text/plain',
       },
     });
 
@@ -202,6 +208,20 @@ function* changeProfile({ payload }: ReturnType<typeof changeProfileRequest>) {
   }
 }
 
+function* resetPassword({ payload }: ReturnType<typeof resetPasswordRequest>) {
+  try {
+    const response: MeetuResponse<string> = yield authenticatedRequest.patch('/api/user/change-password', {
+      data: payload,
+    });
+
+    const action = response.ok ? resetPasswordSuccess() : resetPasswordFailure('비밀번호 변경을 실패했습니다.');
+
+    yield put(action);
+  } catch (e) {
+    yield put(resetPasswordFailure((e as Error).message));
+  }
+}
+
 export default function* defaultSaga() {
   yield takeLatest(loginRequest.type, login);
   yield takeLatest(checkDuplicateIdRequest.type, checkDuplicateId);
@@ -213,4 +233,5 @@ export default function* defaultSaga() {
   yield takeLatest(verifyIdentityRequest.type, verifyIdentity);
   yield takeLatest(verifyOTPRequest.type, verifyOTP);
   yield takeLatest(changeProfileRequest.type, changeProfile);
+  yield takeLatest(resetPasswordRequest.type, resetPassword);
 }

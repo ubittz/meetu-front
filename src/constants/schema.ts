@@ -39,6 +39,9 @@ export const findIdSchema = object({
   email: string()
     .required('이메일을 입력해주세요.')
     .matches(/^[a-zA-Z0-9+-_.]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/, { message: '이메일을 정확히 입력해주세요.' }),
+  authNumber: string()
+    .required('인증번호를 입력해주세요')
+    .matches(/^\d{6}$/, { message: '인증번호를 정확히 입력해주세요' }),
 });
 
 export const verifyIdentitySchema = object({
@@ -46,10 +49,18 @@ export const verifyIdentitySchema = object({
   email: string()
     .required('이메일을 입력해주세요.')
     .matches(/^[a-zA-Z0-9+-_.]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/, { message: '이메일을 정확히 입력해주세요.' }),
+  authNumber: string()
+    .required('인증번호를 입력해주세요')
+    .matches(/^\d{6}$/, { message: '인증번호를 정확히 입력해주세요' }),
 });
 
-export const verifyOTPSchema = object({
-  otp: string().required('인증번호를 입력해주세요.'),
+export const resetPasswordSchema = object({
+  password: string()
+    .required('비밀번호를 입력해주세요.')
+    .matches(new RegExp(/^[a-zA-Z0-9]{8,20}$/), { message: '비밀번호는 영문 대소문자 + 숫자 조합 8~20글자 입니다.' }),
+  passwordCheck: string()
+    .required('비밀번호를 확인해주세요.')
+    .oneOf([ref('password')], '비밀번호가 일치하지 않습니다.'),
 });
 
 export const createContactSchema = object({

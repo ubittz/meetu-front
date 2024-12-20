@@ -42,6 +42,7 @@ const StyledModal = styled.div`
 
     .modal_box__content {
       flex: 1;
+      text-align: center;
     }
 
     .modal_box__button {
