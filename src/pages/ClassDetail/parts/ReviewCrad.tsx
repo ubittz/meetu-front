@@ -5,7 +5,6 @@ import Flex from '@@components/Flex';
 import Typography from '@@components/Typography';
 import { COLORS } from '@@constants/colors';
 import { StartIcon } from '@@pages/ClassDetail/icons';
-import ReviewImage from '@@pages/ClassDetail/images/review.jpeg';
 import { ReviewListResponse } from '@@stores/meeting/types';
 
 const StyledReviewCard = styled(Flex.Vertical)`
@@ -30,12 +29,11 @@ function ReviewCard({ review }: { review: ReviewListResponse }) {
   return (
     <StyledReviewCard gap={12}>
       <Flex.Horizontal gap={4}>
-        <div className='review_card__image'>
-          <img src={ReviewImage} alt='Review Image' />
-        </div>
-        <div className='review_card__image'>
-          <img src={ReviewImage} alt='Review Image' />
-        </div>
+        {review.imageUrls?.map((url) => (
+          <div className='review_card__image' key={url}>
+            <img src={url} alt='Review Image' />
+          </div>
+        ))}
       </Flex.Horizontal>
       <Flex.Horizontal gap={4} alignItems='center'>
         <Typography.Sub fontWeight={700} fontSize='12px'>
