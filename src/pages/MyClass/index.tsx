@@ -9,17 +9,29 @@ import FullScreen from '@@components/FullScreen';
 import Header from '@@components/Header';
 import Tab from '@@components/Tab';
 import Typography from '@@components/Typography';
-import { CLASS_LIST } from '@@pages/Home/constants';
 import ContentTabContent from '@@pages/MyClass/parts/ClassTabContent';
 import { ACCOUNT_TYPE } from '@@pages/Profile/constants';
+import { useMeetingByUser } from '@@stores/meeting/hooks';
+import { MeetingByUserQuery } from '@@stores/meeting/types';
+import { useQueryParams } from '@@utils/request/hooks';
 
 const TAB_LIST = ['전체', '진행예정', '모임확정', '진행완료'];
+
+const initialQuery: MeetingByUserQuery = {
+  page: 0,
+};
 
 function MyClass() {
   const navigate = useNavigate();
   const accountType = ACCOUNT_TYPE.HOST;
 
   const [selectedIndex, setSelectedIndex] = useState<number>(0);
+
+  const { query, updateQuery } = useQueryParams(initialQuery, {
+    initialSearch: ({ page }) => page === undefined,
+  });
+
+  const { content, page, isLoading } = useMeetingByUser(query, query.page === undefined);
 
   const handleClickBack = () => {
     navigate(-1);
@@ -34,15 +46,15 @@ function MyClass() {
         <Typography.Main className='tw-mx-[20px] tw-mt-[12px]' fontWeight={700} fontSize='20px'>
           총{' '}
           <Typography.Point fontWeight='inherit' fontSize='inherit' as='span'>
-            N
+            {page.total}
           </Typography.Point>
           개
         </Typography.Main>
-        <Tab itemList={TAB_LIST} selectedIndex={selectedIndex} onChange={(index) => setSelectedIndex(index)}>
-          <ContentTabContent classList={CLASS_LIST} />
-          <ContentTabContent classList={CLASS_LIST} />
-          <ContentTabContent classList={CLASS_LIST} />
-          <ContentTabContent classList={CLASS_LIST} />
+        <Tab itemList={TAB_LIST} selectedIndex={selectedIndex} onChange={(index) => setSelectedIndex(index)} isLoading={isLoading}>
+          <ContentTabContent meetingList={content ?? []} />
+          <ContentTabContent meetingList={content ?? []} />
+          <ContentTabContent meetingList={content ?? []} />
+          <ContentTabContent meetingList={content ?? []} />
         </Tab>
       </Flex.Vertical>
       {accountType === ACCOUNT_TYPE.HOST && (

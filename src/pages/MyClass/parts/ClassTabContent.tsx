@@ -1,12 +1,12 @@
-import { Class } from '@@components/ClassBox/types';
 import Flex from '@@components/Flex';
 import MyClassItem from '@@pages/MyClass/parts/MyClassItem';
+import { Meeting } from '@@stores/meeting/types';
 
-function ClassTabContent({ classList }: { classList: Class[] }) {
+function ClassTabContent({ meetingList }: { meetingList: Meeting[] }) {
   return (
     <Flex.Vertical className='tw-pt-[40px] tw-px-[20px]' gap={30} flex={1}>
-      {classList.map((classItem) => (
-        <MyClassItem key={classItem.id} classItem={classItem} />
+      {meetingList.map((meeting) => (
+        <MyClassItem key={meeting.meetingId} meeting={meeting} />
       ))}
     </Flex.Vertical>
   );

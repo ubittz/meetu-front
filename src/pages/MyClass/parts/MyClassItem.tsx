@@ -4,6 +4,7 @@ import Button from '@@components/Button';
 import ClassBox from '@@components/ClassBox';
 import { ClassBoxProps } from '@@components/ClassBox/types';
 import Flex from '@@components/Flex';
+import { useAppState } from '@@store/hooks';
 
 const StyledButtonContainer = styled(Flex.Horizontal)`
   margin-top: 8px;
@@ -12,13 +13,17 @@ const StyledButtonContainer = styled(Flex.Horizontal)`
   }
 `;
 
-function MyClassItem(props: ClassBoxProps) {
+function MyClassItem({ meeting, ...props }: ClassBoxProps) {
+  const me = useAppState((state) => state.auth.me);
+
   return (
-    <ClassBox {...props}>
-      <StyledButtonContainer gap={12}>
-        <Button.Tiny theme='outline'>수정하기</Button.Tiny>
-        <Button.Tiny theme='secondary'>삭제</Button.Tiny>
-      </StyledButtonContainer>
+    <ClassBox {...props} meeting={meeting}>
+      {me?.isHost && (
+        <StyledButtonContainer gap={12}>
+          <Button.Tiny theme='outline'>수정하기</Button.Tiny>
+          <Button.Tiny theme='secondary'>삭제</Button.Tiny>
+        </StyledButtonContainer>
+      )}
     </ClassBox>
   );
 }

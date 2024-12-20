@@ -20,9 +20,10 @@ export const useMeetingDetail = (id: string) => {
   };
 };
 
-export const useMeetingByUser = (query: MeetingByUserQuery) => {
+export const useMeetingByUser = (query: MeetingByUserQuery, skip?: boolean) => {
   const data = useSWRList<MeetuPageResponse<Meeting>>('/api/meeting/list/user', {
     query,
+    skip,
   });
 
   return formatSWRListResponse(data);
