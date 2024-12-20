@@ -42,6 +42,10 @@ const StyledHeaderSelect = styled.select`
   color: ${COLORS.TEXT_200};
   text-align: center;
   outline: none;
+
+  & > option {
+    font-size: 20px;
+  }
 `;
 
 const StyledSelect = styled.select`

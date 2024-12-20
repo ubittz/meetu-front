@@ -35,3 +35,8 @@ export const formatSWRListResponse = <Data>(response: SWRResponse<MeetuResponse<
     },
   } as const;
 };
+
+export const createBlobJSON = (jsonString: string) =>
+  new Blob([jsonString], {
+    type: 'application/json,',
+  });

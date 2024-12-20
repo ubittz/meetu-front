@@ -15,6 +15,7 @@ import PaymentComplete from '@@pages/Payment/Complete';
 import Profile from '@@pages/Profile';
 import PurchaseHistory from '@@pages/PurchaseHistory';
 import PurchaseDetail from '@@pages/PurchaseHistory/Detail';
+import ReviewCreate from '@@pages/ReviewCreate';
 import { PAGES } from '@@router/constants';
 import { pathGenerator } from '@@router/utils';
 import { useAppState } from '@@store/hooks';
@@ -41,6 +42,7 @@ function AuthRouter() {
       <Route path={pathGenerator(PAGES.FIND_CLASS)} element={<FindClass />} />
       <Route path={pathGenerator(PAGES.FIND_CLASS, '/:category')} element={<FindClass />} />
       <Route path={pathGenerator(PAGES.CLASS, '/:id')} element={<ClassDetail />} />
+      <Route path={pathGenerator(PAGES.CLASS, '/:id/review')} element={<ReviewCreate />} />
       <Route path={pathGenerator(PAGES.PAYMENT, '/complete')} element={<PaymentComplete />} />
       <Route path={pathGenerator(PAGES.PAYMENT, '/:id')} element={<Payment />} />
       <Route path={pathGenerator(PAGES.PROFILE, '/:id')} element={<Profile />} />

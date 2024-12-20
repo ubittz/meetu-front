@@ -74,3 +74,9 @@ export interface ContactAddDTO {
   secretStatus: boolean;
   contactAnswerStatus: boolean;
 }
+
+export interface ReviewAddRequest {
+  meetingId: string;
+  score: number;
+  description: string;
+}

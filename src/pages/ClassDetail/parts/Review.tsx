@@ -1,6 +1,7 @@
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 
+import Button from '@@components/Button';
 import Flex from '@@components/Flex';
 import Pagination from '@@components/Pagination';
 import TabHeader from '@@components/Tab/TabHeader';
@@ -61,6 +62,9 @@ function Review({ onChangeTab }: { onChangeTab: (index: number) => void }) {
           </Flex.Vertical>
           <Pagination current={page.current} lastPage={page.lastPage} pageKey='reviewPage' replace />
         </Flex.Vertical>
+        <Flex.Horizontal>
+          <Button.Tiny className='tw-flex-1 tw-mt-[12px]'>리뷰 작성하기</Button.Tiny>
+        </Flex.Horizontal>
       </Flex.Vertical>
     </StyledReview>
   );

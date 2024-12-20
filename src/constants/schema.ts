@@ -1,4 +1,4 @@
-import { boolean, object, ref, string } from 'yup';
+import { boolean, number, object, ref, string } from 'yup';
 
 export const registerSchema = object({
   userId: string().required('아이디를 입력해주세요.'),
@@ -76,4 +76,9 @@ export const paymentSchema = object({
       message: '주문자 연락처를 입력해주세요.',
     }),
   agreeFinancial: boolean().isTrue('주문 관련 약관을 동의해주세요.'),
+});
+
+export const reviewCreateSchema = object({
+  score: number().required('별점을 선택해주세요.'),
+  description: string().required('내용을 입력해주세요.'),
 });
