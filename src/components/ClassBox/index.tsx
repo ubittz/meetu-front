@@ -54,24 +54,26 @@ function ClassBox({ meeting, children, ...props }: PropsWithChildren<ClassBoxPro
   const district = Object.entries(DISTRICT).find(([, value]) => meeting.meetingMainPlace.includes(value))?.[0];
 
   return (
-    <StyledClassBox {...props} onClick={handleClick}>
-      <div className='class_box__image'>
-        <img src={Class1Image} alt='Class Box Image' />
-      </div>
-      <Flex.Vertical className='tw-mt-[8px]' gap={12}>
-        <Flex.Horizontal gap={4}>
-          <Badge theme='primary'>HOT</Badge>
-          {district && <Badge theme='outline'>{district}</Badge>}
-        </Flex.Horizontal>
-        <Flex.Vertical gap={4}>
-          <Typography.Main className='class_box__title' fontSize='14px' fontWeight={500}>
-            {meeting.meetingName}
-          </Typography.Main>
-          <Typography.Third fontSize='12px' className='class_box__description'>
-            {meeting.meetingIntro}
-          </Typography.Third>
+    <StyledClassBox {...props}>
+      <Flex.Vertical onClick={handleClick}>
+        <div className='class_box__image'>
+          <img src={Class1Image} alt='Class Box Image' />
+        </div>
+        <Flex.Vertical className='tw-mt-[8px]' gap={12}>
+          <Flex.Horizontal gap={4}>
+            <Badge theme='primary'>HOT</Badge>
+            {district && <Badge theme='outline'>{district}</Badge>}
+          </Flex.Horizontal>
+          <Flex.Vertical gap={4}>
+            <Typography.Main className='class_box__title' fontSize='14px' fontWeight={500}>
+              {meeting.meetingName}
+            </Typography.Main>
+            <Typography.Third fontSize='12px' className='class_box__description'>
+              {meeting.meetingIntro}
+            </Typography.Third>
+          </Flex.Vertical>
+          <Typography.Main fontWeight={700}>{meeting.meetingCost.toLocaleString()}원</Typography.Main>
         </Flex.Vertical>
-        <Typography.Main fontWeight={700}>{meeting.meetingCost.toLocaleString()}원</Typography.Main>
       </Flex.Vertical>
       {children}
     </StyledClassBox>

@@ -13,15 +13,23 @@ const StyledButtonContainer = styled(Flex.Horizontal)`
   }
 `;
 
-function MyClassItem({ meeting, ...props }: ClassBoxProps) {
+function MyClassItem({ meeting, onDelete, ...props }: ClassBoxProps & { onDelete: (id: string) => void }) {
   const me = useAppState((state) => state.auth.me);
+
+  const handleClickDelete = () => {
+    if (meeting?.meetingId) {
+      onDelete(meeting.meetingId);
+    }
+  };
 
   return (
     <ClassBox {...props} meeting={meeting}>
       {me?.isHost && (
         <StyledButtonContainer gap={12}>
           <Button.Tiny theme='outline'>수정하기</Button.Tiny>
-          <Button.Tiny theme='secondary'>삭제</Button.Tiny>
+          <Button.Tiny theme='secondary' onClick={handleClickDelete}>
+            삭제
+          </Button.Tiny>
         </StyledButtonContainer>
       )}
     </ClassBox>

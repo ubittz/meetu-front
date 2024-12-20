@@ -19,6 +19,10 @@ export const addReviewRequest = createAction<{ review: ReviewAddRequest; files: 
 export const addReviewSuccess = createAction(`${PREFIX}/addReviewSuccess`);
 export const addReviewFailure = createAction<string>(`${PREFIX}/addReviewFailure`);
 
+export const deleteMeetingRequest = createAction<string>(`${PREFIX}/deleteMeetingRequest`);
+export const deleteMeetingSuccess = createAction(`${PREFIX}/deleteMeetingSuccess`);
+export const deleteMeetingFailure = createAction<string>(`${PREFIX}/deleteMeetingFailure`);
+
 const meetingSlice = createSlice({
   name: PREFIX,
   initialState,
