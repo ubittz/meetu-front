@@ -32,10 +32,12 @@ function OrdererInfo() {
           <Typography.Sub fontSize='14px'>연락처</Typography.Sub>
           <Typography.Sub fontSize='14px'>{customer.tel}</Typography.Sub>
         </Flex.Horizontal>
-        <Flex.Horizontal justifyContent='space-between'>
-          <Typography.Sub fontSize='14px'>이메일</Typography.Sub>
-          <Typography.Sub fontSize='14px'>testname@gmail.com</Typography.Sub>
-        </Flex.Horizontal>
+        {customer.email && (
+          <Flex.Horizontal justifyContent='space-between'>
+            <Typography.Sub fontSize='14px'>이메일</Typography.Sub>
+            <Typography.Sub fontSize='14px'>{customer.email}</Typography.Sub>
+          </Flex.Horizontal>
+        )}
       </Flex.Vertical>
     </PurchaseDetailSection>
   );

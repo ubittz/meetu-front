@@ -1,4 +1,4 @@
-import { BOOTPAY_FAIL_CODE, BOOTPAY_SUCCESS_CODE } from '@@stores/payment/constants';
+import { BOOTPAY_FAIL_CODE, BOOTPAY_SUCCESS_CODE, SIMPLE_TYPE } from '@@stores/payment/constants';
 import { asType } from '@@types/common';
 
 export interface PaymentAddDTO {
@@ -45,6 +45,10 @@ export interface PaymentDetailResponse {
   meetingName: string;
   customer: Customer;
   amount: Amount;
+  card?: Card;
+  transfer?: Transfer;
+  simple?: Simple;
+  pgData?: PgData;
 }
 
 export interface Amount {
@@ -53,4 +57,30 @@ export interface Amount {
   orderCoupon: number;
   orderPoint: number;
   orderLatestAmount: number;
+}
+
+export interface Card {
+  companyName?: string;
+  no?: string;
+  plan?: number; // 할부 개월 0이면 일시불
+}
+
+export interface Transfer {
+  bankName?: string;
+  accountNo?: string;
+  depositNmae?: string;
+}
+
+export type SimpleType = asType<typeof SIMPLE_TYPE>;
+
+export interface Simple {
+  type: SimpleType;
+}
+
+export interface PgData {
+  method: string;
+  methodNo: string;
+  approveNo: string;
+  price: number;
+  purchasedAt: Date;
 }

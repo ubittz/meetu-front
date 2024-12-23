@@ -7,3 +7,13 @@ export const BOOTPAY_FAIL_CODE = {
   CANCEL: 'cancel',
   ERROR: 'error',
 } as const;
+
+export const SIMPLE_TYPE = {
+  NAVER: 'NAVER',
+  KAKAO: 'KAKAO',
+} as const;
+
+export const SIMPLE_TYPE_STRING = {
+  [SIMPLE_TYPE.NAVER]: '네이버페이',
+  [SIMPLE_TYPE.KAKAO]: '카카오페이',
+};

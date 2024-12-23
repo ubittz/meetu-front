@@ -3,9 +3,10 @@ import styled from 'styled-components';
 
 import Flex from '@@components/Flex';
 import Typography from '@@components/Typography';
+import { usePaymentDetail } from '@@pages/PurchaseHistory/hooks';
 import PurchaseDetailSection from '@@pages/PurchaseHistory/parts/PurchaseDetailSection';
 
-import { usePaymentDetail } from '../hooks';
+import { getPaymentMethod, getPaymentType } from '../utils';
 
 const StyledBetween = styled(Flex.Horizontal)`
   justify-content: space-between;
@@ -33,10 +34,6 @@ function PurchaseInfo() {
           <Typography.Sub fontSize='14px'>{amount.orderAmount.toLocaleString()}원</Typography.Sub>
         </StyledBetween>
         <Flex.Vertical gap={8}>
-          {/* <StyledBetween>
-            <Typography.Sub fontSize='14px'>부가 내역</Typography.Sub>
-            <Typography.Sub fontSize='14px'>{amount.orderLatestAmount}원</Typography.Sub>
-          </StyledBetween> */}
           <StyledSection>
             <StyledBetween>
               <Typography.Sub fontSize='14px'>상품 할인 금액</Typography.Sub>
@@ -62,12 +59,11 @@ function PurchaseInfo() {
           </StyledBetween>
           <StyledSection>
             <StyledBetween>
-              <Typography.Sub fontSize='14px'>신용카드</Typography.Sub>
-              <Typography.Sub fontSize='14px'>KB 국민카드 결제</Typography.Sub>
+              <Typography.Sub fontSize='14px'>{getPaymentType(data)}</Typography.Sub>
+              <Typography.Sub className='tw-text-right' fontSize='14px'>
+                {getPaymentMethod(data)}
+              </Typography.Sub>
             </StyledBetween>
-            <Flex.Horizontal justifyContent='flex-end'>
-              <Typography.Sub fontSize='14px'>5363-****-****-4057 / 일시불</Typography.Sub>
-            </Flex.Horizontal>
           </StyledSection>
         </Flex.Vertical>
         <StyledBetween alignItems='center'>
