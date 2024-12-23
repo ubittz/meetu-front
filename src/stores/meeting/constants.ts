@@ -17,3 +17,8 @@ export const DISTRICT = {
   GYEONGNAM: '경상남도',
   JEJU: '제주',
 } as const;
+
+export const MEETING_FILTER_TYPE = {
+  CONFIRMED_WAITING: 'CONFIRMED_WAITING',
+  IN_PROGRESS: 'IN_PROGRESS',
+} as const;

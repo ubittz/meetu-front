@@ -1,4 +1,6 @@
 import { Category } from '@@pages/Home/types';
+import { MEETING_FILTER_TYPE } from '@@stores/meeting/constants';
+import { asType } from '@@types/common';
 
 export interface MeetingState {
   recentList: Meeting[];
@@ -58,6 +60,7 @@ export interface MeetingByUserQuery {
   page: number;
   size?: number;
   userId?: string;
+  filterType?: MeetingFilterType;
 }
 
 export interface ReviewListQuery {
@@ -81,3 +84,5 @@ export interface ReviewAddRequest {
   score: number;
   description: string;
 }
+
+export type MeetingFilterType = asType<typeof MEETING_FILTER_TYPE>;

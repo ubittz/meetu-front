@@ -15,12 +15,26 @@ import Typography from '@@components/Typography';
 import ContentTabContent from '@@pages/MyClass/parts/ClassTabContent';
 import { ACCOUNT_TYPE } from '@@pages/Profile/constants';
 import { useActionSubscribe } from '@@store/middlewares/actionMiddleware';
+import { MEETING_FILTER_TYPE } from '@@stores/meeting/constants';
 import { useMeetingByUser } from '@@stores/meeting/hooks';
 import { deleteMeetingFailure, deleteMeetingRequest, deleteMeetingSuccess } from '@@stores/meeting/reducer';
 import { MeetingByUserQuery } from '@@stores/meeting/types';
 import { useQueryParams } from '@@utils/request/hooks';
 
-const TAB_LIST = ['전체', '진행예정', '모임확정', '진행완료'];
+const TAB_LIST = [
+  {
+    title: '전체',
+    value: '',
+  },
+  {
+    title: '모임확정',
+    value: MEETING_FILTER_TYPE.CONFIRMED_WAITING,
+  },
+  {
+    title: '진행완료',
+    value: MEETING_FILTER_TYPE.IN_PROGRESS,
+  },
+];
 
 const initialQuery: MeetingByUserQuery = {
   page: 0,
@@ -31,7 +45,6 @@ function MyClass() {
   const navigate = useNavigate();
   const accountType = ACCOUNT_TYPE.HOST;
 
-  const [selectedIndex, setSelectedIndex] = useState<number>(0);
   const [deleteTargetId, setDeleteTargetId] = useState<string>();
 
   const { visible: deleteVisible, setVisible: setDeleteVisible } = useModal();
@@ -42,6 +55,9 @@ function MyClass() {
   });
 
   const { content: meetingList, page, isLoading } = useMeetingByUser(query, query.page === undefined);
+
+  const findedIndex = TAB_LIST.findIndex((tab) => tab.value === query.filterType);
+  const selectedIndex = findedIndex === -1 ? 0 : findedIndex;
 
   const handleClickBack = () => {
     navigate(-1);
@@ -62,6 +78,11 @@ function MyClass() {
     if (deleteTargetId) {
       dispatch(deleteMeetingRequest(deleteTargetId));
     }
+  };
+
+  const handleChangeTab = (selectedIndex: number) => {
+    const filterType = TAB_LIST[selectedIndex].value;
+    updateQuery('filterType', filterType);
   };
 
   useActionSubscribe({
@@ -99,8 +120,7 @@ function MyClass() {
           </Typography.Point>
           개
         </Typography.Main>
-        <Tab itemList={TAB_LIST} selectedIndex={selectedIndex} onChange={(index) => setSelectedIndex(index)} isLoading={isLoading}>
-          <ContentTabContent meetingList={meetingList ?? []} onDelete={handleDelete} />
+        <Tab itemList={TAB_LIST.map(({ title }) => title)} selectedIndex={selectedIndex} onChange={handleChangeTab} isLoading={isLoading}>
           <ContentTabContent meetingList={meetingList ?? []} onDelete={handleDelete} />
           <ContentTabContent meetingList={meetingList ?? []} onDelete={handleDelete} />
           <ContentTabContent meetingList={meetingList ?? []} onDelete={handleDelete} />
