@@ -5,7 +5,7 @@ import Flex from '@@components/Flex';
 import Typography from '@@components/Typography';
 import { COLORS } from '@@constants/colors';
 import { StartIcon } from '@@pages/ClassDetail/icons';
-import ProfileImage from '@@pages/Profile/images/review_profile_image.png';
+import { DefaultUserIcon } from '@@pages/MyPage/icons';
 import { ReviewListResponse } from '@@stores/meeting/types';
 
 const StyledProfileReviewBox = styled(Flex.Vertical)`
@@ -64,7 +64,6 @@ const StyledProfileReviewBox = styled(Flex.Vertical)`
 `;
 
 function ProfileReviewBox({ review }: { review: ReviewListResponse }) {
-  console.log(review);
   return (
     <StyledProfileReviewBox>
       <Flex.Horizontal className='profile_review__top' gap={12}>
@@ -95,7 +94,7 @@ function ProfileReviewBox({ review }: { review: ReviewListResponse }) {
       <Flex.Horizontal className='profile_review__bottom' alignItems='center' justifyContent='space-between'>
         <Flex.Horizontal alignItems='center' gap={4}>
           <div className='profile_review__profile_image'>
-            <img src={ProfileImage} alt='Profile Image' />
+            {review.userImageUrl ? <img src={review.userImageUrl} alt='User Profile Image' /> : <DefaultUserIcon />}
           </div>
           <Typography.Sub fontSize='10px' fontWeight='bold'>
             {review.userId}

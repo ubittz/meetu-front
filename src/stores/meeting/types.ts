@@ -48,6 +48,7 @@ export interface ReviewListResponse {
   reviewDescript: string;
   createDatetime: Date;
   imageUrls?: string[];
+  userImageUrl?: string;
 }
 
 export interface ContactResponse {
