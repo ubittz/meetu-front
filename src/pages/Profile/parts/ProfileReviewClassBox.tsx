@@ -6,7 +6,6 @@ import Button from '@@components/Button';
 import Flex from '@@components/Flex';
 import Typography from '@@components/Typography';
 import { COLORS } from '@@constants/colors';
-import Class1Image from '@@pages/Home/images/class_1.png';
 import ClassEmpty from '@@pages/Home/parts/ClassEmpty';
 import { ProfileReviewDownArrowIcon } from '@@pages/Profile/icons';
 import ProfileReviewBox from '@@pages/Profile/parts/ProfileReviewBox';
@@ -53,7 +52,7 @@ function ProfileReviewClassBox({ meeting }: { meeting: Meeting }) {
   return (
     <StyledProfileReviewClassBox>
       <div className='review_class__image'>
-        <img src={Class1Image} alt='Class Image' />
+        <img src={meeting.imageUrl} alt='Class Image' />
       </div>
       <Flex.Vertical gap={4}>
         <Typography.Main fontSize='14px' fontWeight={500}>

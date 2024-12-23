@@ -7,7 +7,6 @@ import Flex from '@@components/Flex';
 import FullLoading from '@@components/FullLoading';
 import Header from '@@components/Header';
 import { HeaderProps } from '@@components/Header/types';
-import ProfileImage from '@@pages/Profile/images/profile_image.jpeg';
 import ProfileClassList from '@@pages/Profile/parts/ProfileClassList';
 import ProfileInfo from '@@pages/Profile/parts/ProfileInfo';
 import ProfileReviewList from '@@pages/Profile/parts/ProfileReviewList';
@@ -18,6 +17,7 @@ const StyledProfileDetail = styled(Flex.Vertical)<{ $profileImage: string; $scro
   background-image: url(${({ $profileImage }) => $profileImage});
   background-attachment: fixed;
   background-size: cover;
+  background-position: center;
 
   .scroll_wrap {
     height: 100vh;
@@ -67,7 +67,7 @@ function Profile() {
   };
 
   return (
-    <StyledProfileDetail $scrollPadding={paddingTop} $profileImage={ProfileImage}>
+    <StyledProfileDetail $scrollPadding={paddingTop} $profileImage={data?.imageUrl ?? ''}>
       <Header theme={headerTheme} onBack={handleBack} />
       {!data && isLoading ? (
         <FullLoading visible />

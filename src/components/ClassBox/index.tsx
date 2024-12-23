@@ -8,7 +8,6 @@ import { ClassBoxProps } from '@@components/ClassBox/types';
 import Flex from '@@components/Flex';
 import Typography from '@@components/Typography';
 import { COLORS } from '@@constants/colors';
-import Class1Image from '@@pages/Home/images/class_1.png';
 import { PAGES } from '@@router/constants';
 import { pathGenerator } from '@@router/utils';
 import { DISTRICT } from '@@stores/meeting/constants';
@@ -57,7 +56,7 @@ function ClassBox({ meeting, children, ...props }: PropsWithChildren<ClassBoxPro
     <StyledClassBox {...props}>
       <Flex.Vertical onClick={handleClick}>
         <div className='class_box__image'>
-          <img src={Class1Image} alt='Class Box Image' />
+          <img src={meeting.imageUrl} alt='Class Box Image' />
         </div>
         <Flex.Vertical className='tw-mt-[8px]' gap={12}>
           <Flex.Horizontal gap={4}>

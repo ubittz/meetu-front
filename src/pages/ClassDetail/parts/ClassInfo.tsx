@@ -44,7 +44,7 @@ function ClassInfo({ setPaddingTop }: { setPaddingTop: (paddingTop: number) => v
   const district = Object.entries(DISTRICT).find(([, value]) => data?.address.includes(value))?.[0];
 
   const handleClickShowHost = () => {
-    // navigate(pathGenerator(PAGES.PROFILE, `/${data.}`));
+    navigate(pathGenerator(PAGES.PROFILE, `/${data?.hostId}`));
   };
 
   useEffect(() => {

@@ -15,14 +15,13 @@ import ClassInfo from '@@pages/ClassDetail/parts/ClassInfo';
 import DetailInfo from '@@pages/ClassDetail/parts/DetailInfo';
 import EnrollBottomModal from '@@pages/ClassDetail/parts/EnrollBottomModal';
 import Review from '@@pages/ClassDetail/parts/Review';
-import Background from '@@pages/Home/images/class_4.jpeg';
 import { useMeetingDetail } from '@@stores/meeting/hooks';
 import { appendRecentMeeting } from '@@stores/meeting/reducer';
 import { singleResponseToMeeting } from '@@stores/meeting/utils';
 
-const StyledClassDetail = styled(Flex.Vertical)<{ $scrollPadding: number }>`
+const StyledClassDetail = styled(Flex.Vertical)<{ $scrollPadding: number; $imageUrl: string }>`
   height: 100vh;
-  background-image: url(${Background});
+  background-image: url(${({ $imageUrl }) => $imageUrl});
   background-attachment: fixed;
   background-size: cover;
 
@@ -85,7 +84,7 @@ function ClassDetail() {
   }, [data, dispatch]);
 
   return (
-    <StyledClassDetail $scrollPadding={paddingTop}>
+    <StyledClassDetail $scrollPadding={paddingTop} $imageUrl={data?.imageUrl ?? ''}>
       <FullLoading visible={isLoading} />
       <Header theme={headerTheme} onBack={handleBack} />
       <Flex.Vertical ref={scrollWrapRef} className='scroll_wrap' onScroll={handleScroll}>

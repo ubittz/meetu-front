@@ -19,12 +19,14 @@ export interface Meeting {
   meetingDescript: string;
   meetingProcessGuide: string;
   meetingItem: string;
+  imageUrl: string;
 }
 
 export interface MeetingSingleResponse {
   id: string;
   name: string;
   hostName: string;
+  hostId: string;
   address: string;
   processDate: Date;
   cost: number;
@@ -36,6 +38,7 @@ export interface MeetingSingleResponse {
   item: string;
   guestCount: number;
   avgScore: number;
+  imageUrl: string;
 }
 
 export interface ReviewListResponse {

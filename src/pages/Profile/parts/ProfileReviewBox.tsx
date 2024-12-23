@@ -5,7 +5,6 @@ import Flex from '@@components/Flex';
 import Typography from '@@components/Typography';
 import { COLORS } from '@@constants/colors';
 import { StartIcon } from '@@pages/ClassDetail/icons';
-import ReviewImage from '@@pages/Profile/images/review_iamge.jpeg';
 import ProfileImage from '@@pages/Profile/images/review_profile_image.png';
 import { ReviewListResponse } from '@@stores/meeting/types';
 
@@ -65,12 +64,15 @@ const StyledProfileReviewBox = styled(Flex.Vertical)`
 `;
 
 function ProfileReviewBox({ review }: { review: ReviewListResponse }) {
+  console.log(review);
   return (
     <StyledProfileReviewBox>
       <Flex.Horizontal className='profile_review__top' gap={12}>
-        <div className='profile_review__image'>
-          <img src={ReviewImage} alt='Review Image' />
-        </div>
+        {review.imageUrls && !!review.imageUrls.length && (
+          <div className='profile_review__image'>
+            <img src={review.imageUrls[0]} alt='Review Image' />
+          </div>
+        )}
         <Flex.Vertical>
           <Flex.Horizontal className='tw-mt-[8px]' gap={4}>
             <Typography.Sub fontSize='12px' fontWeight={700}>

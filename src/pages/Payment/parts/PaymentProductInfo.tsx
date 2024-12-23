@@ -4,7 +4,6 @@ import styled from 'styled-components';
 import Flex from '@@components/Flex';
 import Typography from '@@components/Typography';
 import { COLORS } from '@@constants/colors';
-import Class1Image from '@@pages/Home/images/class_1.png';
 import { useMeetingDetail } from '@@stores/meeting/hooks';
 
 const StyledPaymentProductInfo = styled(Flex.Vertical)`
@@ -34,7 +33,7 @@ function PaymentProductInfo() {
     <StyledPaymentProductInfo gap={20}>
       <Flex.Horizontal gap={10} alignItems='center'>
         <div className='product_info__image'>
-          <img src={Class1Image} alt='Product Image' />
+          <img src={data.imageUrl} alt='Product Image' />
         </div>
         <Flex.Vertical gap={4}>
           <Typography.Main fontWeight={700}>{data.name}</Typography.Main>
