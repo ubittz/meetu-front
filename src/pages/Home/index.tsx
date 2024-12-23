@@ -1,5 +1,6 @@
 import { useState } from 'react';
 
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 import ClassBoxList from '@@components/ClassBoxList';
@@ -17,6 +18,8 @@ import MainBanner from '@@pages/Home/parts/MainBanner';
 import MeetingByCategory from '@@pages/Home/parts/MeetingByCategory';
 import MoodBanner from '@@pages/Home/parts/MoodBanner';
 import { Category } from '@@pages/Home/types';
+import { PAGES } from '@@router/constants';
+import { pathGenerator } from '@@router/utils';
 
 const StyledHome = styled(FullScreen)`
   .body {
@@ -30,6 +33,8 @@ const StyledHome = styled(FullScreen)`
 `;
 
 function Home() {
+  const navigate = useNavigate();
+
   const [selectedCategory, setSelectedCategory] = useState<Category>();
 
   const { content: contentByCategory, isLoading: categoryLoading } = useMeetingListByFilter({
@@ -53,7 +58,9 @@ function Home() {
 
   const { content: contentByLastMonth, isLoading: lastMonthLoading } = useMeetingListByLastMonth();
 
-  const handleClickHotShowAll = () => {};
+  const handleClickHotShowAll = () => {
+    navigate(pathGenerator(PAGES.FIND_CLASS));
+  };
 
   const isLoading = categoryLoading || requestLoading || latestLoading || lastMonthLoading;
 
