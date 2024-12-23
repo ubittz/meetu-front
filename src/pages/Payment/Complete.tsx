@@ -10,7 +10,9 @@ import { pathGenerator } from '@@router/utils';
 function PaymentComplete() {
   const navigate = useNavigate();
 
-  const handleClickHistory = () => {};
+  const handleClickHistory = () => {
+    navigate(pathGenerator(PAGES.MY_PAGE, '/purchase-history'));
+  };
 
   const handleClickMain = () => {
     navigate(pathGenerator(PAGES.HOME));
