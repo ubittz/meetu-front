@@ -12,7 +12,6 @@ import Flex from '@@components/Flex';
 import FooterContainer from '@@components/FooterContainer';
 import Typography from '@@components/Typography';
 import { COLORS } from '@@constants/colors';
-import Image from '@@pages/Home/images/class_4.jpeg';
 import { PAGES } from '@@router/constants';
 import { pathGenerator } from '@@router/utils';
 import { useMeetingDetail } from '@@stores/meeting/hooks';
@@ -69,7 +68,7 @@ function EnrollBottomModal(props: Omit<BottomModalProps, 'title'>) {
         <Flex.Vertical className='enroll__top' gap={12}>
           <Flex.Horizontal gap={10}>
             <div className='enroll__image'>
-              <img src={Image} alt='Class Image' />
+              <img src={data?.imageUrl} alt='Class Image' />
             </div>
             <Flex.Vertical gap={8}>
               <Typography.Main fontSize='20px' fontWeight={700}>

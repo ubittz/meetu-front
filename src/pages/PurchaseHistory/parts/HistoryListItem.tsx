@@ -6,7 +6,6 @@ import Button from '@@components/Button';
 import Flex from '@@components/Flex';
 import Typography from '@@components/Typography';
 import { COLORS } from '@@constants/colors';
-import Image from '@@pages/Home/images/class_4.jpeg';
 import { PAGES } from '@@router/constants';
 import { pathGenerator } from '@@router/utils';
 import { PaymentListResponse } from '@@stores/payment/types';
@@ -46,9 +45,8 @@ function HistoryListItem({ payment }: { payment: PaymentListResponse }) {
   return (
     <StyledHistoryListItem gap={30}>
       <Flex.Horizontal gap={14}>
-        <div className='item__image'>
-          <img src={Image} alt='History Image' />
-        </div>
+        {/* TODO: Image 추가 */}
+        <div className='item__image'>{/* <img src={Image} alt='History Image' /> */}</div>
         <Flex.Vertical gap={12}>
           <Flex.Horizontal gap={10}>
             <Typography.Third className='item__label' fontSize='12px'>

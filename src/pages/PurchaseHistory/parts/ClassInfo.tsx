@@ -5,9 +5,7 @@ import styled from 'styled-components';
 import Flex from '@@components/Flex';
 import Typography from '@@components/Typography';
 import { COLORS } from '@@constants/colors';
-import Image from '@@pages/Home/images/class_4.jpeg';
-
-import { usePaymentDetail } from '../hooks';
+import { usePaymentDetail } from '@@pages/PurchaseHistory/hooks';
 
 const StyledClassInfo = styled.div`
   padding: 30px 20px;
@@ -47,9 +45,8 @@ function ClassInfo() {
   return (
     <StyledClassInfo>
       <Flex.Horizontal className='class_info__card' gap={14} alignItems='center'>
-        <div className='class_info__image'>
-          <img src={Image} alt='Class Image' />
-        </div>
+        {/* TODO: Image 추가 필요 */}
+        <div className='class_info__image'>{/* <img src={Image} alt='Class Image' /> */}</div>
         <Flex.Vertical gap={12}>
           <Flex.Horizontal gap={10}>
             <Typography.Third className='class_ingo__label' fontSize='12px'>

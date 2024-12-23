@@ -13,4 +13,5 @@ export const singleResponseToMeeting = (meeting: MeetingSingleResponse): Meeting
   meetingDescript: meeting.descript,
   meetingProcessGuide: meeting.processGuide,
   meetingItem: meeting.item,
+  imageUrl: meeting.imageUrl,
 });
