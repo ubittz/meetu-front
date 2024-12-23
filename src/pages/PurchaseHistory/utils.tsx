@@ -31,6 +31,16 @@ export const getPaymentMethod = (payment: PaymentDetailResponse) => {
     return <>{SIMPLE_TYPE_STRING[payment.simple.type]} 결제</>;
   }
 
+  if (payment.transfer) {
+    return (
+      <>
+        {payment.transfer.bankName}
+        <br />
+        {payment.transfer.accountNo} - {payment.transfer.depositNmae}
+      </>
+    );
+  }
+
   return '';
 };
 
