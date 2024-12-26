@@ -24,6 +24,7 @@ const StyledClassDetail = styled(Flex.Vertical)<{ $scrollPadding: number; $image
   background-image: url(${({ $imageUrl }) => $imageUrl});
   background-attachment: fixed;
   background-size: cover;
+  background-position: center;
 
   .scroll_wrap {
     height: 100vh;
