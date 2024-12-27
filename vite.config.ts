@@ -16,10 +16,10 @@ export default defineConfig(({ mode }) => {
         includeAssets: ['favicon.ico', 'apple-touch-icon.png', 'mask-icon.svg'],
         scope: env.VITE_APP_ROUTE_PREFIX,
         manifest: {
-          name: 'App Name',
-          short_name: 'App Name',
+          name: 'Meetu',
+          short_name: 'Meetu',
           theme_color: '#ffffff',
-          description: 'Ubittz MVP Web Template',
+          description: 'Meetu',
           icons: [
             {
               src: 'pwa-64x64.png',
